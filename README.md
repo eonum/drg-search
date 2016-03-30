@@ -12,9 +12,6 @@ To prevent sensitive data to show up in the repository, put such data into the
 
 ``<%= ENV['SOME_PASSWORD'] =>``
 
-A .env file is currently under version control, but it contains only development/test
-information, serving as an example.
-
 ### Required packages for development on Ubuntu
 ``sudo apt-get install postgresql postgresql-contrib libpq-dev``
 
