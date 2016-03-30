@@ -3,7 +3,7 @@
 
 ## Configuration
 
-* Ruby: 2.2.1, as specified by the .ruby-version file in the root folder.
+* Ruby: 2.2.3, as specified by the .ruby-version file in the root folder.
 * Rails: 4.2.4
 * Database: PostgreSQL
 
