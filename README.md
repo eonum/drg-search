@@ -13,9 +13,39 @@ To prevent sensitive data to show up in the repository, put such data into the
 ``<%= ENV['SOME_PASSWORD'] =>``
 
 ### Setup PostgreSQL on Ubuntu 14.04
+Install PostgreSQL server and client
+
 ``sudo apt-get install postgresql postgresql-contrib libpq-dev``
 
-For setting up roles see sections "Using PostgreSQL Roles and Databases" and "Create a New Role" in https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
+#### Manage roles
+1. Login into the PostgreSQL console using the default admin role postresql
+ 
+``sudo -u postgres psql postgres``
+
+2. Set the password and then exit the console with \q
+
+``\password postgres``
+
+3. Create new user drgsearch. You will be promted for a password.
+
+``sudo -u postgres createuser -A -P myuser``
+
+4. Configure your .env file with the created user and password:
+
+```
+# development:
+DRGSEARCH_DEVELOPMENT_USER=drgsearch
+DRGSEARCH_DEVELOPMENT_PASSWORD=your_secret_password
+# test:
+DRGSEARCH_TEST_USER=drgsearch
+DRGSEARCH_TEST_PASSWORD=your_secret_password
+# production:
+DRGSEARCH_PRODUCTION_USER=drgsearch
+DRGSEARCH_PRODUCTION_PASSWORD=your_secret_password
+```
+
+
+Further information can be found here: https://help.ubuntu.com/community/PostgreSQL
 
 ## Testing
 
