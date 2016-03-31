@@ -18,19 +18,19 @@ Install PostgreSQL server and client
 ``sudo apt-get install postgresql postgresql-contrib libpq-dev``
 
 #### Manage roles
-1. Login into the PostgreSQL console using the default admin role postresql
+Login into the PostgreSQL console using the default admin role postresql
  
 ``sudo -u postgres psql postgres``
 
-2. Set the password and then exit the console with \q
+Set the password and then exit the console with \q
 
 ``\password postgres``
 
-3. Create new user drgsearch. You will be promted for a password.
+Create new user drgsearch. You will be promted for a password.
 
 ``sudo -u postgres createuser -A -P drgsearch``
 
-4. Configure your .env file with the created user and password:
+Configure your .env file with the created user and password:
 
 ```
 # development:
@@ -43,7 +43,13 @@ DRGSEARCH_TEST_PASSWORD=your_secret_password
 DRGSEARCH_PRODUCTION_USER=drgsearch
 DRGSEARCH_PRODUCTION_PASSWORD=your_secret_password
 ```
+Restart the server
 
+``sudo service postgresql restart``
+
+Test with database creation
+
+``rake db:create``
 
 Further information can be found here: https://help.ubuntu.com/community/PostgreSQL
 
