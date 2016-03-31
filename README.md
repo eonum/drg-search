@@ -28,7 +28,7 @@ Install PostgreSQL server and client
 
 3. Create new user drgsearch. You will be promted for a password.
 
-``sudo -u postgres createuser -A -P myuser``
+``sudo -u postgres createuser -A -P drgsearch``
 
 4. Configure your .env file with the created user and password:
 
