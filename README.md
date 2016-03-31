@@ -1,4 +1,4 @@
-# drg-search
+# DRG search
 "DRG-Fallzahlsuche" on behalf of the Swiss Federal Office of Public Health FOPH 
 
 ## Configuration
@@ -20,7 +20,7 @@ Install PostgreSQL server and client if not already installed:
 ``sudo apt-get install postgresql postgresql-contrib libpq-dev``
 
 #### Manage roles
-Login into the PostgreSQL console using the default admin role postresql
+Login into the PostgreSQL console using the default admin role postgres
  
 ``sudo -u postgres psql postgres``
 
@@ -45,7 +45,7 @@ DRGSEARCH_TEST_PASSWORD=your_secret_password
 DRGSEARCH_PRODUCTION_USER=drgsearch
 DRGSEARCH_PRODUCTION_PASSWORD=your_secret_password
 ```
-Check the postgreSQL config file (Adapt version and path if different)
+Check the PostgreSQL config file (Adapt version and path if different)
 
 ``sudo vim /etc/postgresql/9.3/main/pg_hba.conf``
 
