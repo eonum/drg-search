@@ -12,8 +12,10 @@ To prevent sensitive data to show up in the repository, put such data into the
 
 ``<%= ENV['SOME_PASSWORD'] =>``
 
-### Setup PostgreSQL on Ubuntu 14.04
-Install PostgreSQL server and client
+### Setup PostgreSQL on Ubuntu 14.04 for production
+This section describes the setup for PostgreSQL for Ruby on Rails on a Ubuntu 14.04 machine. The Rails application and the database are assumed to be running on the same machine.
+
+Install PostgreSQL server and client if not already installed:
 
 ``sudo apt-get install postgresql postgresql-contrib libpq-dev``
 
@@ -43,6 +45,14 @@ DRGSEARCH_TEST_PASSWORD=your_secret_password
 DRGSEARCH_PRODUCTION_USER=drgsearch
 DRGSEARCH_PRODUCTION_PASSWORD=your_secret_password
 ```
+Check the postgreSQL config file (Adapt version and path if different)
+
+``sudo vim /etc/postgresql/9.3/main/pg_hba.conf``
+
+Add the following line if not already present:
+
+``local   all             drgsearch                                md5``
+
 Restart the server
 
 ``sudo service postgresql restart``
