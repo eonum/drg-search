@@ -12,8 +12,10 @@ To prevent sensitive data to show up in the repository, put such data into the
 
 ``<%= ENV['SOME_PASSWORD'] =>``
 
-### Required packages for development on Ubuntu
+### Setup PostgreSQL on Ubuntu 14.04
 ``sudo apt-get install postgresql postgresql-contrib libpq-dev``
+
+For setting up roles see sections "Using PostgreSQL Roles and Databases" and "Create a New Role" in https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04
 
 ## Testing
 
