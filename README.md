@@ -11,7 +11,7 @@ To prevent sensitive data to show up in the repository, put such data into the
 ``.env`` file. Then they are available, for example in ``database.yml``, as
 
 ## Installation
-## Generate secrets.yml
+### Generate secrets.yml
 You have to generate the file config/secrets.yml in order to have a functional and secure application. Do never include this file in version control.
 
 Sample file with secret tokens generated using `rake secret`. Do not use this sample without modifying the secret tokens!
