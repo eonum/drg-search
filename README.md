@@ -10,6 +10,9 @@
 To prevent sensitive data to show up in the repository, put such data into the
 ``.env`` file. Then they are available, for example in ``database.yml``, as
 
+``<%= ENV['SOME_PASSWORD'] =>``
+
+
 ## Installation
 ### Generate secrets.yml
 You have to generate the file config/secrets.yml in order to have a functional and secure application. Do never include this file in version control.
@@ -38,9 +41,6 @@ test:
 production:
   secret_key_base: 89b3fc5ad414d94c445f3f533a2dcb6ae90813de4937d603381c34aef9e70d551fc0b7625d566ffd7d0352fd4250e900d0c6c4a9c28af4afe5c6d472779f9969
 ```
-
-``<%= ENV['SOME_PASSWORD'] =>``
-
 ### Setup PostgreSQL on Ubuntu 14.04 for production
 This section describes the setup for PostgreSQL for Ruby on Rails on a Ubuntu 14.04 machine. The Rails application and the database are assumed to be running on the same machine.
 
