@@ -20,12 +20,12 @@ gem 'haml-rails'
 
 gem 'decent_exposure'
 
+# Loads environment variables from `.env` -> keep passwords out of database.yml
+gem 'dotenv-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  # Loads environment variables from `.env` -> keep passwords out of database.yml
-  gem 'dotenv-rails', :groups => [:development, :test]
-
 end
 
 group :development do
