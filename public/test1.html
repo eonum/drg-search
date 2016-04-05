@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test 1</title>
+    <title>Test 1 Styles</title>
+    <style>
+        .greenHeader {
+            color: green;
+        }
+    </style>
+    <link href="style1.css" media="screen" rel="stylesheet" />
 </head>
 
 <body>
+<style>
+    .greenBody {
+        color: green;
+    }
+</style>
+
+<link href="style2.css" media="screen" rel="stylesheet" />
+
 <h1>Test 1</h1>
 <a href="test2.html">Link to test2.html</a>
+
+<div style="color: green">Inline style test: This line should be green</div>
+
+<div class="greenHeader">Class in header test: This line should be green</div>
+
+<div class="greenBody">Class in body test: This line should be green</div>
+
+
+<div class="greenFile1">Class in external file referenced in header test: This line should be green</div>
+
+<div class="greenFile2">Class in external file referenced in body test: This line should be green</div>
+
 
 </body>
 </html>
