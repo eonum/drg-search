@@ -17,7 +17,7 @@ To prevent sensitive data to show up in the repository, put such data into the
 ### Generate secrets.yml
 You have to generate the file config/secrets.yml in order to have a functional and secure application. Do never include this file in version control.
 
-Sample file with secret tokens generated using `rake secret`. Do not use this sample without modifying the secret tokens!
+Sample file with secret tokens generated using `rake secret`. Do not use this sample in a production environment without modifying the secret tokens!
 
 ```
 # Be sure to restart your server when you modify this file.
@@ -42,7 +42,7 @@ production:
   secret_key_base: 89b3fc5ad414d94c445f3f533a2dcb6ae90813de4937d603381c34aef9e70d551fc0b7625d566ffd7d0352fd4250e900d0c6c4a9c28af4afe5c6d472779f9969
 ```
 ### Setup PostgreSQL on Ubuntu 14.04 for production
-This section describes the setup for PostgreSQL for Ruby on Rails on a Ubuntu 14.04 machine. The Rails application and the database are assumed to be running on the same machine.
+This section describes the setup for PostgreSQL for Ruby on Rails on a Ubuntu 14.04 machine. The Rails application and the database are assumed to be running on the same machine. For development environments it may be sufficient to use your user account as the PostgreSQL role.
 
 Install PostgreSQL server and client if not already installed:
 
@@ -89,6 +89,11 @@ Restart the server
 Test with database creation
 
 ``rake db:create``
+
+and if you want to create a production database:
+
+``RAILS_ENV=production rake db:create``
+
 
 Further information can be found here: https://help.ubuntu.com/community/PostgreSQL
 
