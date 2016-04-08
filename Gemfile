@@ -42,3 +42,5 @@ group :test do
   gem 'factory_girl_rails'
 end
 
+# Internationalization
+gem 'i18n-js'
