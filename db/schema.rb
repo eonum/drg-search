@@ -11,9 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108100318) do
+ActiveRecord::Schema.define(version: 20160408121021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "systems", force: :cascade do |t|
+    t.string  "version"
+    t.integer "years",   default: [], array: true
+    t.string  "text_de"
+    t.string  "text_fr"
+    t.string  "text_it"
+  end
 
 end
