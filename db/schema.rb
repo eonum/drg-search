@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160408130016) do
 
   create_table "hospitals", force: :cascade do |t|
     t.integer "year"
+    t.integer "hospital_id"
     t.string  "name"
     t.string  "street"
     t.string  "address"
