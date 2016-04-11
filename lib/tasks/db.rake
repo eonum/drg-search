@@ -75,6 +75,16 @@ namespace :db do
     end
   end
 
+  desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.'
+  task :seed_numcase_data, [:directory] => :environment do |t, args|
+    Dir.entries(args.directory).sort.each do |file|
+      puts "Seed data in #{file}"
+      CSV.foreach(file, col_sep: ';') do |row|
+        # TODO
+      end
+    end
+  end
+
   desc "Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)."
   task :truncate => :environment do
     ActiveRecord::Base.connection_pool.with_connection do |conn|
@@ -100,5 +110,9 @@ namespace :db do
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V4.0/'))
     Rake::Task['db:seed_drg_version'].reenable
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V5.0/'))
+
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'))
+    Rake::Task['db:seed_drg_version'].reenable
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'))
   end
 end
