@@ -1,5 +1,5 @@
 # A hospital is a representation of a hospital in one year.
-# Hence a unique hospital can have multiple hospital objects for several years.
+# Hence a unique hospital can have multiple hospital objects. One for each year.
 class Hospital < ActiveRecord::Base
   has_many :num_cases
 
