@@ -53,7 +53,26 @@ namespace :db do
       Adrg.where(:version => system.version).all.each {|adrg| adrg_ids[adrg.code] = adrg.id}
     end
 
+    ActiveRecord::Base.transaction do
+      Drg.where(:version => system.version).all.each do |drg|
+        drg.mdc_id = mdc_ids[drg.code[0..0]]
+        drg.adrg_id = adrg_ids[drg.code[0..2]]
+        drg.partition_id = partition_ids[drg.code[0..0] + drg.partition_letter]
+        drg.save!
+      end
+    end
 
+    ActiveRecord::Base.transaction do
+      Adrg.where(:version => system.version).all.each do |adrg|
+        adrg.mdc_id = mdc_ids[adrg.code[0..0]]
+        if adrg.drgs.empty?
+          puts "Warning: No DRG found for ADRG #{adrg.code}"
+        else
+          adrg.partition_id = partition_ids[adrg.code[0..0] + adrg.drgs[0].partition_letter]
+        end
+        adrg.save!
+      end
+    end
   end
 
   desc "Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)."
