@@ -44,3 +44,7 @@ end
 
 # Internationalization
 gem 'i18n-js'
+
+# Used in rake tasks
+gem 'ruby-progressbar'
+gem 'json'
