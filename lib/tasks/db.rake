@@ -18,6 +18,22 @@ namespace :db do
       puts "Warning: version of MDC #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
       Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5]})
     end
+
+    puts 'Loading ADRGs..'
+    CSV.foreach(File.join(args.directory, 'adrgs.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      version = row[1]
+      puts "Warning: version of ADRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
+      Adrg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4]})
+    end
+
+    puts 'Loading DRGs..'
+    CSV.foreach(File.join(args.directory, 'drgs.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      version = row[1]
+      puts "Warning: version of DRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
+      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4]})
+    end
   end
 
   desc "Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)."
