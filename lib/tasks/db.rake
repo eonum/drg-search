@@ -16,7 +16,10 @@ namespace :db do
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of MDC #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5]})
+      mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5]})
+      Partition.create!({code: 'O', version: system.version, mdc_id: mdc.id})
+      Partition.create!({code: 'M', version: system.version, mdc_id: mdc.id})
+      Partition.create!({code: 'A', version: system.version, mdc_id: mdc.id})
     end
 
     puts 'Loading ADRGs..'
@@ -32,8 +35,25 @@ namespace :db do
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of DRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4]})
+      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: row[5]})
     end
+
+    puts 'Link codes..'
+    # load ID caches
+    mdc_ids = {}
+    adrg_ids = {}
+    partition_ids = {}
+    ActiveRecord::Base.transaction do
+      Mdc.where(:version => system.version).all.each do |mdc|
+        mdc_ids[mdc.prefix] = mdc.id
+        mdc.partitions.each {|partition| partition_ids[mdc.prefix + partition.code] = partition.id}
+      end
+    end
+    ActiveRecord::Base.transaction do
+      Adrg.where(:version => system.version).all.each {|adrg| adrg_ids[adrg.code] = adrg.id}
+    end
+
+
   end
 
   desc "Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)."

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408130016) do
+ActiveRecord::Schema.define(version: 20160411120803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160408130016) do
     t.integer "mdc_id"
     t.integer "partition_id"
     t.integer "adrg_id"
+    t.string  "partition_letter"
   end
 
   create_table "hospitals", force: :cascade do |t|
