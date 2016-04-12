@@ -77,15 +77,33 @@ namespace :db do
 
   desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.'
   task :seed_numcase_data, [:directory] => :environment do |t, args|
+    puts "Seed folder #{args.directory}"
     Dir.entries(args.directory).sort.each do |file|
-      puts "Seed data in #{file}"
-      CSV.foreach(file, col_sep: ';') do |row|
-        # TODO
+      next unless file.downcase.end_with?('csv.utf8')
+
+      file_name = File.join(args.directory, file)
+      count = `wc -l "#{file_name}"`.to_i  +  1
+      pg = ProgressBar.create(total: count, title: "Importing #{file_name}..")
+
+      is_hospital_table = file.include? 'hosp_table'
+      csv_contents = CSV.read(file_name, col_sep: ';')
+      # skip header
+      csv_contents.shift
+      ActiveRecord::Base.transaction do
+        csv_contents.each do |row|
+          pg.increment
+          if is_hospital_table
+            Hospital.create!({year: row[0].to_i, hospital_id: row[1].to_i, name: row[2], street: row[3], address: row[4], canton: row[4]})
+          else
+            NumCase.create!({hospital_id: row[0].to_i, year: row[1].to_i, version: row[2], level: row[3], code: row[4], n: row[5].to_i})
+          end
+        end
       end
+      pg.finish
     end
   end
 
-  desc "Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)."
+  desc 'Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence).'
   task :truncate => :environment do
     ActiveRecord::Base.connection_pool.with_connection do |conn|
       postgres = "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname='public'"
