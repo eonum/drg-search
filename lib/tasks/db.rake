@@ -35,7 +35,9 @@ namespace :db do
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of DRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: row[5]})
+      partition_letter = row[5]
+      partition_letter = 'O' if partition_letter == 'X'
+      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: partition_letter})
     end
 
     puts 'Link codes..'
@@ -98,8 +100,17 @@ namespace :db do
       adrgs_by_drg = {}
       ActiveRecord::Base.transaction do
         Drg.where(:version => version).all.each do |drg|
-          partitions_by_drg[drg.code] = drg.partition.code
-          adrgs_by_drg[drg.code] = drg.adrg.code
+          if not drg.partition.nil?
+            partitions_by_drg[drg.code] = drg.partition.code
+          else
+            puts "Warning: Could not find a partition in DRG #{drg.code}"
+          end
+
+          if not drg.adrg.nil?
+            adrgs_by_drg[drg.code] = drg.adrg.code
+          else
+            puts "Warning: Could not find a ADRG in DRG #{drg.code}"
+          end
         end
       end
 
