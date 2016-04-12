@@ -93,26 +93,7 @@ namespace :db do
       version = csv_contents[0][2]
       year = csv_contents[0][1].to_i
       level = csv_contents[0][3]
-      ActiveRecord::Base.transaction do
-        csv_contents.each do |row|
-          pg.increment
-          if is_hospital_table
-            Hospital.create!({year: row[0].to_i, hospital_id: row[1].to_i, name: row[2], street: row[3], address: row[4], canton: row[4]})
-          else
-            if version != row[2] || year != row[1].to_i || level != row[3]
-              puts "Warning row #{row} has not the same version, year or level as other rows in this file!"
-              puts "version: #{version}, level: #{level}, year: #{year}"
-            end
-            NumCase.create!({hospital_id: row[0].to_i, year: row[1].to_i, version: row[2], level: row[3], code: row[4], n: row[5].to_i})
-          end
-        end
-      end
-      pg.finish
 
-      next if level != 'DRG'
-
-      puts 'Aggregating ADRGs and Partitions..'
-      # Calculate aggregations for ADRGs and Partitions
       partitions_by_drg = {}
       adrgs_by_drg = {}
       ActiveRecord::Base.transaction do
@@ -124,28 +105,48 @@ namespace :db do
 
       numcases_by_partition_and_hospital = {}
       numcases_by_adrg_and_hospital = {}
-      ActiveRecord::Base.transaction do
-        NumCase.where(:version => version, :year => year, :level => 'DRG').all.each do |numcase|
-          partition = partitions_by_drg[numcase.code]
-          adrg = adrgs_by_drg[numcase.code]
-          if numcases_by_partition_and_hospital[partition].nil?
-            numcases_by_partition_and_hospital[partition] = {}
-          end
-          if numcases_by_partition_and_hospital[partition][numcase.hospital_id].nil?
-            numcases_by_partition_and_hospital[partition][numcase.hospital_id] = 0
-          end
-          numcases_by_partition_and_hospital[partition][numcase.hospital_id] += numcase.n
 
-          if numcases_by_adrg_and_hospital[adrg].nil?
-            numcases_by_adrg_and_hospital[adrg] = {}
+      ActiveRecord::Base.transaction do
+        csv_contents.each do |row|
+          pg.increment
+          if is_hospital_table
+            Hospital.create!({year: row[0].to_i, hospital_id: row[1].to_i, name: row[2], street: row[3], address: row[4], canton: row[4]})
+          else
+            if version != row[2] || year != row[1].to_i || level != row[3]
+              puts "Warning row #{row} has not the same version, year or level as other rows in this file!"
+              puts "version: #{version}, level: #{level}, year: #{year}"
+            end
+            numcase = NumCase.create!({hospital_id: row[0].to_i, year: row[1].to_i, version: row[2], level: row[3], code: row[4], n: row[5].to_i})
+
+            if level == 'DRG'
+              # Calculate aggregations for ADRGs and Partitions
+
+              partition = partitions_by_drg[numcase.code]
+              adrg = adrgs_by_drg[numcase.code]
+              if numcases_by_partition_and_hospital[partition].nil?
+                numcases_by_partition_and_hospital[partition] = {}
+              end
+              if numcases_by_partition_and_hospital[partition][numcase.hospital_id].nil?
+                numcases_by_partition_and_hospital[partition][numcase.hospital_id] = 0
+              end
+              numcases_by_partition_and_hospital[partition][numcase.hospital_id] += numcase.n
+
+              if numcases_by_adrg_and_hospital[adrg].nil?
+                numcases_by_adrg_and_hospital[adrg] = {}
+              end
+              if numcases_by_adrg_and_hospital[adrg][numcase.hospital_id].nil?
+                numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] = 0
+              end
+              numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] += numcase.n
+            end
           end
-          if numcases_by_adrg_and_hospital[adrg][numcase.hospital_id].nil?
-            numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] = 0
-          end
-          numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] += numcase.n
         end
       end
+      pg.finish
 
+      next if level != 'DRG'
+
+      puts 'Store aggregations for ADRGs and Partitions..'
       ActiveRecord::Base.transaction do
         numcases_by_partition_and_hospital.each do |partition, hospitals|
           hospitals.each do |hospital, n|
