@@ -17,9 +17,9 @@ namespace :db do
       version = row[1]
       puts "Warning: version of MDC #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
       mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5]})
-      Partition.create!({code: 'O', version: system.version, mdc_id: mdc.id})
-      Partition.create!({code: 'M', version: system.version, mdc_id: mdc.id})
-      Partition.create!({code: 'A', version: system.version, mdc_id: mdc.id})
+      Partition.create!({code: "#{row[5]} O", version: system.version, mdc_id: mdc.id})
+      Partition.create!({code: "#{row[5]} M", version: system.version, mdc_id: mdc.id})
+      Partition.create!({code: "#{row[5]} A", version: system.version, mdc_id: mdc.id})
     end
 
     puts 'Loading ADRGs..'
@@ -46,7 +46,7 @@ namespace :db do
     ActiveRecord::Base.transaction do
       Mdc.where(:version => system.version).all.each do |mdc|
         mdc_ids[mdc.prefix] = mdc.id
-        mdc.partitions.each {|partition| partition_ids[mdc.prefix + partition.code] = partition.id}
+        mdc.partitions.each {|partition| partition_ids[partition.code] = partition.id}
       end
     end
     ActiveRecord::Base.transaction do
@@ -57,7 +57,7 @@ namespace :db do
       Drg.where(:version => system.version).all.each do |drg|
         drg.mdc_id = mdc_ids[drg.code[0..0]]
         drg.adrg_id = adrg_ids[drg.code[0..2]]
-        drg.partition_id = partition_ids[drg.code[0..0] + drg.partition_letter]
+        drg.partition_id = partition_ids[drg.code[0..0] + ' ' + drg.partition_letter]
         drg.save!
       end
     end
@@ -68,14 +68,15 @@ namespace :db do
         if adrg.drgs.empty?
           puts "Warning: No DRG found for ADRG #{adrg.code}"
         else
-          adrg.partition_id = partition_ids[adrg.code[0..0] + adrg.drgs[0].partition_letter]
+          adrg.partition_id = partition_ids[adrg.code[0..0] + ' ' + adrg.drgs[0].partition_letter]
         end
         adrg.save!
       end
     end
   end
 
-  desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.'
+  desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.
+      All files must be encoded using UTF-8. All rows in one  numcase file must have identical version, year and level.'
   task :seed_numcase_data, [:directory] => :environment do |t, args|
     puts "Seed folder #{args.directory}"
     Dir.entries(args.directory).sort.each do |file|
@@ -89,17 +90,77 @@ namespace :db do
       csv_contents = CSV.read(file_name, col_sep: ';')
       # skip header
       csv_contents.shift
+      version = csv_contents[0][2]
+      year = csv_contents[0][1].to_i
+      level = csv_contents[0][3]
       ActiveRecord::Base.transaction do
         csv_contents.each do |row|
           pg.increment
           if is_hospital_table
             Hospital.create!({year: row[0].to_i, hospital_id: row[1].to_i, name: row[2], street: row[3], address: row[4], canton: row[4]})
           else
+            if version != row[2] || year != row[1].to_i || level != row[3]
+              puts "Warning row #{row} has not the same version, year or level as other rows in this file!"
+              puts "version: #{version}, level: #{level}, year: #{year}"
+            end
             NumCase.create!({hospital_id: row[0].to_i, year: row[1].to_i, version: row[2], level: row[3], code: row[4], n: row[5].to_i})
           end
         end
       end
       pg.finish
+
+      next if level != 'DRG'
+
+      puts 'Aggregating ADRGs and Partitions..'
+      # Calculate aggregations for ADRGs and Partitions
+      partitions_by_drg = {}
+      adrgs_by_drg = {}
+      ActiveRecord::Base.transaction do
+        Drg.where(:version => version).all.each do |drg|
+          partitions_by_drg[drg.code] = drg.partition.code
+          adrgs_by_drg[drg.code] = drg.adrg.code
+        end
+      end
+
+      numcases_by_partition_and_hospital = {}
+      numcases_by_adrg_and_hospital = {}
+      ActiveRecord::Base.transaction do
+        NumCase.where(:version => version, :year => year, :level => 'DRG').all.each do |numcase|
+          partition = partitions_by_drg[numcase.code]
+          adrg = adrgs_by_drg[numcase.code]
+          if numcases_by_partition_and_hospital[partition].nil?
+            numcases_by_partition_and_hospital[partition] = {}
+          end
+          if numcases_by_partition_and_hospital[partition][numcase.hospital_id].nil?
+            numcases_by_partition_and_hospital[partition][numcase.hospital_id] = 0
+          end
+          numcases_by_partition_and_hospital[partition][numcase.hospital_id] += numcase.n
+
+          if numcases_by_adrg_and_hospital[adrg].nil?
+            numcases_by_adrg_and_hospital[adrg] = {}
+          end
+          if numcases_by_adrg_and_hospital[adrg][numcase.hospital_id].nil?
+            numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] = 0
+          end
+          numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] += numcase.n
+        end
+      end
+
+      ActiveRecord::Base.transaction do
+        numcases_by_partition_and_hospital.each do |partition, hospitals|
+          hospitals.each do |hospital, n|
+            NumCase.create!({hospital_id: hospital, year: year, version: version, level: 'PARTITION', code: partition, n: n})
+          end
+        end
+      end
+
+      ActiveRecord::Base.transaction do
+        numcases_by_adrg_and_hospital.each do |adrg, hospitals|
+          hospitals.each do |hospital, n|
+            NumCase.create!({hospital_id: hospital, year: year, version: version, level: 'ADRG', code: adrg, n: n})
+          end
+        end
+      end
     end
   end
 
@@ -130,7 +191,7 @@ namespace :db do
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V5.0/'))
 
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'))
-    Rake::Task['db:seed_drg_version'].reenable
+    Rake::Task['db:seed_numcase_data'].reenable
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'))
   end
 end
