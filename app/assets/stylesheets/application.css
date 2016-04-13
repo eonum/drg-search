@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
- *= require styleguide
  *= require styleguide_vendors
+ *= require styleguide
+ *= require styleguide_print
  */
