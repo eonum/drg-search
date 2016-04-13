@@ -14,6 +14,7 @@ namespace :swiss_styleguide do |t|
     js_dest = dest + 'javascripts/'
     css_dest = dest + 'stylesheets/'
     images_dest = dest + 'images/'
+    images_dest_public = 'public/img/'
     fonts_dest = './public/'
 
     FileUtils.cp css_origin+'admin.css', css_dest+'styleguide.css'
@@ -26,6 +27,7 @@ namespace :swiss_styleguide do |t|
     FileUtils.cp js_origin+'vendors.min.js', js_dest+'styleguide_vendors.min.js'
     FileUtils.cp js_origin+'polyfills.min.js', js_dest+'styleguide_polyfills.min.js'
     FileUtils.cp_r images_origin, images_dest
+    FileUtils.cp_r images_origin, images_dest_public
     FileUtils.cp_r fonts_origin, fonts_dest
   end
 
