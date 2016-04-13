@@ -38,8 +38,8 @@
     </div>
 
     <div class="clearfix">
-      <a href="../en/" class="brand hidden-xs">
-        <%= image_tag "logo-CH.png" %>
+      <a href="<%= url_for( :locale => I18n.locale) %>" class="brand hidden-xs">
+        <img src="<%= image_path("logo-CH.svg") %>" onerror="this.onerror=null; this.src='<%= image_path("logo-CH.png") %>'">
         <h1><%=t('drg_search')%></h1>
       </a>
     </div>
@@ -61,7 +61,7 @@
 
     <div class="container-fluid">
       <hr class="footer-line visible-xs">
-      <img class="visible-xs" src="../img/logo-CH.svg" onerror="this.onerror=null; this.src='../img/logo-CH.png'" alt="back to home">
+      <img class="visible-xs" src="<%= image_path("logo-CH.svg") %>" onerror="this.onerror=null; this.src='<%= image_path("logo-CH.png") %>'" alt="back to home">
     </div>
 
     <address>
