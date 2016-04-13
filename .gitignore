@@ -39,3 +39,6 @@ bower.json
 
 # Ignore environment settings
 .env
+
+# Ignore data folder
+/data
