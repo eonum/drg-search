@@ -8,7 +8,67 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container container-main">
+  <header>
+    <div class="clearfix">
+      <section class="nav-services clearfix">
+        <h2 class="sr-only">Language selection</h2>
+        <nav class="nav-lang">
+          <ul>
+            <li>
+              <a href="#" lang="de" title="Deutsch" aria-label="Deutsch " class="">DE</a>
+            </li>
+            <li>
+              <a href="#" lang="fr" title="Français" aria-label="Français " class="">FR</a>
+            </li>
+            <li>
+              <a href="#" lang="it" title="Italiano Disabled" aria-label="Italiano Disabled" class="disabled">IT</a>
+            </li>
+            <li>
+              <a href="#" lang="en" title="English Selected" aria-label="English Selected" class="active">EN</a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </div>
+
+    <div class="clearfix">
+      <a href="../en/" class="brand hidden-xs">
+        <%= image_tag "logo-CH.png" %>
+        <h1><%=t('drg_search')%></h1>
+      </a>
+    </div>
+  </header>
+  <div class="header-separator"></div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="content" class="container-fluid">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container-fluid footer-service">
+      <h3>©2016 TODO</h3>
+    </div>
+
+    <div class="container-fluid">
+      <hr class="footer-line visible-xs">
+      <img class="visible-xs" src="../img/logo-CH.svg" onerror="this.onerror=null; this.src='../img/logo-CH.png'" alt="back to home">
+    </div>
+
+    <address>
+      <span class="hidden-xs">©2015 TODO</span>
+      <nav class="pull-right">
+        <ul>
+          <li><a href="http://www.disclaimer.admin.ch/terms_and_conditions.html">Legal framework</a></li>
+        </ul>
+      </nav>
+    </address>
+  </footer>
+</div>
 
 </body>
 </html>
