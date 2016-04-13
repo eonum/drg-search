@@ -17,10 +17,14 @@ namespace :swiss_styleguide do |t|
     fonts_dest = './public/'
 
     FileUtils.cp css_origin+'admin.css', css_dest+'styleguide.css'
+    FileUtils.cp css_origin+'print.css', css_dest+'styleguide_print.css'
+    FileUtils.cp css_origin+'vendors.css', css_dest+'styleguide_vendors.css'
     FileUtils.cp_r css_origin+'images', css_dest+'images'
 
     FileUtils.cp js_origin+'main.js', js_dest+'styleguide.js'
     FileUtils.cp js_origin+'main.min.js', js_dest+'styleguide.min.js'
+    FileUtils.cp js_origin+'vendors.min.js', js_dest+'styleguide_vendors.min.js'
+    FileUtils.cp js_origin+'polyfills.min.js', js_dest+'styleguide_polyfills.min.js'
     FileUtils.cp_r images_origin, images_dest
     FileUtils.cp_r fonts_origin, fonts_dest
   end
