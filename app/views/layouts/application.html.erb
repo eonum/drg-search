@@ -21,16 +21,16 @@
         <nav class="nav-lang">
           <ul>
             <li>
-              <a href="#" lang="de" title="Deutsch" aria-label="Deutsch " class="">DE</a>
+              <a href="<%= url_for( :locale => 'de') %>" lang="de" title="Deutsch <% if I18n.locale == :de %>Selected<% end %>" aria-label="Deutsch " class="<% if I18n.locale == :de %>active<% end %>">DE</a>
             </li>
             <li>
-              <a href="#" lang="fr" title="Français" aria-label="Français " class="">FR</a>
+              <a href="<%= url_for( :locale => 'fr') %>" lang="fr" title="Français <% if I18n.locale == :fr %>Selected<% end %>" aria-label="Français " class="<% if I18n.locale == :fr %>active<% end %>">FR</a>
             </li>
             <li>
               <a href="#" lang="it" title="Italiano Disabled" aria-label="Italiano Disabled" class="disabled">IT</a>
             </li>
             <li>
-              <a href="#" lang="en" title="English Selected" aria-label="English Selected" class="active">EN</a>
+              <a href="<%= url_for( :locale => 'en') %>" lang="en" title="English <% if I18n.locale == :en %>Selected<% end %>" aria-label="English Selected" class="<% if I18n.locale == :en %>active<% end %>">EN</a>
             </li>
           </ul>
         </nav>
