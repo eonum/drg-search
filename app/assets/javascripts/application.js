@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require styleguide
+//= require styleguide_vendors.min
 //= require_tree .
