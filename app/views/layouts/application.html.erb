@@ -27,10 +27,7 @@
               <a href="<%= url_for( :locale => 'fr') %>" lang="fr" title="Français <% if I18n.locale == :fr %>Selected<% end %>" aria-label="Français " class="<% if I18n.locale == :fr %>active<% end %>">FR</a>
             </li>
             <li>
-              <a href="#" lang="it" title="Italiano Disabled" aria-label="Italiano Disabled" class="disabled">IT</a>
-            </li>
-            <li>
-              <a href="<%= url_for( :locale => 'en') %>" lang="en" title="English <% if I18n.locale == :en %>Selected<% end %>" aria-label="English Selected" class="<% if I18n.locale == :en %>active<% end %>">EN</a>
+              <a href="<%= url_for( :locale => 'it') %>" lang="it" title="Italiano" aria-label="Italiano <% if I18n.locale == :it %>Selected<% end %>" class="<% if I18n.locale == :it %>active<% end %>">IT</a>
             </li>
           </ul>
         </nav>
