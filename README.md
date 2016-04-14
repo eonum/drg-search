@@ -101,9 +101,13 @@ Update the git submodule which references the swiss styleguide using:
 
 ``rake swiss_styleguide:update_submodule`` 
 
+This will check out the submodule if this isn't done already. Then it will pull the newest commit on the master branch of the submodule and finally update .gitmodules if necessary.
+
 Import the state which is represented  in the styleguide submodule with: 
 
 ``rake swiss_styleguide:import``
+
+This will copy the files from ./styleguide/build to the appropriate locations in ./vendor/assets and ./public.
 
 These both steps can also be executed at once by entering: 
 

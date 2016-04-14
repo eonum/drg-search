@@ -34,7 +34,10 @@ namespace :swiss_styleguide do |t|
   desc "Updates swiss styleguide git submodule"
   task update_submodule: :environment do
     print "Updating styleguide ...\n"
+    print `git submodule init`
+    print `git submodule update`
     print `cd styleguide && git pull origin master`
+    print `git submodule update`
   end
 
   desc 'Updates swiss styleguide git submodule and imports it'
