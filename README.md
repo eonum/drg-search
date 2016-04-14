@@ -12,7 +12,6 @@ To prevent sensitive data to show up in the repository, put such data into the
 
 ``<%= ENV['SOME_PASSWORD'] =>``
 
-
 ## Installation
 ### Generate secrets.yml
 You have to generate the file config/secrets.yml in order to have a functional and secure application. Do never include this file in version control.
@@ -96,6 +95,19 @@ and if you want to create a production database:
 
 
 Further information can be found here: https://help.ubuntu.com/community/PostgreSQL
+
+#### Update and Import Swiss Styleguide (https://github.com/swiss/styleguide)
+Update the git submodule which references the swiss styleguide using:
+
+``rake swiss_styleguide:update_submodule`` 
+
+Import the state which is represented  in the styleguide submodule with: 
+
+``rake swiss_styleguide:import``
+
+These both steps can also be executed at once by entering: 
+
+``rake swiss_styleguide:update_and_import`` 
 
 ## Testing
 
