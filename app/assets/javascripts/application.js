@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require styleguide
 //= require styleguide_vendors.min
+//= require styleguide_polyfills.min
 //= require_tree .
