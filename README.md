@@ -107,7 +107,7 @@ Import the state which is represented  in the styleguide submodule with:
 
 ``rake swiss_styleguide:import``
 
-This will copy the files from /styleguide/build to the appropriate locations in /vendor/assets and /public.
+This will copy the files from ./styleguide/build to the appropriate locations in ./vendor/assets and ./public.
 
 These both steps can also be executed at once by entering: 
 
