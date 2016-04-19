@@ -1,0 +1,56 @@
+!!!
+/[if lt IE 7 ] <html class="no-js ie6 oldie">
+/[if IE 7 ] <html class="no-js ie7 oldie">
+/[if IE 8 ] <html class="no-js ie8 oldie">
+/[if IE 9 ] <html class="no-js ie9">
+/ [if gt IE 9 ]><!
+%html.no-js.no-ie{:lang => "#{I18n.locale}"}
+  / <![endif]
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+      = t('drg_search')
+      \- #{t('foph_long')}
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+  %body
+    .container.container-main
+      %header
+        .clearfix
+          %section.nav-services.clearfix
+            %h2.sr-only= t('language_selection')
+            %nav.nav-lang
+              %ul
+                %li
+                  %a{"aria-label" => "Deutsch ", :class => I18n.locale == :de ? 'active' : '', :href => "#{url_for( :locale => 'de')}", :lang => "de", :title => "Deutsch"} DE
+                %li
+                  %a{"aria-label" => "Français ", :class => I18n.locale == :fr ? 'active' : '', :href => "#{url_for( :locale => 'fr')}", :lang => "fr", :title => "Français"} FR
+                %li
+                  %a{"aria-label" => "Italiano", :class => I18n.locale == :it ? 'active' : '', :href => "#{url_for( :locale => 'it')}", :lang => "it", :title => "Italiano"} IT
+        .clearfix
+          %a.brand.hidden-xs{:href => "#{url_for( :locale => I18n.locale)}"}
+            %img{:onerror => "this.onerror=null; this.src='#{image_path("logo-CH.png")}'", :src => "#{image_path("logo-CH.svg")}"}/
+            %h1
+              = t('drg_search')
+              \- #{t('foph_long')}
+      .header-separator
+      .row
+        .col-xs-12
+          #content.container-fluid
+            = yield
+      %footer
+        .container-fluid.footer-service
+          %h3
+            ©2016 #{t('foph_long')}
+        .container-fluid
+          %hr.footer-line.visible-xs/
+          %img.visible-xs{:alt => "back to home", :onerror => "this.onerror=null; this.src='#{image_path("logo-CH.png")}'", :src => "#{image_path("logo-CH.svg")}"}/
+        %address
+          %span.hidden-xs
+            ©2016 #{t('foph_long')}
+          %nav.pull-right
+            %ul
+              %li
+                %a{:href => "http://www.disclaimer.admin.ch/terms_and_conditions.html"}= t('legal')
