@@ -96,14 +96,28 @@ and if you want to create a production database:
 
 Further information can be found here: https://help.ubuntu.com/community/PostgreSQL
 
-#### Update and Import Swiss Styleguide (https://github.com/swiss/styleguide)
+### Seed DRG catalogues and import data
+The following rake tasks handle the import of data and DRG catalogues. Use `rake db:reseed[directory]` if you have a fresh database (create by `rake db:create`) or a database that has been emptied by `rake db:truncate`. `rake db:reseed[directory]` calls `rake db:seed_drg_version[directory]` and `rake db:seed_numcase_data[directory]` for all systems and years.
+
+```
+rake db:reseed[directory]                # Empties all tables and executes all tasks to setup the database
+rake db:seed_drg_version[directory]      # Seed a DRG system
+rake db:seed_numcase_data[directory]     # Seed all data in a certain directory
+rake db:truncate                         # Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)
+```
+
+### Update and Import Swiss Styleguide (https://github.com/swiss/styleguide)
 Update the git submodule which references the swiss styleguide using:
 
 ``rake swiss_styleguide:update_submodule`` 
 
+This will check out the submodule if this isn't done already. Then it will pull the newest commit on the master branch of the submodule and finally update .gitmodules if necessary.
+
 Import the state which is represented  in the styleguide submodule with: 
 
 ``rake swiss_styleguide:import``
+
+This will copy the files from ./styleguide/build to the appropriate locations in ./vendor/assets and ./public.
 
 These both steps can also be executed at once by entering: 
 
