@@ -42,3 +42,6 @@ bower.json
 
 # Ignore data folder
 /data
+
+# Ignore compiled assets
+/public/assets
