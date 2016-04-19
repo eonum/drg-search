@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  root to: 'home#index', locale: :de
-  scope "(:locale)", locale: [/#{I18n.available_locales.join("|")}/], defaults: {locale: :de} do
-    get 'home/index'
+  root to: 'home#redirect'
+
+  scope '/:locale', :locale => /de|fr|it/, :format => /json|html/ do
+    get '', to: 'home#index', as: 'home'
+
+    resources :systems,  only: ['index'] do
+      get :compare, :on => :member
+    end
   end
 end

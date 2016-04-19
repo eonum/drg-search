@@ -1,7 +1,7 @@
 require 'fileutils'
 
 namespace :swiss_styleguide do |t|
-  desc "Imports swiss styleguide from git submodule"
+  desc "Imports Swiss styleguide from git submodule"
   task import: :environment do
     print 'Importing styleguide ...'
     origin = './styleguide/build/'
@@ -31,13 +31,13 @@ namespace :swiss_styleguide do |t|
     FileUtils.cp_r fonts_origin, fonts_dest
   end
 
-  desc "Updates swiss styleguide git submodule"
+  desc "Updates Swiss styleguide git submodule"
   task update_submodule: :environment do
     print "Updating styleguide ...\n"
     print `cd styleguide && git pull origin master`
   end
 
-  desc 'Updates swiss styleguide git submodule and imports it'
+  desc 'Updates Swiss styleguide git submodule and imports it'
   task update_and_import: :environment do
     Rake::Task['swiss_styleguide:update_submodule'].invoke
     Rake::Task['swiss_styleguide:import'].invoke
