@@ -10,4 +10,12 @@ class ApplicationController < ActionController::Base
     session[:locale] = I18n.locale
   end
 
+  def default_url_options
+    { :locale => I18n.locale }
+  end
+
+  def escape_query query
+    return (query or '').gsub(/\\/, '\&\&').gsub(/'/, "''")
+  end
+
 end

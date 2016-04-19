@@ -1,10 +1,10 @@
 class SystemsController < ApplicationController
-  def compare
+  def show
     @system = System.find(params[:id])
   end
 
   def index
     @system = System.order(version: :desc).first()
-    redirect_to action: 'compare', id: @system.id
+    redirect_to system_path(@system)
   end
 end
