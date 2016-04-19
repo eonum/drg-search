@@ -9,10 +9,11 @@ module SearchHelper
     res = []
     query = params[:term].blank? ? '' : params[:term]
     limit = params[:limit].blank? ? 5 : params[:limit].to_i
+    version = params[:version].blank? ? System.order(version: :desc).first().version : params[:version]
     locale =  check_locale(params[:locale])
 
-    codes = model.where({ '$or' => [{'code' => /#{Regexp.escape(query)}/i }, {'text_' + locale => /#{Regexp.escape(query)}/i}]})
-        .order_by([[ :code, :asc ]]).limit(limit)
+    codes = model.where("version = '#{version}' and (code ILIKE ? or text_de ILIKE ?)", "%#{Regexp.escape(query)}%", "%#{Regexp.escape(query)}%")
+        .order(code: :asc).limit(limit)
     codes.each do |code|
       res << "#{code.code} #{code.text(locale)}" if params[:as_hash].blank?
       res << {:id => code.id.to_s, :code => code.code, :text => code.text(locale)} if !params[:as_hash].blank?

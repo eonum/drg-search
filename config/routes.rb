@@ -5,5 +5,8 @@ Rails.application.routes.draw do
     get '', to: 'home#index', as: 'home'
 
     resources :systems,  only: ['index', 'show']
+
+    get 'search/hospitals'
+    get 'search/codes'
   end
 end
