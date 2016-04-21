@@ -1,1 +1,5 @@
-hop search
+%fieldset
+  %legend.hidden-legend= t('hospital_search')
+  .form-group
+    .col-sm-12
+      = text_field_tag('hospital_search', '', { class: 'form-control', placeholder: t('hospital_search') })

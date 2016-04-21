@@ -1,12 +1,10 @@
-%h1.page-title= @system.text locale
-
-.container
+.container{ style: 'margin-top: 20px;'}
   .row
-    .col-lg-4
+    .col-lg-2
       #version-selectionbox= render 'version_selection'
-    .col-lg-4
+    .col-lg-5
       #hospital-searchbox= render 'hospital_search'
-    .col-lg-4
+    .col-lg-5
       #drg-searchbox= render 'drg_search'
   .row
     .col-lg-12
