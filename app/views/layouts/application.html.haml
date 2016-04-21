@@ -38,15 +38,28 @@
       .header-separator
       .clearfix
         %nav#main-navigation.nav-main.yamm.navbar
-          %section.nav-mobile.fixed
+          %section.nav-mobile
             .table-row
               .nav-mobile-header
                 .table-row
                   %span.nav-mobile-logo
-                    Coming Soon
+                    %h1= t('drg_search')
+              .table-cell.dropdown
+                %a.nav-mobile-menu.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
+                  %span.icon.icon--menu.center-block
+                .drilldown.dropdown-menu{ role: "menu"}
+                  .drilldown-container
+                    %nav.nav-page-list
+                      %ul
+                        %li
+                          = link_to t('drg_search'), root_path
+                        %li
+                          %a About
+                        %li
+                          %a Help
           %ul.nav.navbar-nav
             %li.dropdown.yamm-fw.open.current
-              %a{ href: '#'} Home
+              = link_to t('drg_search'), root_path
             %li.dropdown.yamm-fw
               %a About
             %li.dropdown.yamm-fw
