@@ -44,6 +44,11 @@
                   %a{"aria-label" => "Français ", :class => I18n.locale == :fr ? 'active' : '', :href => "#{url_for( :locale => 'fr')}", :lang => "fr", :title => "Français"} FR
                 %li
                   %a{"aria-label" => "Italiano", :class => I18n.locale == :it ? 'active' : '', :href => "#{url_for( :locale => 'it')}", :lang => "it", :title => "Italiano"} IT
+            %h2.sr-only= t('services_navigation')
+            %nav.nav-service
+              %ul
+                %li
+                  %a{:href => "#", :lang => "de", :title => "#{t('contact')}"} #{t('contact')}
         .clearfix
           %a.brand.hidden-xs{:href => "#{url_for( :locale => I18n.locale)}"}
             %img{:onerror => "this.onerror=null; this.src='/img/logo-CH.png'", :src => "/img/logo-CH.svg"}/
