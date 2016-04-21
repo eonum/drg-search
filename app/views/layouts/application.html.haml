@@ -52,14 +52,22 @@
                     %nav.nav-page-list
                       %ul
                         %li
+                          %nav.drilldown-sub
                           = link_to t('drg_search'), root_path
+                          %ul
+                            - System.order(version: :desc).each do |system|
+                              %li= link_to system.text(locale), system_path(system)
                         %li
                           %a About
                         %li
                           %a Help
           %ul.nav.navbar-nav
-            %li.dropdown.yamm-fw.open.current
-              = link_to t('drg_search'), root_path
+            %li.dropdown.yamm-fw.current
+              = link_to t('drg_search'), root_path, {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}
+              %ul.dropdown-menu{ role: "menu"}
+                - System.order(version: :desc).each do |system|
+                  %li
+                    .yamm-content.container-fluid= link_to system.text(locale), system_path(system)
             %li.dropdown.yamm-fw
               %a About
             %li.dropdown.yamm-fw
