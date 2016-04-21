@@ -43,7 +43,8 @@
               .nav-mobile-header
                 .table-row
                   %span.nav-mobile-logo
-                    %h1= t('drg_search')
+                    %img{ src: '/img/swiss.svg', onerror: "this.onerror=null; this.src='/img/swiss.png'", alt: "Confederatio Helvetica"}
+                  %h1= t('drg_search')
               .table-cell.dropdown
                 %a.nav-mobile-menu.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
                   %span.icon.icon--menu.center-block
