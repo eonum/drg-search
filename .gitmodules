@@ -1,3 +1,6 @@
 [submodule "styleguide"]
 	path = styleguide
 	url = https://github.com/swiss/styleguide
+[submodule "data"]
+	path = data
+	url = eonum.ch:/home/tim/git/data-drgsearch.git
