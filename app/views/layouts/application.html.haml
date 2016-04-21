@@ -46,7 +46,7 @@
                   %a{"aria-label" => "Italiano", :class => I18n.locale == :it ? 'active' : '', :href => "#{url_for( :locale => 'it')}", :lang => "it", :title => "Italiano"} IT
         .clearfix
           %a.brand.hidden-xs{:href => "#{url_for( :locale => I18n.locale)}"}
-            %img{:onerror => "this.onerror=null; this.src='#{image_path("logo-CH.png")}'", :src => "#{image_path("logo-CH.svg")}"}/
+            %img{:onerror => "this.onerror=null; this.src='/img/logo-CH.png'", :src => "/img/logo-CH.svg"}/
             %h1
               = t('drg_search')
               \- #{t('foph_long')}

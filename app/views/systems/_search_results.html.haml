@@ -1,1 +1,28 @@
-search results..
+%h3= t('search_results')
+/ Nav tabs
+%ul.nav.nav-tabs
+  %li.active
+    %a{ href: '#hospitalSearchResults', 'data-toggle': 'tab'}= t('hospitals')
+  %li
+    %a{ href: '#mdcSearchResults', 'data-toggle': 'tab'}= t('mdcs')
+  %li
+    %a{ href: '#adrgSearchResults', 'data-toggle': 'tab'}= t('adrgs')
+  %li
+    %a{ href: '#drgSearchResults', 'data-toggle': 'tab'}= t('drgs')
+
+/ Tab panes
+.tab-content.tab-border
+  #hospitalSearchResults.tab-pane.active
+
+    / Header pagination
+    / See http://swiss.github.io/styleguide/de/search.html
+
+    / Results
+    %article.search-result
+      Example search result
+
+  #mdcSearchResults.tab-pane
+
+  #adrgSearchResults.tab-pane
+
+  #drgSearchResults.tab-pane

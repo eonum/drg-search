@@ -1,16 +1,15 @@
 .container{ style: 'margin-top: 20px;'}
   .row
-    .col-lg-2
+    .col-sm-2
       #version-selectionbox= render 'version_selection'
-    .col-lg-5
+    .col-sm-5
       #hospital-searchbox= render 'hospital_search'
-    .col-lg-5
+    .col-sm-5
       #drg-searchbox= render 'drg_search'
   .row
-    .col-lg-12
-      #search-resultsbox= render 'search_results'
+    .col-sm-12= render 'search_results'
   .row
-    .col-lg-12
+    .col-sm-12
       #comparison-resultsbox= render 'results'
 
 

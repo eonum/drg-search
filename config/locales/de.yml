@@ -28,3 +28,8 @@ de:
   drg_version: "DRG Version"
   hospital_search: "Suche nach Spital"
   number_search: "Suche nach Kennzahl"
+  search_results: "Suchresultate"
+  hospitals: "Spitäler"
+  mdcs: "MDCs Major Diagnostic Categories"
+  adrgs: "Basis-DRGs"
+  drgs: "DRGs - Fallpauschalen"
