@@ -1,9 +1,7 @@
 - if @hospitals.empty?
   .row
     .col-sm-12
-      .has-warning.text-center= t('no_search_results')
-
-
+      .alert.alert-warning{ role: 'alert'}= t('no_search_results')
 
 - i = 0
 - @hospitals.each do |hospital|

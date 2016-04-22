@@ -5,4 +5,7 @@ class HomeController < ApplicationController
   def redirect
     redirect_to "/#{session[:language] || I18n.locale}"
   end
+
+  def contact
+  end
 end

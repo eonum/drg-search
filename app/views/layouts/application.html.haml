@@ -48,7 +48,7 @@
             %nav.nav-service
               %ul
                 %li
-                  %a{:href => "#", :lang => "de", :title => "#{t('contact')}"} #{t('contact')}
+                  %a{:href => contact_path, :lang => "de", :title => "#{t('contact')}"} #{t('contact')}
         .clearfix
           %a.brand.hidden-xs{:href => "#{url_for( :locale => I18n.locale)}"}
             %img{:onerror => "this.onerror=null; this.src='/img/logo-CH.png'", :src => "/img/logo-CH.svg"}/
