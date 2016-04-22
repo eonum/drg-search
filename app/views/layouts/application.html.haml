@@ -79,9 +79,9 @@
                             - System.order(version: :desc).each do |system|
                               %li= link_to system.text(locale), system_path(system)
                         %li
-                          %a About
+                          = link_to t('about'), about_path
                         %li
-                          %a Help
+                          = link_to t('help'), help_path
           %ul.nav.navbar-nav
             %li.dropdown.yamm-fw.current
               = link_to t('drg_search'), root_path, {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}
@@ -90,9 +90,9 @@
                   %li
                     .yamm-content.container-fluid= link_to system.text(locale), system_path(system)
             %li.dropdown.yamm-fw
-              %a About
+              = link_to t('about'), about_path
             %li.dropdown.yamm-fw
-              %a Help
+              = link_to t('help'), help_path
       .row
         .col-xs-12
           #content.container-fluid
