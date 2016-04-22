@@ -10,6 +10,8 @@
     <div class='row'>
   .col-sm-6
     %article
+      .pull-right
+        %button.btn{ type: "button", title: t('take_over_hospital') }= t('take_over')
       %strong= hospital.name
       %address.small
         = hospital.street

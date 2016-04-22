@@ -6,4 +6,8 @@
 - @codes.each do |code|
   %article.row
     %strong.col-sm-1= code.code
-    .col-sm-11= ' ' + code.text(locale)
+    .col-sm-11
+      = ' ' + code.text(locale)
+      .pull-right
+        %button.btn{ type: "button", title: t('take_over_hospital') }= t('take_over')
+    %hr
