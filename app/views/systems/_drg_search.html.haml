@@ -2,4 +2,4 @@
   %legend.hidden-legend= t('number_search')
   .form-group
     .col-sm-12
-      = text_field_tag('number_search', '', { class: 'form-control', placeholder: t('number_search') })
+      = text_field_tag('number_search', '', { class: 'form-control', placeholder: t('number_search'), 'data-search-url': system_search_codes_path(@system) })
