@@ -1,2 +1,9 @@
+- if @codes.empty?
+  .row
+    .col-sm-12
+      .has-warning.text-center= t('no_search_results')
+
 - @codes.each do |code|
-  %article= code.code + ' ' + code.text(locale)
+  %article.row
+    %strong.col-sm-1= code.code
+    .col-sm-11= ' ' + code.text(locale)

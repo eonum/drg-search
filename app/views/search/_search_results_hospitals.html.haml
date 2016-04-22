@@ -1,2 +1,22 @@
+- if @hospitals.empty?
+  .row
+    .col-sm-12
+      .has-warning.text-center= t('no_search_results')
+
+
+
+- i = 0
 - @hospitals.each do |hospital|
-  %article= hospital.name
+  - i += 1
+  - if i % 2 == 1
+    <div class='row'>
+  .col-sm-6
+    %article
+      %strong= hospital.name
+      %address.small
+        = hospital.street
+        %br
+        = hospital.address
+    %hr
+  - if i % 2 == 0
+    </div>

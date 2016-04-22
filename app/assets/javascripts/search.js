@@ -5,7 +5,7 @@ $( function() {
     $('#hospital_search').keydown(function () {
         searchTerm = $('#hospital_search').val();
         searchUrl = $('#hospital_search').data('search-url') + '.html';
-        $.get(searchUrl, {term: searchTerm, limit: 5})
+        $.get(searchUrl, {term: searchTerm, limit: 6})
             .done(function (data) {
                 $('#hospitalSearchResults').html(data);
                 $('.nav-tabs a[href="#hospitalSearchResults"]').tab('show');
