@@ -4,29 +4,29 @@
 $( function() {
     $('#hospital_search').keydown(function () {
         searchTerm = $('#hospital_search').val();
-        searchUrl = $('#hospital_search').data('search-url');
-        $.get(searchUrl, {term: searchTerm, limit: 5, format: 'json'})
+        searchUrl = $('#hospital_search').data('search-url') + '.html';
+        $.get(searchUrl, {term: searchTerm, limit: 5})
             .done(function (data) {
-                $('#hospitalSearchResults').html(data[0]['text']);
+                $('#hospitalSearchResults').html(data);
                 $('.nav-tabs a[href="#hospitalSearchResults"]').tab('show');
             });
     });
 
     $('#number_search').keydown(function () {
         searchTerm = $('#number_search').val();
-        searchUrl = $('#number_search').data('search-url');
-        $.get(searchUrl, {term: searchTerm, limit: 5, format: 'json', level: 'drg'})
+        searchUrl = $('#number_search').data('search-url') + '.html';
+        $.get(searchUrl, {term: searchTerm, limit: 5, level: 'drg'})
             .done(function (data) {
-                $('#drgSearchResults').html(data[0]['text']);
+                $('#drgSearchResults').html(data);
                 $('.nav-tabs a[href="#drgSearchResults"]').tab('show');
             });
-        $.get(searchUrl, {term: searchTerm, limit: 5, format: 'json', level: 'mdc'})
+        $.get(searchUrl, {term: searchTerm, limit: 5, level: 'mdc'})
             .done(function (data) {
-                $('#mdcSearchResults').html(data[0]['text']);
+                $('#mdcSearchResults').html(data);
             });
-        $.get(searchUrl, {term: searchTerm, limit: 5, format: 'json', level: 'adrg'})
+        $.get(searchUrl, {term: searchTerm, limit: 5, level: 'adrg'})
             .done(function (data) {
-                $('#adrgSearchResults').html(data[0]['text']);
+                $('#adrgSearchResults').html(data);
             });
     });
 });
