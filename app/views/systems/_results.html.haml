@@ -1,29 +1,20 @@
 %h3= t('comparison_table')
-%table.table.table-bordered.table-striped.text-right
-  %thead
-    %tr
-      %th
-      %th Sample key figure 1
-      %th Sample key figure 2
-      %th Sample key figure 3
-      %th Sample key figure 4
-  %tbody
-    %tr
-      %th.text-left Hospital 1
-      %td 4'160
-      %td 7'647
-      %td 4'160
-      %td 7'647
-    %tr
-      %th.text-left Hospital 2
-      %td 4'160
-      %td 7'647
-      %td 4'160
-      %td 7'647
-  %tfoot
-    %tr
-      %th
-      %th Sample key figure 1
-      %th Sample key figure 2
-      %th Sample key figure 3
-      %th Sample key figure 4
+
+- if @codes.empty? || @hospitals.empty?
+  .row
+    .col-sm-12
+      .alert.alert-info{ role: 'alert'}= t('pick_at_least_one')
+
+- else
+  %table.table.table-bordered.table-striped.text-right
+    %thead
+      %tr
+        %th
+        - @codes.each do |code|
+          %th= "#{code.code} #{code.text locale}"
+    %tbody
+      - @hospitals.each do |hospital|
+        %tr
+          %td= hospital.name
+          - @codes.each do |code|
+            %th number
