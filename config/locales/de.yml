@@ -50,3 +50,4 @@ de:
   additional_data_plural: "mit zusätzlichen Vergleichsdaten aus den Jahren"
   additional_data_singular: "mit zusätzlichen Vergleichsdaten aus dem Jahr"
   pick_at_least_one: "Wählen Sie mindestens ein Spital und eine Kennzahl zum Vergleich."
+  remove_from_comparison: "Aus dem Vergleich entfernen"

@@ -2,6 +2,27 @@
 // All this logic will automatically be available in application.js.
 
 $( function() {
+    var deleteItem = function(code, element){
+        code = String(code);
+        var codes = $(element).val().split(',');
+        var index = codes.indexOf(code);
+        if (index > -1) {
+            codes.splice(index, 1);
+        }
+        $(element).val(codes.join(','));
+        updateComparison();
+    }
+
+    var addRemoveFunction = function(){
+        $('.removeCode').click(function(){
+            deleteItem($(this).data('code'), '#codes');
+        });
+
+        $('.removeHospital').click(function(){
+            deleteItem($(this).data('hospital-id'), '#hospitals');
+        });
+    }
+
     /**
      * set the URL with the correct codes and hospital parameters.
      * Hence we can enable a reload of the page.
@@ -14,46 +35,44 @@ $( function() {
             window.history.replaceState({}, 'DRG comparison', path + '?codes=' + codes + '&hospitals=' + hospitals);
     }
 
-    var updateComparison = function(button){
+    var updateComparison = function(){
         var hospitals = $('#hospitals').val();
         var codes = $('#codes').val();
         var url = $('#compareUrl').val();
-        button.hide();
         $.get(url, {codes: codes, hospitals: hospitals})
             .done(function (data) {
                 $('#comparison-resultsbox').html(data);
+                addRemoveFunction();
             });
         setURL();
+    }
+
+    var assembleArray = function(item, list){
+        var temp = [];
+        for (var i = 0; i < list.length; i++){
+            var h = list[i]
+            if(h != '' && temp.indexOf(h) == -1)
+                temp.push(h);
+        }
+        if(temp.indexOf(item) == -1)
+            temp.push(item);
+        return temp.join(',')
     }
 
     var hospitalSelection = function() {
         var hospital_id = String($(this).data('hospital-id'));
         var hospitals = $('#hospitals').val().split(',');
-        var temp = [];
-        for (var i = 0; i < hospitals.length; i++){
-            var h = hospitals[i]
-            if(h != '' && temp.indexOf(h) == -1)
-                temp.push(h);
-        }
-        if(temp.indexOf(hospital_id) == -1)
-            temp.push(hospital_id);
-        $('#hospitals').val(temp.join(','));
-        updateComparison($(this));
+        $('#hospitals').val(assembleArray(hospital_id, hospitals));
+        updateComparison();
+        $(this).hide();
     }
 
     var codeSelection = function() {
         var code = String($(this).data('code'));
         var codes = $('#codes').val().split(',');
-        var temp = [];
-        for (var i = 0; i < codes.length; i++){
-            var h = codes[i]
-            if(h != '' && temp.indexOf(h) == -1)
-                temp.push(h);
-        }
-        if(temp.indexOf(code) == -1)
-            temp.push(code);
-        $('#codes').val(temp.join(','));
-        updateComparison($(this));
+        $('#codes').val(assembleArray(code, codes));
+        updateComparison();
+        $(this).hide();
     }
 
     $('#hospital_search').keydown(function () {
@@ -87,4 +106,6 @@ $( function() {
                 $('.codeSelection').click(codeSelection);
             });
     });
+
+    addRemoveFunction();
 });
