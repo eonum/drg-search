@@ -13,6 +13,9 @@
       #drg-searchbox= render 'drg_search'
   .row
     .col-sm-12= render 'search_results'
+    .hidden
+      = text_field_tag 'hospitals', @hospitals.map(&:id).join(',')
+      = text_field_tag 'codes', @codes.map(&:code).join(',')
   .row
     .col-sm-12
       #comparison-resultsbox= render 'results'
