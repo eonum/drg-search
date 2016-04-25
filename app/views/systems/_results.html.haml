@@ -7,15 +7,18 @@
 
 - unless @codes.empty? && @hospitals.empty?
   %table.table.table-bordered.table-striped.text-right
-    %thead
+    %thead.text-left
       %tr
         %th
         - @codes.each do |code|
-          %th= "#{code.code} #{code.text locale}"
+          %th
+            = code.code + ' '
+            %span.small{style: "color:#757575" }= code.text locale
+            %span.small.pull-right.icon.icon--close{ 'aria-hidden': "true", style: "color:#757575" }
     %tbody
       - @hospitals.each do |hospital|
         %tr
-          %td= hospital.name
+          %td.important= hospital.name
           - num_cases = @num_cases[hospital.hospital_id]
           - @codes.each do |code|
             %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
