@@ -23,5 +23,16 @@ class SystemsController < ApplicationController
       @codes += Drg.where(code: param_codes, version: @system.version)
       @codes += Adrg.where(code: param_codes, version: @system.version)
       @codes += Partition.where(code: param_codes, version: @system.version)
+
+      hop_ids = @hospitals.map {|h| h.hospital_id }
+      codes = @codes.map {|c| c.code }
+      temp_num_cases = NumCase.where(version: @system.version, year: @system.base_year, hospital_id: hop_ids, code: codes)
+      @num_cases = {}
+      hop_ids.each do |hop_id|
+        @num_cases[hop_id] = {}
+      end
+      temp_num_cases.each do |nc|
+        @num_cases[nc.hospital_id][nc.code] = nc
+      end
     end
 end

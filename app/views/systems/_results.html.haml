@@ -16,5 +16,6 @@
       - @hospitals.each do |hospital|
         %tr
           %td= hospital.name
+          - num_cases = @num_cases[hospital.hospital_id]
           - @codes.each do |code|
-            %th number
+            %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
