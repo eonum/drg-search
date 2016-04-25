@@ -1,7 +1,9 @@
 .container{ style: 'margin-top: 20px; padding-right: 3.0em;'}
   .row
     .col-sm-12
-      %h3= t('search')
+      %h3
+        = @system.text locale
+        = data_from @system
   .row
     /.col-sm-2
     /  #version-selectionbox= render 'version_selection'

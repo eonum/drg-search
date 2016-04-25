@@ -29,7 +29,7 @@ de:
   hospital_search: "Spitalsuche"
   hospital_search_placeholder: "Name oder Adresse der Klinik"
   number_search: "Fallzahlsuche"
-  number_search_placeholder: "Fallpauschale, Krankheitsbild, Diagnose oder Behandlung"
+  number_search_placeholder: "Krankheitsbild, Diagnose oder Behandlung"
   search_results: "Suchresultate"
   hospitals: "Spitäler"
   mdcs: "MDCs Major Diagnostic Categories"
@@ -45,3 +45,4 @@ de:
   take_over_hospital: "Dieses Spital in die Analyse übernehmen"
   take_over: "Übernehmen"
   take_over_code: "Diese Kennzahl in die Analyse übernehmen"
+  data_from: "Daten aus den Jahren"

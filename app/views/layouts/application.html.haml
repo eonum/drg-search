@@ -77,7 +77,9 @@
                           = link_to t('drg_search'), root_path
                           %ul
                             - System.order(version: :desc).each do |system|
-                              %li= link_to system.text(locale), system_path(system)
+                              %li
+                                = link_to system.text(locale), system_path(system)
+                                = data_from(system)
                         %li
                           = link_to t('about'), about_path
                         %li
@@ -88,7 +90,9 @@
               %ul.dropdown-menu{ role: "menu"}
                 - System.order(version: :desc).each do |system|
                   %li
-                    .yamm-content.container-fluid= link_to system.text(locale), system_path(system)
+                    .yamm-content.container-fluid
+                      %div= link_to system.text(locale), system_path(system)
+                      = data_from(system)
             %li.dropdown.yamm-fw
               = link_to t('about'), about_path
             %li.dropdown.yamm-fw
