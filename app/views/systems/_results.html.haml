@@ -12,7 +12,7 @@
         %th
         - @codes.each do |code|
           %th
-            = code.code + ' '
+            = code.code_display + ' '
             %span.small{style: "color:#757575" }= code.text locale
             %span.small.pull-right.icon.icon--close{ 'aria-hidden': "true", style: "color:#757575" }
     %tbody

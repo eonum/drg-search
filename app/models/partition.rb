@@ -7,4 +7,8 @@ class Partition < ActiveRecord::Base
   def partition_letter
     return self.code.split(' ')[1]
   end
+
+  def code_display
+    return 'MDC ' + code
+  end
 end

@@ -4,4 +4,8 @@ class Adrg < ActiveRecord::Base
   has_many :drgs
 
   include MultiLanguageText
+
+  def code_display
+    return code
+  end
 end
