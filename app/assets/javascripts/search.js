@@ -27,7 +27,7 @@ $( function() {
     }
 
     var hospitalSelection = function() {
-        var hospital_id = $(this).data('hospital-id');
+        var hospital_id = String($(this).data('hospital-id'));
         var hospitals = $('#hospitals').val().split(',');
         var temp = [];
         for (var i = 0; i < hospitals.length; i++){
@@ -42,7 +42,7 @@ $( function() {
     }
 
     var codeSelection = function() {
-        var code = $(this).data('code');
+        var code = String($(this).data('code'));
         var codes = $('#codes').val().split(',');
         var temp = [];
         for (var i = 0; i < codes.length; i++){
