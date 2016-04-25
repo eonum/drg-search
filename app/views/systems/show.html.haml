@@ -2,7 +2,7 @@
   .row
     .col-sm-12
       %h3
-        = @system.text locale
+        = @system.text(locale) + ' / '
         = data_from @system
   .row
     /.col-sm-2
