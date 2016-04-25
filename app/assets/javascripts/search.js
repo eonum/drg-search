@@ -2,6 +2,11 @@
 // All this logic will automatically be available in application.js.
 
 $( function() {
+    var hospitalSelection = function() {
+        hospital_id = $(this).data('hospital-id');
+        $('#hospitals').val($('#hospitals').val() + ',' + hospital_id);
+    }
+
     $('#hospital_search').keydown(function () {
         searchTerm = $('#hospital_search').val();
         searchUrl = $('#hospital_search').data('search-url') + '.html';
@@ -9,6 +14,8 @@ $( function() {
             .done(function (data) {
                 $('#hospitalSearchResults').html(data);
                 $('.nav-tabs a[href="#hospitalSearchResults"]').tab('show');
+
+                $('.hospitalselection').click(hospitalSelection);
             });
     });
 
