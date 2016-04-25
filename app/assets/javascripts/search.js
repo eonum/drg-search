@@ -2,31 +2,45 @@
 // All this logic will automatically be available in application.js.
 
 $( function() {
+    /**
+     * set the URL with the correct codes and hospital parameters.
+     * Hence we can enable a reload of the page.
+     */
+    var setURL = function(){
+        var path = purl().data.attr.path;
+        var hospitals = $('#hospitals').val();
+        var codes = $('#codes').val();
+        if("replaceState" in window.history)
+            window.history.replaceState({}, 'DRG comparison', path + '?codes=' + codes + '&hospitals=' + hospitals);
+    }
+
     var updateComparison = function(button){
-        hospitals = $('#hospitals').val();
-        codes = $('#codes').val();
-        url = $('#compareUrl').val();
+        var hospitals = $('#hospitals').val();
+        var codes = $('#codes').val();
+        var url = $('#compareUrl').val();
         button.hide();
         $.get(url, {codes: codes, hospitals: hospitals})
             .done(function (data) {
                 $('#comparison-resultsbox').html(data);
             });
+        setURL();
     }
+
     var hospitalSelection = function() {
-        hospital_id = $(this).data('hospital-id');
+        var hospital_id = $(this).data('hospital-id');
         $('#hospitals').val($('#hospitals').val() + ',' + hospital_id);
         updateComparison($(this));
     }
 
     var codeSelection = function() {
-        code = $(this).data('code');
+        var code = $(this).data('code');
         $('#codes').val($('#codes').val() + ',' + code);
         updateComparison($(this));
     }
 
     $('#hospital_search').keydown(function () {
-        searchTerm = $('#hospital_search').val();
-        searchUrl = $('#hospital_search').data('search-url') + '.html';
+        var searchTerm = $('#hospital_search').val();
+        var searchUrl = $('#hospital_search').data('search-url') + '.html';
         $.get(searchUrl, {term: searchTerm, limit: 6})
             .done(function (data) {
                 $('#hospitalSearchResults').html(data);
@@ -36,8 +50,8 @@ $( function() {
     });
 
     $('#number_search').keydown(function () {
-        searchTerm = $('#number_search').val();
-        searchUrl = $('#number_search').data('search-url') + '.html';
+        var searchTerm = $('#number_search').val();
+        var searchUrl = $('#number_search').data('search-url') + '.html';
         $.get(searchUrl, {term: searchTerm, limit: 5, level: 'drg'})
             .done(function (data) {
                 $('#drgSearchResults').html(data);
