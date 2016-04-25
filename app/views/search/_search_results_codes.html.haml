@@ -9,5 +9,5 @@
     .col-sm-11
       = ' ' + code.text(locale)
       .pull-right
-        %button.btn{ type: "button", title: t('take_over_hospital') }= t('take_over')
+        %button.btn.codeSelection{ type: "button", title: t('take_over_code'), 'data-code': code.code }= t('take_over')
     %hr

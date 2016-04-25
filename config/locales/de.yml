@@ -43,6 +43,7 @@ de:
   help: "Hilfe"
   about: "Info"
   take_over_hospital: "Dieses Spital in die Analyse übernehmen"
+  take_over_code: "Diese Kennzahl in die Analyse übernehmen"
   take_over: "Übernehmen"
   take_over_code: "Diese Kennzahl in die Analyse übernehmen"
   data_from: "Daten aus dem Jahr"
