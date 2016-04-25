@@ -5,6 +5,14 @@ $( function() {
     var hospitalSelection = function() {
         hospital_id = $(this).data('hospital-id');
         $('#hospitals').val($('#hospitals').val() + ',' + hospital_id);
+        hospitals = $('#hospitals').val();
+        codes = $('#codes').val();
+        url = $('#compareUrl').val();
+        $(this).hide();
+        $.get(url, {codes: codes, hospitals: hospitals})
+            .done(function (data) {
+                $('#comparison-resultsbox').html(data);
+            });
     }
 
     $('#hospital_search').keydown(function () {
