@@ -28,13 +28,31 @@ $( function() {
 
     var hospitalSelection = function() {
         var hospital_id = $(this).data('hospital-id');
-        $('#hospitals').val($('#hospitals').val() + ',' + hospital_id);
+        var hospitals = $('#hospitals').val().split(',');
+        var temp = [];
+        for (var i = 0; i < hospitals.length; i++){
+            var h = hospitals[i]
+            if(h != '' && temp.indexOf(h) == -1)
+                temp.push(h);
+        }
+        if(temp.indexOf(hospital_id) == -1)
+            temp.push(hospital_id);
+        $('#hospitals').val(temp.join(','));
         updateComparison($(this));
     }
 
     var codeSelection = function() {
         var code = $(this).data('code');
-        $('#codes').val($('#codes').val() + ',' + code);
+        var codes = $('#codes').val().split(',');
+        var temp = [];
+        for (var i = 0; i < codes.length; i++){
+            var h = codes[i]
+            if(h != '' && temp.indexOf(h) == -1)
+                temp.push(h);
+        }
+        if(temp.indexOf(code) == -1)
+            temp.push(code);
+        $('#codes').val(temp.join(','));
         updateComparison($(this));
     }
 
