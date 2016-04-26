@@ -29,6 +29,13 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/img/ico/mstile-144x144.png">
     <meta name="msapplication-config" content="/img/ico/browserconfig.xml">
+
+    = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
+    :javascript
+      I18n.defaultLocale = '#{I18n.default_locale}';
+      I18n.locale = '#{I18n.locale}';
+      google.charts.load('current', {packages: ['corechart'], 'language': '#{I18n.locale}'});
+
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
   %body
     .container.container-main
