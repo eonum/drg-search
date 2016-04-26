@@ -41,23 +41,16 @@
       :javascript
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-          var data = google.visualization.arrayToDataTable([
-            ['#{t('hospitals')}', #{@codes.map{|code| "'" + code.code_display + "'"}.join(', ')}],
-            ['2014', 1000, 400, 200],
-            ['2015', 1170, 460, 250],
-            ['2016', 660, 1120, 300],
-            ['2017', 1030, 540, 350]
-          ]);
+          var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
             chart: {}
-            //bars: 'horizontal' // Required for Material Bar Charts.
           };
 
-          var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+          var chart = new google.charts.Bar(document.getElementById('barchart_comparison_num_cases'));
 
-          chart.draw(data, null);
+          chart.draw(data, options);
         }
-      #barchart_material{ style: "height: 400px;" }
+      #barchart_comparison_num_cases{ style: "height: 400px;" }
 
 
