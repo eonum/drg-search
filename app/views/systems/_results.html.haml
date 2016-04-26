@@ -8,16 +8,16 @@
 - unless @codes.empty? && @hospitals.empty?
   / Nav tabs
   %ul.nav.nav-tabs
-    %li.active
+    %li
       %a{ href: '#tableResults', 'data-toggle': 'tab'}
         %span.icon.icon--list
-    %li
+    %li.active
       %a{ href: '#barChartResults', 'data-toggle': 'tab'}
         %span.icon.icon--cart
 
   / Tab panes
   .tab-content.tab-border
-    #tableResults.tab-pane.active
+    #tableResults.tab-pane
       %table.table.table-bordered.table-striped.text-right
         %thead.text-left
           %tr
@@ -37,7 +37,27 @@
               - @codes.each do |code|
                 %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
 
-    #barChartResults.tab-pane
-      asfd
+    #barChartResults.tab-pane.active
+      :javascript
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['Year', 'Sales', 'Expenses', 'Profit'],
+            ['2014', 1000, 400, 200],
+            ['2015', 1170, 460, 250],
+            ['2016', 660, 1120, 300],
+            ['2017', 1030, 540, 350]
+          ]);
+
+          var options = {
+            chart: {}
+            //bars: 'horizontal' // Required for Material Bar Charts.
+          };
+
+          var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+          chart.draw(data, null);
+        }
+      #barchart_material{ style: "width: 900px; height: 500px;" }
 
 
