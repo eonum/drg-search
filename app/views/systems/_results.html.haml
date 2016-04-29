@@ -5,7 +5,7 @@
     .col-sm-12
       .alert.alert-info{ role: 'alert'}= t('pick_at_least_one')
 
-- unless @codes.empty? && @hospitals.empty?
+- unless @codes.empty? || @hospitals.empty?
   / Nav tabs
   %ul.nav.nav-tabs
     %li
