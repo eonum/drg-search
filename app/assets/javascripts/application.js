@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require purl
+//= require search
 //= require styleguide
 //= require styleguide_vendors.min
 //= require styleguide_polyfills.min
