@@ -6,21 +6,51 @@
       .alert.alert-info{ role: 'alert'}= t('pick_at_least_one')
 
 - unless @codes.empty? && @hospitals.empty?
-  %table.table.table-bordered.table-striped.text-right
-    %thead.text-left
-      %tr
-        %th
-        - @codes.each do |code|
-          %th
-            = code.code_display + ' '
-            %span.small{style: "color:#757575" }= code.text locale
-            %span.small.pull-right.icon.icon--trash.removeCode{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-code': code.code }
-    %tbody
-      - @hospitals.each do |hospital|
-        %tr
-          %td.important
-            = hospital.name
-            %span.small.icon.icon--trash.removeHospital{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }
-          - num_cases = @num_cases[hospital.hospital_id]
-          - @codes.each do |code|
-            %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
+  / Nav tabs
+  %ul.nav.nav-tabs
+    %li
+      %a{ href: '#tableResults', 'data-toggle': 'tab'}
+        %span.icon.icon--list
+    %li.active
+      %a{ href: '#barChartResults', 'data-toggle': 'tab'}
+        %span.icon.icon--cart
+
+  / Tab panes
+  .tab-content.tab-border
+    #tableResults.tab-pane
+      %table.table.table-bordered.table-striped.text-right
+        %thead.text-left
+          %tr
+            %th
+            - @codes.each do |code|
+              %th
+                = code.code_display + ' '
+                %span.small{style: "color:#757575" }= code.text locale
+                %span.small.pull-right.icon.icon--trash.removeCode{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-code': code.code }
+        %tbody
+          - @hospitals.each do |hospital|
+            %tr
+              %td.important
+                = hospital.name
+                %span.small.icon.icon--trash.removeHospital{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }
+              - num_cases = @num_cases[hospital.hospital_id]
+              - @codes.each do |code|
+                %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
+
+    #barChartResults.tab-pane.active
+      :javascript
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
+
+          var options = {
+            chart: {}
+          };
+
+          var chart = new google.charts.Bar(document.getElementById('barchart_comparison_num_cases'));
+
+          chart.draw(data, options);
+        }
+      #barchart_comparison_num_cases{ style: "height: 400px;" }
+
+
