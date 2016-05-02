@@ -14,8 +14,20 @@ module SystemsHelper
     data << [I18n.t('hospitals')] + @codes.map{|code| code.code_display + ' ' + code.text(locale)}
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
-      data << [h.name] + codes.map {|code| ncs[code.code] == nil ? 0 : ncs[code.code].n }
+      data << [h.name] + codes.map {|code| numcase_number ncs[code.code] }
     end
     data
+  end
+
+  def numcase_number numcase
+    return 0 if numcase.nil?
+    return 0 if numcase.n < 5
+    return numcase.n
+  end
+
+  def numcase_display numcase
+    number = numcase_number numcase
+    return '< 5' if number < 5
+    return number.to_s
   end
 end

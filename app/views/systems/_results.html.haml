@@ -46,7 +46,7 @@
                 %span.small.icon.icon--trash.removeHospital{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }
               - num_cases = @num_cases[hospital.hospital_id]
               - @codes.each do |code|
-                %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
+                %th= numcase_display(num_cases[code.code])
 
     #barChartResults.tab-pane.active
       :javascript
