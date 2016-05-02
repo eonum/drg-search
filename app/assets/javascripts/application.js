@@ -13,10 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require purl
-//= require search
-//= require styleguide
 //= require styleguide_vendors.min
 //= require styleguide_polyfills.min
+//= require styleguide
 //= require i18n
 //= require i18n/translations
+//= require search
+
 //= require_tree .

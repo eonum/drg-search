@@ -5,15 +5,15 @@
     .col-sm-12
       .alert.alert-info{ role: 'alert'}= t('pick_at_least_one')
 
-- unless @codes.empty? && @hospitals.empty?
+- unless @codes.empty? || @hospitals.empty?
   / Nav tabs
   %ul.nav.nav-tabs
     %li
       %a{ href: '#tableResults', 'data-toggle': 'tab'}
-        %span.icon.icon--list
+        = fa_icon('table')
     %li.active
       %a{ href: '#barChartResults', 'data-toggle': 'tab'}
-        %span.icon.icon--cart
+        = fa_icon('bar-chart-o')
 
   / Tab panes
   .tab-content.tab-border
