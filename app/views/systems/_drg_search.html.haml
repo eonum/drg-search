@@ -1,7 +1,2 @@
-%fieldset
-  %legend.hidden-legend= t('number_search')
-  .form-group
-    .col-sm-2
-      = label 'number_search', t('number_search')
-    .col-sm-10
-      = text_field_tag('number_search', '', { class: 'form-control', placeholder: t('number_search_placeholder'), 'data-search-url': system_search_codes_path(@system) })
+= label 'number_search', t('number_search')
+= text_field_tag('number_search', '', { class: 'form-control', placeholder: t('number_search_placeholder'), 'data-search-url': system_search_codes_path(@system) })
