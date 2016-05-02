@@ -24,6 +24,9 @@ de:
   language_selection: "Sprachauswahl"
   foph: "BAG"
   foph_long: "Bundesamt für Gesundheit"
+  admin_ch: Bundesverwaltung
+  edi: EDI
+  edi_long: "Eidgenössisches Departement des Innern EDI"
   legal: "Rechtliches"
   drg_version: "DRG Version"
   hospital_search: "Spitalsuche"

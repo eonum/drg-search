@@ -41,6 +41,16 @@
     .container.container-main
       %header
         .clearfix
+          %nav.navbar.treecrumb.pull-left{ role: 'navigation'}
+            %h2.sr-only Orientation in the website
+            %ul.nav.navbar-nav
+              / Treecrumb dropdown element
+              %li.dropdown
+                %a.dropdown-toggle{ href: "http://www.admin.ch/gov/#{locale}/start.html", target: "_blank", title: "Bundesverwaltung admin.ch"}= t('admin_ch')
+              %li.dropdown
+                %a.dropdown-toggle{ href: "http://www.edi.admin.ch/edi/#{locale}/home.html", target: "_blank", title: t('edi_long')}= t('edi')
+              %li.dropdown
+                %a.dropdown-toggle{ href: "http://www.bag.admin.ch/index.html?lang=" + locale.to_s, target: "_blank", title: t('foph_long')}= t('foph')
           %section.nav-services.clearfix
             %h2.sr-only= t('language_selection')
             %nav.nav-lang
