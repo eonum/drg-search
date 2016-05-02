@@ -85,7 +85,7 @@
                           %ul
                             - System.order(version: :desc).each do |system|
                               %li
-                                = link_to system.text(locale), system_path(system)
+                                = link_to system.application_year, system_path(system)
                                 = data_from(system)
                         %li
                           = link_to t('about'), about_path
@@ -98,7 +98,7 @@
                 - System.order(version: :desc).each do |system|
                   %li
                     .yamm-content.container-fluid
-                      %div= link_to system.text(locale), system_path(system)
+                      %h4= link_to system.application_year, system_path(system)
                       = data_from(system)
             %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'about' ? 'current' : ''}
               = link_to t('about'), about_path
