@@ -1,3 +1,11 @@
+%h3= t('selection')
+
+.row
+  .col-sm-5
+    Spitäler
+  .col-sm-7
+    Kennzahlen
+
 %h3= t('comparison_table')
 
 - if @codes.empty? || @hospitals.empty?
@@ -5,7 +13,7 @@
     .col-sm-12
       .alert.alert-info{ role: 'alert'}= t('pick_at_least_one')
 
-- unless @codes.empty? || @hospitals.empty?
+- else
   / Nav tabs
   %ul.nav.nav-tabs
     %li
@@ -14,6 +22,9 @@
     %li.active
       %a{ href: '#barChartResults', 'data-toggle': 'tab'}
         = fa_icon('bar-chart-o')
+    %li
+      %a{ href: '#timeSeriesResults', 'data-toggle': 'tab'}
+        = fa_icon('line-chart')
 
   / Tab panes
   .tab-content.tab-border
@@ -44,7 +55,8 @@
           var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
-            chart: {}
+            chart: {},
+            legend: {textStyle: {color: 'blue', fontSize: 3}}
           };
 
           var chart = new google.charts.Bar(document.getElementById('barchart_comparison_num_cases'));
@@ -53,4 +65,5 @@
         }
       #barchart_comparison_num_cases{ style: "height: 400px;" }
 
-
+    #timeSeriesResults
+      Coming Soon
