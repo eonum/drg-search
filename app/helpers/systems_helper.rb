@@ -10,8 +10,9 @@ module SystemsHelper
 
 
   def chart_data(codes, hospitals, num_cases)
+    num_data_points = codes.size * hospitals.size
     data = []
-    data << [I18n.t('hospitals')] + @codes.map{|code| code.code_display + ' ' + code.text(locale)}
+    data << [I18n.t('hospitals')] + @codes.map{|code| code.code_display + (num_data_points > 6 ? '' : ' ' + code.text(locale))}
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
       data << [h.name] + codes.map {|code| numcase_number ncs[code.code] }

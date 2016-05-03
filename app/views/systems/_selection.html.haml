@@ -1,0 +1,12 @@
+%h3= t('selection')
+
+.row
+  .col-sm-5
+    - @hospitals.each do |hospital|
+      .selection.bordered-well
+        = hospital.name
+  .col-sm-7
+    - @codes.each do |code|
+      .selection.bordered
+        = code.code_display + ' '
+        %span.small{style: "color:#757575" }= code.text locale
