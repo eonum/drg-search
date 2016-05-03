@@ -38,7 +38,7 @@
                 = hospital.name
               - num_cases = @num_cases[hospital.hospital_id]
               - @codes.each do |code|
-                %th= numcase_display(num_cases[code.code])
+                %td= numcase_display(num_cases[code.code])
 
     #barChartResults.tab-pane.active
       :javascript
