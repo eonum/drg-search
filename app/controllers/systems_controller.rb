@@ -16,13 +16,22 @@ class SystemsController < ApplicationController
   private
     def set_variables
       @system = System.find(params[:id])
-      params_hospitals = params[:hospitals] == nil ? [] : params[:hospitals].split(',')
-      @hospitals = Hospital.where(id: params_hospitals)
+      params_hospitals = params[:hospitals] == nil ? [] : params[:hospitals].split(',').map {|id| id.to_i}
+
+      # Keep the order. I'm sure this could be done more elegant.
+      hops = Hospital.where(id: params_hospitals)
+      temp = {}
+      hops.each {|h| temp[h.id] = h}
+      @hospitals = params_hospitals.map{|id| temp[id] }
+
       param_codes = params[:codes] == nil ? [] : params[:codes].split(',')
       @codes = Mdc.where(code: param_codes, version: @system.version)
       @codes += Drg.where(code: param_codes, version: @system.version)
       @codes += Adrg.where(code: param_codes, version: @system.version)
       @codes += Partition.where(code: param_codes, version: @system.version)
+      temp = {}
+      @codes.each {|c| temp[c.code] = c}
+      @codes = param_codes.map{|code| temp[code] }
 
       hop_ids = @hospitals.map {|h| h.hospital_id }
       codes = @codes.map {|c| c.code }

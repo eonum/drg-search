@@ -13,7 +13,7 @@ $( function() {
         updateComparison();
     }
 
-    var addRemoveFunction = function(){
+    var addRemoval = function(){
         $('.removeCode').click(function(){
             deleteItem($(this).data('code'), '#codes');
         });
@@ -21,6 +21,31 @@ $( function() {
         $('.removeHospital').click(function(){
             deleteItem($(this).data('hospital-id'), '#hospitals');
         });
+    }
+
+    var addSorting = function() {
+        $( ".sortableHospitals" ).sortable({
+            stop: function( event, ui ) {
+                var hospitals = [];
+                $( ".sortableHospitals").children('.selection').each(function () {
+                    hospitals.push($(this).data('hospital-id'));
+                });
+                $('#hospitals').val(hospitals.join(','));
+                updateComparison();
+            }
+        });
+        $( ".sortableHospitals" ).disableSelection();
+        $( ".sortableCodes" ).sortable({
+            stop: function( event, ui ) {
+                var codes = [];
+                $( ".sortableCodes").children('.selection').each(function () {
+                    codes.push($(this).data('code'));
+                });
+                $('#codes').val(codes.join(','));
+                updateComparison();
+            }
+        });
+        $( ".sortableCodes" ).disableSelection();
     }
 
     /**
@@ -42,7 +67,8 @@ $( function() {
         $.get(url, {codes: codes, hospitals: hospitals})
             .done(function (data) {
                 $('#comparison-resultsbox').html(data);
-                addRemoveFunction();
+                addRemoval();
+                addSorting();
             });
         setURL();
     }
@@ -107,5 +133,6 @@ $( function() {
             });
     });
 
-    addRemoveFunction();
+    addRemoval();
+    addSorting();
 });
