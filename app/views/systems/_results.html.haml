@@ -31,13 +31,11 @@
               %th
                 = code.code_display + ' '
                 %span.small{style: "color:#757575" }= code.text locale
-                %span.small.pull-right.icon.icon--trash.removeCode{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-code': code.code }
         %tbody
           - @hospitals.each do |hospital|
             %tr
               %td.important
                 = hospital.name
-                %span.small.icon.icon--trash.removeHospital{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }
               - num_cases = @num_cases[hospital.hospital_id]
               - @codes.each do |code|
                 %th= numcase_display(num_cases[code.code])

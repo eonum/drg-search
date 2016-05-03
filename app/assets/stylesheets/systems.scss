@@ -8,7 +8,14 @@ div[class*=col-] {
 
 .selection {
   padding: 3px;
+  padding-left: 10px;
   margin: 3px;
   background-color: #F2F7F9;
   border-radius: 6px;
+}
+
+.removeCode, .removeHospital {
+  margin-right: 10px;
+  cursor: hand;
+  cursor: pointer;
 }

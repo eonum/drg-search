@@ -5,8 +5,11 @@
     - @hospitals.each do |hospital|
       .selection.bordered-well
         = hospital.name
+        %span.pull-right.icon.icon--trash.removeHospital{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }
+
   .col-sm-7
     - @codes.each do |code|
       .selection.bordered
         = code.code_display + ' '
         %span.small{style: "color:#757575" }= code.text locale
+        %span.pull-right.icon.icon--trash.removeCode{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-code': code.code }
