@@ -24,6 +24,9 @@ de:
   language_selection: "Sprachauswahl"
   foph: "BAG"
   foph_long: "Bundesamt für Gesundheit"
+  admin_ch: Bundesverwaltung
+  edi: EDI
+  edi_long: "Eidgenössisches Departement des Innern EDI"
   legal: "Rechtliches"
   drg_version: "DRG Version"
   hospital_search: "Spitalsuche"
@@ -46,8 +49,10 @@ de:
   take_over_code: "Diese Kennzahl in die Analyse übernehmen"
   take_over: "Übernehmen"
   take_over_code: "Diese Kennzahl in die Analyse übernehmen"
-  data_from: "Daten aus dem Jahr"
-  additional_data_plural: "mit zusätzlichen Vergleichsdaten aus den Jahren"
-  additional_data_singular: "mit zusätzlichen Vergleichsdaten aus dem Jahr"
+  application_year: "Abrechnungstarif aus dem Jahr "
+  data_from: "Kennzahlen berechnet mit Daten aus dem Jahr"
+  additional_data_plural: "und zusätzlichen Vergleichsdaten aus den Jahren"
+  additional_data_singular: "und zusätzlichen Vergleichsdaten aus dem Jahr"
   pick_at_least_one: "Wählen Sie mindestens ein Spital und eine Kennzahl zum Vergleich."
   remove_from_comparison: "Aus dem Vergleich entfernen"
+  selection: "Auswahl"

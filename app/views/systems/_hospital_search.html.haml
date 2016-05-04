@@ -1,7 +1,2 @@
-%fieldset
-  %legend.hidden-legend= t('hospital_search')
-  .form-group
-    .col-sm-2
-      = label 'hospital_search', t('hospital_search')
-    .col-sm-10
-      = text_field_tag('hospital_search', '', { class: 'form-control', placeholder: t('hospital_search_placeholder'), 'data-search-url': system_search_hospitals_path(@system)})
+= label 'hospital_search', t('hospital_search')
+= text_field_tag('hospital_search', '', { class: 'form-control', placeholder: t('hospital_search_placeholder'), 'data-search-url': system_search_hospitals_path(@system)})

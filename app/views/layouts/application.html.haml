@@ -41,6 +41,16 @@
     .container.container-main
       %header
         .clearfix
+          %nav.navbar.treecrumb.pull-left{ role: 'navigation'}
+            %h2.sr-only Orientation in the website
+            %ul.nav.navbar-nav
+              / Treecrumb dropdown element
+              %li.dropdown
+                %a.dropdown-toggle{ href: "http://www.admin.ch/gov/#{locale}/start.html", target: "_blank", title: "Bundesverwaltung admin.ch"}= t('admin_ch')
+              %li.dropdown
+                %a.dropdown-toggle{ href: "http://www.edi.admin.ch/edi/#{locale}/home.html", target: "_blank", title: t('edi_long')}= t('edi')
+              %li.dropdown
+                %a.dropdown-toggle{ href: "http://www.bag.admin.ch/index.html?lang=" + locale.to_s, target: "_blank", title: t('foph_long')}= t('foph')
           %section.nav-services.clearfix
             %h2.sr-only= t('language_selection')
             %nav.nav-lang
@@ -85,7 +95,7 @@
                           %ul
                             - System.order(version: :desc).each do |system|
                               %li
-                                = link_to system.text(locale), system_path(system)
+                                = link_to system.application_year, system_path(system)
                                 = data_from(system)
                         %li
                           = link_to t('about'), about_path
@@ -98,7 +108,7 @@
                 - System.order(version: :desc).each do |system|
                   %li
                     .yamm-content.container-fluid
-                      %div= link_to system.text(locale), system_path(system)
+                      %h4= link_to system.application_year, system_path(system)
                       = data_from(system)
             %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'about' ? 'current' : ''}
               = link_to t('about'), about_path
@@ -120,5 +130,7 @@
             ©2016 #{t('foph_long')}
           %nav.pull-right
             %ul
+              %li
+                %a{:href => contact_path, :lang => "de", :title => "#{t('contact')}"} #{t('contact')}
               %li
                 %a{:href => "http://www.disclaimer.admin.ch/terms_and_conditions.html"}= t('legal')

@@ -1,3 +1,5 @@
+= render 'selection'
+
 %h3= t('comparison_table')
 
 - if @codes.empty? || @hospitals.empty?
@@ -5,7 +7,7 @@
     .col-sm-12
       .alert.alert-info{ role: 'alert'}= t('pick_at_least_one')
 
-- unless @codes.empty? || @hospitals.empty?
+- else
   / Nav tabs
   %ul.nav.nav-tabs
     %li
@@ -14,6 +16,9 @@
     %li.active
       %a{ href: '#barChartResults', 'data-toggle': 'tab'}
         = fa_icon('bar-chart-o')
+    %li
+      %a{ href: '#timeSeriesResults', 'data-toggle': 'tab'}
+        = fa_icon('line-chart')
 
   / Tab panes
   .tab-content.tab-border
@@ -26,16 +31,14 @@
               %th
                 = code.code_display + ' '
                 %span.small{style: "color:#757575" }= code.text locale
-                %span.small.pull-right.icon.icon--trash.removeCode{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-code': code.code }
         %tbody
           - @hospitals.each do |hospital|
             %tr
               %td.important
                 = hospital.name
-                %span.small.icon.icon--trash.removeHospital{ 'aria-hidden': "true", style: "color:#757575", title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }
               - num_cases = @num_cases[hospital.hospital_id]
               - @codes.each do |code|
-                %th= num_cases[code.code] == nil ? '0' : num_cases[code.code].n
+                %td= numcase_display(num_cases[code.code])
 
     #barChartResults.tab-pane.active
       :javascript
@@ -44,7 +47,8 @@
           var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
-            chart: {}
+            chart: {},
+            legend: {textStyle: {color: 'blue', fontSize: 3}}
           };
 
           var chart = new google.charts.Bar(document.getElementById('barchart_comparison_num_cases'));
@@ -53,4 +57,5 @@
         }
       #barchart_comparison_num_cases{ style: "height: 400px;" }
 
-
+    #timeSeriesResults.tab-pane
+      Coming Soon

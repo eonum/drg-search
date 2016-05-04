@@ -16,6 +16,7 @@
 //= require styleguide_vendors.min
 //= require styleguide_polyfills.min
 //= require styleguide
+//= require jquery-ui/sortable
 //= require i18n
 //= require i18n/translations
 //= require search

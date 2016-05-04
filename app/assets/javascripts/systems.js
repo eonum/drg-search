@@ -10,5 +10,4 @@ $( function() {
 
     $(document).on('change', '#version-select', change_system);
 
-
 });
