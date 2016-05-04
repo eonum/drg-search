@@ -15,7 +15,13 @@ module SystemsHelper
     data << [I18n.t('hospitals')] + @codes.map{|code| code.code_display + (num_data_points > 6 ? '' : ' ' + code.text(locale))}
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
-      data << [h.name] + codes.map {|code| numcase_number ncs[code.code] }
+      hname = ''
+      words = h.name.split(' ')
+      words.each_with_index do |word, i|
+        hname += word + ' ' if i % 2 == 0
+        hname += word + "\r\n" if i % 2 == 1
+      end
+      data << [hname] + codes.map {|code| numcase_number ncs[code.code] }
     end
     data
   end
