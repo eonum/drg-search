@@ -111,31 +111,22 @@ $( function() {
         $(this).hide();
     }
 
-    $('#hospital_search').keydown(function () {
+    var search = function(activeTab) {
         var searchTermHospital = $('#hospital_search').val();
         var searchTermCodes = $('#codes_search').val();
         var searchUrl = $('#hospital_search').data('search-url') + '.html';
         $.get(searchUrl, {term_hospitals: searchTermHospital, term_codes: searchTermCodes, limit: 6})
             .done(function (data) {
                 $('#search-results').html(data);
-                $('.nav-tabs a[href="#hospitalSearchResults"]').tab('show');
+                $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
                 $('.hospitalselection').click(hospitalSelection);
                 $('.codeSelection').click(codeSelection);
             });
-    });
+    }
 
-    $('#codes_search').keydown(function () {
-        var searchTermHospital = $('#hospital_search').val();
-        var searchTermCodes = $('#codes_search').val();
-        var searchUrl = $('#hospital_search').data('search-url') + '.html';
-        $.get(searchUrl, {term_hospitals: searchTermHospital, term_codes: searchTermCodes, limit: 6})
-            .done(function (data) {
-                $('#search-results').html(data);
-                $('.nav-tabs a[href="#drgSearchResults"]').tab('show');
-                $('.hospitalselection').click(hospitalSelection);
-                $('.codeSelection').click(codeSelection);});
+    $('#hospital_search').keyup(function() {search("#hospitalSearchResults")});
+    $('#codes_search').keyup(function() {search("#drgSearchResults")});
 
-    });
 
     addRemoval();
     addSorting();
