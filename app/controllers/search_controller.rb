@@ -29,7 +29,7 @@ class SearchController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @codes.map { |code| {:id => code.id.to_s, :code => code.code, :text => code.text(@locale)}}}
-      format.html { render partial: 'search_results_codes' }
+      format.html { render partial: 'search_results_codes', locals: {codes: @codes} }
     end
   end
 
@@ -40,7 +40,7 @@ class SearchController < ApplicationController
   # limit: maximum number of items
   def all
     @query_codes = params[:term_codes].blank? ? '' : params[:term_codes]
-    @query_hospital = params[:term_hospital].blank? ? '' : params[:term_hospital]
+    @query_hospital = params[:term_hospitals].blank? ? '' : params[:term_hospitals]
 
     json = {}
     json[:drgs] = @drgs = code_search(Drg, @query_codes)
@@ -50,7 +50,7 @@ class SearchController < ApplicationController
 
     respond_to do |format|
       format.json { render json: json}
-      format.html { render partial: 'search_results_codes' }
+      format.html { render partial: 'systems/search_results' }
     end
   end
 

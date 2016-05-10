@@ -1,25 +1,29 @@
 %h3= t('search_results')
-/ Nav tabs
-%ul.nav.nav-tabs
-  %li.active
-    %a{ href: '#hospitalSearchResults', 'data-toggle': 'tab'}= t('hospitals')
-  %li
-    %a{ href: '#mdcSearchResults', 'data-toggle': 'tab'}= t('mdcs')
-  %li
-    %a{ href: '#adrgSearchResults', 'data-toggle': 'tab'}= t('adrgs')
-  %li
-    %a{ href: '#drgSearchResults', 'data-toggle': 'tab'}= t('drgs')
 
-/ Tab panes
-.tab-content.tab-border
-  #hospitalSearchResults.tab-pane.active
-    = t('please_search')
+- if @hospitals.nil? || @drgs.nil? || @mdcs.nil? || @adrgs.nil?
+  = t('please_search')
+- else
+  / Nav tabs
+  %ul.nav.nav-tabs
+    %li.active
+      %a{ href: '#hospitalSearchResults', 'data-toggle': 'tab'}= t('hospitals')
+    %li
+      %a{ href: '#mdcSearchResults', 'data-toggle': 'tab'}= t('mdcs')
+    %li
+      %a{ href: '#adrgSearchResults', 'data-toggle': 'tab'}= t('adrgs')
+    %li
+      %a{ href: '#drgSearchResults', 'data-toggle': 'tab'}= t('drgs')
 
-  #mdcSearchResults.tab-pane
-    = t('please_search')
+  / Tab panes
+  .tab-content.tab-border
+    #hospitalSearchResults.tab-pane.active
+      = render 'search/search_results_hospitals'
 
-  #adrgSearchResults.tab-pane
-    = t('please_search')
+    #mdcSearchResults.tab-pane
+      = render partial: 'search/search_results_codes', locals: {codes: @mdcs}
 
-  #drgSearchResults.tab-pane
-    = t('please_search')
+    #adrgSearchResults.tab-pane
+      = render partial: 'search/search_results_codes', locals: {codes: @adrgs}
+
+    #drgSearchResults.tab-pane
+      = render partial: 'search/search_results_codes', locals: {codes: @drgs}
