@@ -12,7 +12,7 @@
     .col-sm-6
       #drg-searchbox= render 'drg_search'
   .row
-    .col-sm-12= render 'search_results'
+    #search-results.col-sm-12= render 'search_results'
     .hidden
       = text_field_tag 'compareUrl', compare_system_path(@system)
       = text_field_tag 'hospitals', @hospitals.map(&:id).join(',')

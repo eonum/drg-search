@@ -111,37 +111,22 @@ $( function() {
         $(this).hide();
     }
 
-    $('#hospital_search').keydown(function () {
-        var searchTerm = $('#hospital_search').val();
+    var search = function(activeTab) {
+        var searchTermHospital = $('#hospital_search').val();
+        var searchTermCodes = $('#codes_search').val();
         var searchUrl = $('#hospital_search').data('search-url') + '.html';
-        $.get(searchUrl, {term: searchTerm, limit: 6})
+        $.get(searchUrl, {term_hospitals: searchTermHospital, term_codes: searchTermCodes, limit: 6})
             .done(function (data) {
-                $('#hospitalSearchResults').html(data);
-                $('.nav-tabs a[href="#hospitalSearchResults"]').tab('show');
+                $('#search-results').html(data);
+                $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
                 $('.hospitalselection').click(hospitalSelection);
+                $('.codeSelection').click(codeSelection);
             });
-    });
+    }
 
-    $('#number_search').keydown(function () {
-        var searchTerm = $('#number_search').val();
-        var searchUrl = $('#number_search').data('search-url') + '.html';
-        $.get(searchUrl, {term: searchTerm, limit: 5, level: 'drg'})
-            .done(function (data) {
-                $('#drgSearchResults').html(data);
-                $('.nav-tabs a[href="#drgSearchResults"]').tab('show');
-                $('.codeSelection').click(codeSelection);
-            });
-        $.get(searchUrl, {term: searchTerm, limit: 5, level: 'mdc'})
-            .done(function (data) {
-                $('#mdcSearchResults').html(data);
-                $('.codeSelection').click(codeSelection);
-            });
-        $.get(searchUrl, {term: searchTerm, limit: 5, level: 'adrg'})
-            .done(function (data) {
-                $('#adrgSearchResults').html(data);
-                $('.codeSelection').click(codeSelection);
-            });
-    });
+    $('#hospital_search').keyup(function() {search("#hospitalSearchResults")});
+    $('#codes_search').keyup(function() {search("#drgSearchResults")});
+
 
     addRemoval();
     addSorting();
