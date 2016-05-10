@@ -58,6 +58,7 @@ $( function() {
         var codes = $('#codes').val();
         if("replaceState" in window.history)
             window.history.replaceState({}, 'DRG comparison', path + '?codes=' + codes + '&hospitals=' + hospitals);
+        $('.lang-selection').attr('href', path + '?codes=' + codes + '&hospitals=' + hospitals);
     }
 
     var updateComparison = function(){
