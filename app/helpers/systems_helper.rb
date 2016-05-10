@@ -44,9 +44,9 @@ module SystemsHelper
     data = []
     data << [I18n.t('year')] + identifiers
     @system.years.each do |year|
-      row = [year]
+      row = [year.to_s]
       hospitals.each do |h|
-        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? 0 : numcase_number num_cases[h.hospital_id][code.code][year] }
+        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? 0 : numcase_number(num_cases[h.hospital_id][code.code][year]) }
       end
       data << row
     end
