@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get :compare, on: :member
       get 'search/hospitals'
       get 'search/codes'
+      get 'search/all'
     end
   end
 end
