@@ -56,11 +56,11 @@
             %nav.nav-lang
               %ul
                 %li
-                  %a{"aria-label" => "Deutsch ", :class => I18n.locale == :de ? 'active' : '', :href => "#{url_for( :locale => 'de')}", :lang => "de", :title => "Deutsch"} DE
+                  %a.lang-selection{"aria-label" => "Deutsch ", :class => I18n.locale == :de ? 'active' : '', :data => "#{url_for( :locale => 'de')}", :href => "#{url_for( :locale => 'de')}?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}", :lang => "de", :title => "Deutsch"} DE
                 %li
-                  %a{"aria-label" => "Français ", :class => I18n.locale == :fr ? 'active' : '', :href => "#{url_for( :locale => 'fr')}", :lang => "fr", :title => "Français"} FR
-                %li
-                  %a{"aria-label" => "Italiano", :class => I18n.locale == :it ? 'active' : '', :href => "#{url_for( :locale => 'it')}", :lang => "it", :title => "Italiano"} IT
+                  %a.lang-selection{"aria-label" => "Français ", :class => I18n.locale == :fr ? 'active' : '', :data => "#{url_for( :locale => 'fr')}", :href => "#{url_for( :locale => 'fr')}?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}", :lang => "fr", :title => "Français"} FR
+                %lih
+                  %a.lang-selection{"aria-label" => "Italiano", :class => I18n.locale == :it ? 'active' : '', :data => "#{url_for( :locale => 'it')}", :href => "#{url_for( :locale => 'it')}?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}", :lang => "it", :title => "Italiano"} IT
             %h2.sr-only= t('services_navigation')
             %nav.nav-service
               %ul

@@ -16,6 +16,7 @@ class SystemsController < ApplicationController
   private
     def set_variables
       @system = System.find(params[:id])
+      @hospitals_url_query = params[:hospitals]
       params_hospitals = params[:hospitals] == nil ? [] : params[:hospitals].split(',').map {|id| id.to_i}
 
       # Keep the order. I'm sure this could be done more elegant.
@@ -24,6 +25,7 @@ class SystemsController < ApplicationController
       hops.each {|h| temp[h.id] = h}
       @hospitals = params_hospitals.map{|id| temp[id] }
 
+      @codes_url_query = params[:codes]
       param_codes = params[:codes] == nil ? [] : params[:codes].split(',')
       @codes = Mdc.where(code: param_codes, version: @system.version)
       @codes += Drg.where(code: param_codes, version: @system.version)
