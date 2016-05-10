@@ -42,8 +42,8 @@
 
     #barChartResults.tab-pane.active
       :javascript
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
+        google.charts.setOnLoadCallback(drawBarChart);
+        function drawBarChart() {
           var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
@@ -58,4 +58,20 @@
       #barchart_comparison_num_cases{ style: "height: 400px;" }
 
     #timeSeriesResults.tab-pane
-      Coming Soon
+      :javascript
+        google.charts.setOnLoadCallback(drawLineChart);
+
+        function drawLineChart() {
+          var data = google.visualization.arrayToDataTable(#{time_series_data(@codes, @hospitals, @num_cases).to_json});
+
+          var options = {
+            colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D'],
+            title: "#{t('time_series_chart_title')}",
+            legend: { position: 'bottom' }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('linechart-time-series'));
+
+          chart.draw(data, options);
+        }
+      #linechart-time-series{ style: "height: 400px;" }

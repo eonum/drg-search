@@ -56,3 +56,5 @@ de:
   pick_at_least_one: "Wählen Sie mindestens ein Spital und eine Kennzahl zum Vergleich."
   remove_from_comparison: "Aus dem Vergleich entfernen"
   selection: "Auswahl"
+  time_series_chart_title: "Zeitlicher Verlauf der Fallzahlen"
+  year: "Jahr"

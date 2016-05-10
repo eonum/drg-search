@@ -26,6 +26,24 @@ module SystemsHelper
     data
   end
 
+  def time_series_data(codes, hospitals, num_cases)
+    num_data_points = codes.size * hospitals.size
+    identifiers = []
+    @hospitals.each do |h|
+       identifiers += @codes.map{|code| code.code_display + ' - ' + h.name }
+    end
+    data = []
+    data << [I18n.t('year')] + identifiers
+    @system.years.each do |year|
+      row = [year]
+      @hospitals.each do |h|
+        row += @codes.map{|code| Random.rand() }
+      end
+      data << row
+    end
+    data
+  end
+
   def numcase_number numcase
     return 0 if numcase.nil?
     return 0 if numcase.n < 5
