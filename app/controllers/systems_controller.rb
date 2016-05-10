@@ -35,11 +35,11 @@ class SystemsController < ApplicationController
       @codes.each {|c| temp[c.code] = c}
       @codes = param_codes.map{|code| temp[code] }
 
-      hop_ids = @hospitals.map {|h| h.hospital_id }
+      @hop_ids = @hospitals.map {|h| h.hospital_id }
       codes = @codes.map {|c| c.code }
-      temp_num_cases = NumCase.where(version: @system.version, year: @system.base_year, hospital_id: hop_ids, code: codes)
+      temp_num_cases = NumCase.where(version: @system.version, year: @system.base_year, hospital_id: @hop_ids, code: codes)
       @num_cases = {}
-      hop_ids.each do |hop_id|
+      @hop_ids.each do |hop_id|
         @num_cases[hop_id] = {}
       end
       temp_num_cases.each do |nc|

@@ -27,17 +27,26 @@ module SystemsHelper
   end
 
   def time_series_data(codes, hospitals, num_cases)
-    num_data_points = codes.size * hospitals.size
+    temp_num_cases = NumCase.where(version: @system.version, hospital_id: @hop_ids, code: codes.map {|c| c.code })
+    num_cases = {}
+    @hop_ids.each do |hop_id|
+      num_cases[hop_id] = {}
+    end
+    temp_num_cases.each do |nc|
+      num_cases[nc.hospital_id][nc.code] = {} if num_cases[nc.hospital_id][nc.code].nil?
+      num_cases[nc.hospital_id][nc.code][nc.year] = nc
+    end
+
     identifiers = []
-    @hospitals.each do |h|
+    hospitals.each do |h|
        identifiers += @codes.map{|code| code.code_display + ' - ' + h.name }
     end
     data = []
     data << [I18n.t('year')] + identifiers
     @system.years.each do |year|
       row = [year]
-      @hospitals.each do |h|
-        row += @codes.map{|code| Random.rand() }
+      hospitals.each do |h|
+        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? 0 : numcase_number num_cases[h.hospital_id][code.code][year] }
       end
       data << row
     end
