@@ -21,8 +21,8 @@
         = fa_icon('line-chart')
 
   / Tab panes
-  .tab-content.tab-border
-    #tableResults.tab-pane
+  .tab-content.tab-border.scrollable
+    #tableResults.tab-pane.table-responsive
       %table.table.table-bordered.table-striped.text-right
         %thead.text-left
           %tr
@@ -47,8 +47,8 @@
           var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
-            chart: {},
-            legend: {textStyle: {color: 'blue', fontSize: 3}}
+            colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D'],
+            chart: {}
           };
 
           var chart = new google.charts.Bar(document.getElementById('barchart_comparison_num_cases'));

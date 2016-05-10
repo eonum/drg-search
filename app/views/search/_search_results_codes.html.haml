@@ -1,9 +1,9 @@
-- if @codes.empty?
+- if codes.empty?
   .row
     .col-sm-12
       .alert.alert-warning{ role: 'alert'}= t('no_search_results')
 
-- @codes.each do |code|
+- codes.each do |code|
   %article.row
     %strong.col-sm-1= code.code_display
     .col-sm-11
