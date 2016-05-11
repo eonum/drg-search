@@ -119,6 +119,9 @@ $( function() {
         if(code==13) {
             $('#hospital_search').blur();
             $('#codes_search').blur();
+            $(activeTab).addClass('highlightSearchResults');
+            $(activeTab).removeClass('highlightSearchResults', 2000);
+            return;
         }
 
         var searchTermHospital = $('#hospital_search').val();
