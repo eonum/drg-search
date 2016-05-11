@@ -114,7 +114,13 @@ $( function() {
         $(this).hide();
     }
 
-    var search = function(activeTab) {
+    var search = function(e, activeTab) {
+        var code = e.which;
+        if(code==13) {
+            $('#hospital_search').blur();
+            $('#codes_search').blur();
+        }
+
         var searchTermHospital = $('#hospital_search').val();
         var searchTermCodes = $('#codes_search').val();
         var searchUrl = $('#hospital_search').data('search-url') + '.html';
@@ -127,8 +133,8 @@ $( function() {
             });
     }
 
-    $('#hospital_search').keyup(function() {search("#hospitalSearchResults")});
-    $('#codes_search').keyup(function() {search("#drgSearchResults")});
+    $('#hospital_search').keyup(function(e) {search(e, "#hospitalSearchResults")});
+    $('#codes_search').keyup(function(e) {search(e, "#drgSearchResults")});
 
 
     addRemoval();
