@@ -12,10 +12,10 @@ div[class*=col-] {
   margin: 3px;
   background-color: #F2F7F9;
   border-radius: 6px;
+  cursor: move;
 }
 
 .removeCode, .removeHospital {
   margin-right: 10px;
-  cursor: hand;
   cursor: pointer;
 }
