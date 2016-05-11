@@ -46,7 +46,7 @@ module SystemsHelper
     @system.years.each do |year|
       row = [year.to_s]
       hospitals.each do |h|
-        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? 0 : numcase_number(num_cases[h.hospital_id][code.code][year]) }
+        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? NaN : numcase_number(num_cases[h.hospital_id][code.code][year]) }
       end
       data << row
     end
@@ -54,13 +54,14 @@ module SystemsHelper
   end
 
   def numcase_number numcase
-    return 0 if numcase.nil?
+    return Float::NAN if numcase.nil?
     return 0 if numcase.n < 5
     return numcase.n
   end
 
   def numcase_display numcase
     number = numcase_number numcase
+    return I18n.t('no_value') if number.to_f.nan?
     return '< 5' if number < 5
     return number.to_s
   end

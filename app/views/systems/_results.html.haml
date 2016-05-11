@@ -33,7 +33,7 @@
         %tbody
           - @hospitals.each do |hospital|
             %tr
-              %td.important
+              %td
                 = hospital.name
               - num_cases = @num_cases[hospital.hospital_id]
               - @codes.each do |code|
