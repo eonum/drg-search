@@ -104,6 +104,7 @@ $( function() {
         $('#hospitals').val(assembleArray(hospital_id, hospitals));
         updateComparison();
         $(this).hide();
+        $('#hospital_' + hospital_id).addClass('alreadySelected');
     }
 
     var codeSelection = function() {
@@ -112,6 +113,20 @@ $( function() {
         $('#codes').val(assembleArray(code, codes));
         updateComparison();
         $(this).hide();
+        $('#code_' + code).addClass('alreadySelected');
+    }
+
+    var disableAlreadySelected = function(){
+        var codes = $('#codes').val().split(',');
+        var hospitals = $('#hospitals').val().split(',');
+        for (var i = 0; i < codes.length; i++) {
+            $('#code_' + codes[i]).addClass('alreadySelected');
+            $('#code_' + codes[i]).find( ".btn" ).remove();
+        }
+        for (var i = 0; i < hospitals.length; i++) {
+            $('#hospital_' + hospitals[i]).addClass('alreadySelected');
+            $('#hospital_' + hospitals[i]).find( ".btn" ).remove();
+        }
     }
 
     var search = function(e, activeTab) {
@@ -133,6 +148,7 @@ $( function() {
                 $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
                 $('.hospitalselection').click(hospitalSelection);
                 $('.codeSelection').click(codeSelection);
+                disableAlreadySelected();
             });
     }
 

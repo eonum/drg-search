@@ -9,7 +9,7 @@
   - if i % 2 == 1
     <div class='row'>
   .col-sm-6
-    %article
+    %article{ id: 'hospital_' + hospital.id.to_s }
       .pull-right
         %button.btn.hospitalselection{ type: "button", title: t('take_over_hospital'), 'data-hospital-id': hospital.id }= t('take_over')
       %strong= hospital.name
