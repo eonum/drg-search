@@ -28,9 +28,8 @@
           %tr
             %th
             - @codes.each do |code|
-              %th
-                = code.code_display + ' '
-                %span.small{style: "color:#757575" }= code.text locale
+              %th{ title: code.text(locale) }
+                = code.code_display
         %tbody
           - @hospitals.each do |hospital|
             %tr
