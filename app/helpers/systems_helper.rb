@@ -1,4 +1,5 @@
 module SystemsHelper
+  # data description text for a system
   def data_from system
     additional_years = system.years - [system.base_year]
     additional_data = ''
@@ -8,7 +9,7 @@ module SystemsHelper
     return application + I18n.t('data_from') + ' ' + system.base_year.to_s + ' ' + additional_data
   end
 
-
+  # prepare data for the bar chart
   def chart_data(codes, hospitals, num_cases)
     num_data_points = codes.size * hospitals.size
     data = []
@@ -26,6 +27,7 @@ module SystemsHelper
     data
   end
 
+  # prepare data for the time series line chart
   def time_series_data(codes, hospitals, num_cases)
     temp_num_cases = NumCase.where(version: @system.version, hospital_id: @hop_ids, code: codes.map {|c| c.code })
     num_cases = {}
@@ -46,19 +48,22 @@ module SystemsHelper
     @system.years.each do |year|
       row = [year.to_s]
       hospitals.each do |h|
-        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? NaN : numcase_number(num_cases[h.hospital_id][code.code][year]) }
+        row += @codes.map{|code| num_cases[h.hospital_id][code.code].nil? ? Float::NAN : numcase_number(num_cases[h.hospital_id][code.code][year]) }
       end
       data << row
     end
     data
   end
 
+  # get the number from a NumCase
+  # anonymize if lower than 5
   def numcase_number numcase
     return Float::NAN if numcase.nil?
     return 0 if numcase.n < 5
     return numcase.n
   end
 
+  # format the number. handle NaN and anonymized numbers
   def numcase_display numcase
     number = numcase_number numcase
     return I18n.t('no_value') if number.to_f.nan?
