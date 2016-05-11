@@ -39,12 +39,11 @@ module SystemsHelper
       num_cases[nc.hospital_id][nc.code][nc.year] = nc
     end
 
-    identifiers = []
+    identifiers = [I18n.t('year')]
     hospitals.each do |h|
        identifiers += @codes.map{|code| code.code_display + ' - ' + h.name }
     end
     data = []
-    data << [I18n.t('year')] + identifiers
     @system.years.each do |year|
       row = [year.to_s]
       hospitals.each do |h|
@@ -52,7 +51,7 @@ module SystemsHelper
       end
       data << row
     end
-    data
+    [identifiers, data]
   end
 
   # get the number from a NumCase
