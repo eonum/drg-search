@@ -69,9 +69,10 @@
           var data = google.visualization.arrayToDataTable(#{time_series_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
-            colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D'],
+            //colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D'],
             title: "#{t('time_series_chart_title')}",
-            legend: { position: 'bottom' }
+            chartArea: {  height: "60%", bottom: 30 },
+            legend: { position: 'top', height: "20%", top: 10, textStyle: {fontSize: 12}, maxLines: 4}
           };
 
           var chart = new google.visualization.LineChart(document.getElementById('linechart-time-series'));
