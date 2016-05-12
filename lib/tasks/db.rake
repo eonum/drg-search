@@ -12,6 +12,7 @@ namespace :db do
     system.save!
 
     puts 'Loading MDCs..'
+    Mdc.create!({code: 'ALL', version: system.version, text_de: 'Alle MDCs', text_fr: 'Tous les MDCs', text_it: 'tutti MDC', prefix: '0'})
     CSV.foreach(File.join(args.directory, 'mdcs.csv'), col_sep: ';') do |row|
       next if row[0] == 'code' # skip header if any
       version = row[1]
@@ -116,6 +117,7 @@ namespace :db do
 
       numcases_by_partition_and_hospital = {}
       numcases_by_adrg_and_hospital = {}
+      numcases_by_hospital = {}
 
       ActiveRecord::Base.transaction do
         csv_contents.each do |row|
@@ -150,6 +152,11 @@ namespace :db do
               end
               numcases_by_adrg_and_hospital[adrg][numcase.hospital_id] += numcase.n
             end
+
+            if level == 'MDC'
+               numcases_by_hospital[numcase.hospital_id] = 0 if numcases_by_hospital[numcase.hospital_id].nil?
+               numcases_by_hospital[numcase.hospital_id] += numcase.n
+            end
           end
         end
       end
@@ -160,9 +167,14 @@ namespace :db do
       puts 'Store aggregations for ADRGs and Partitions..'
       ActiveRecord::Base.transaction do
         numcases_by_partition_and_hospital.each do |partition, hospitals|
-          hospitals.each do |hospital, n|
-            NumCase.create!({hospital_id: hospital, year: year, version: version, level: 'PARTITION', code: partition, n: n})
+          hospitals.each do |hospital_id, n|
+            NumCase.create!({hospital_id: hospital_id, year: year, version: version, level: 'PARTITION', code: partition, n: n})
           end
+        end
+
+        # store ALL MDC
+        numcases_by_hospital.each do |hospital_id, n|
+          NumCase.create!({hospital_id: hospital_id, year: year, version: version, level: 'MDC', code: 'ALL', n: n})
         end
       end
 
