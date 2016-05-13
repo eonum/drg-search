@@ -136,6 +136,7 @@ $( function() {
             $('#codes_search').blur();
             $(activeTab).addClass('highlightSearchResults');
             $(activeTab).removeClass('highlightSearchResults', 2000);
+            $(activeTab).focus();
             return;
         }
 
