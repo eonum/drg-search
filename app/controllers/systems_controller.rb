@@ -24,6 +24,7 @@ class SystemsController < ApplicationController
       temp = {}
       hops.each {|h| temp[h.id] = h}
       @hospitals = params_hospitals.map{|id| temp[id] }
+      @hospitals.reject! {|h| h.nil?}
 
       @codes_url_query = params[:codes]
       param_codes = params[:codes] == nil ? [] : params[:codes].split(',')
@@ -34,6 +35,7 @@ class SystemsController < ApplicationController
       temp = {}
       @codes.each {|c| temp[c.code] = c}
       @codes = param_codes.map{|code| temp[code] }
+      @codes.reject! {|c| c.nil?}
 
       @hop_ids = @hospitals.map {|h| h.hospital_id }
       codes = @codes.map {|c| c.code }
