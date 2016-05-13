@@ -12,7 +12,7 @@ namespace :db do
     system.save!
 
     puts 'Loading MDCs..'
-    Mdc.create!({code: 'ALL', version: system.version, text_de: 'Alle MDCs', text_fr: 'Tous les MDCs', text_it: 'tutti MDC', prefix: '0'})
+    Mdc.create!({code: 'ALL', version: system.version, text_de: 'Alle Fälle', text_fr: 'Tous les cas', text_it: 'Tutti i casi', prefix: '0'})
     CSV.foreach(File.join(args.directory, 'mdcs.csv'), col_sep: ';') do |row|
       next if row[0] == 'code' # skip header if any
       version = row[1]
@@ -162,7 +162,7 @@ namespace :db do
       end
       pg.finish
 
-      next if level != 'DRG'
+      next if level != 'DRG' && level != 'MDC'
 
       puts 'Store aggregations for ADRGs and Partitions..'
       ActiveRecord::Base.transaction do

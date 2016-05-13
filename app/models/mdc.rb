@@ -6,6 +6,7 @@ class Mdc < ActiveRecord::Base
   include MultiLanguageText
 
   def code_display
+    return code if code == 'ALL'
     return 'MDC ' + code
   end
 end
