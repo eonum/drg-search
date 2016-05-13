@@ -70,11 +70,13 @@ class SearchController < ApplicationController
     end
 
     def code_search model, query
+      return [] if query.blank?
       return model.where("version = '#{@system.version}' and (code ILIKE ? or text_#{@locale} ILIKE ?)", "%#{Regexp.escape(query)}%", "%#{Regexp.escape(query)}%")
                  .order(code: :asc).limit(@limit)
     end
 
     def hospital_search query
+      return [] if query.blank?
       Hospital.where("year = '#{@system.base_year}' and (name ILIKE ? or address ILIKE ?)", "%#{Regexp.escape(query)}%", "%#{Regexp.escape(query)}%")
           .order(name: :asc).limit(@limit)
     end

@@ -29,6 +29,7 @@ de:
   edi_long: "Eidgenössisches Departement des Innern EDI"
   legal: "Rechtliches"
   drg_version: "DRG Version"
+  system_selection: "Auswahl SwissDRG Versionen"
   hospital_search: "Spitalsuche"
   hospital_search_placeholder: "Name oder Adresse der Klinik"
   number_search: "Fallzahlsuche"
