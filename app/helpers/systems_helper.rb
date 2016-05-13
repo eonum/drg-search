@@ -11,9 +11,8 @@ module SystemsHelper
 
   # prepare data for the bar chart
   def chart_data(codes, hospitals, num_cases)
-    num_data_points = codes.size * hospitals.size
     data = []
-    data << [I18n.t('hospitals')] + @codes.map{|code| code.code_display + (num_data_points > 6 ? '' : ' ' + code.text(locale))}
+    data << [I18n.t('hospitals')] + codes.map{|code| code.code_display + (codes.size > 6 ? '' : ' ' + code.text(locale))}
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
       hname = ''

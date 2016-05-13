@@ -34,7 +34,7 @@
     :javascript
       I18n.defaultLocale = '#{I18n.default_locale}';
       I18n.locale = '#{I18n.locale}';
-      google.charts.load('current', {packages: ['corechart', 'bar'], 'language': '#{I18n.locale}'});
+      google.charts.load('current', {packages: ['corechart'], 'language': '#{I18n.locale}'});
 
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
   %body

@@ -36,6 +36,7 @@ de:
   number_search_placeholder: "Krankheitsbild, Diagnose oder Behandlung"
   search_results: "Suchresultate"
   hospitals: "Spitäler"
+  num_cases: "Fallzahlen"
   mdcs: "MDCs Major Diagnostic Categories"
   adrgs: "Basis-DRGs"
   drgs: "DRGs - Fallpauschalen"
@@ -63,3 +64,4 @@ de:
   only_one_year: "Für dieses Abrechnungsjahr sind nur Vergleichsdaten von einem
    Jahr vorhanden. Ein zeitlicher Vergleich ist daher nicht möglich.
     Bitte wählen Sie dazu ein anderes Abrechnungsjahr."
+  data_year: "Datenjahr"

@@ -53,14 +53,15 @@
           var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
           var options = {
-            chart : {
-              title: "#{t('comparison_table')}",
-              legend: { position: 'top', alignment: 'end'},
-            },
+            title: "#{t('comparison_table')}",
+            hAxis: { title: "#{t('num_cases')}", titleTextStyle: {color: '#888888' }},
+            vAxis: { title: "#{t('hospitals')}", titleTextStyle: {color: '#888888' }},
+            bars: 'vertical',
+            chartArea: { left: 100 },
             colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D']
           };
 
-          var chart = new google.charts.Bar(document.getElementById('barchart_comparison_num_cases'));
+          var chart = new google.visualization.BarChart(document.getElementById('barchart_comparison_num_cases'));
 
           chart.draw(data, options);
         }
@@ -92,7 +93,9 @@
               title: "#{t('time_series_chart_title')}",
               pointSize: 6,
               chartArea: {  height: "60%", bottom: 30 },
-              legend: { position: 'top', height: "20%", top: 10, textStyle: {fontSize: 12}, maxLines: 4}
+              legend: { position: 'top', height: "20%", top: 10, textStyle: {fontSize: 12}, maxLines: 4},
+              hAxis: { title: "#{t('data_year')}", titleTextStyle: {color: '#888888' }},
+              vAxis: { title: "#{t('num_cases')}", titleTextStyle: {color: '#888888' }},
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('linechart-time-series'));
