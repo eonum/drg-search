@@ -10,19 +10,19 @@
 - else
   / Nav tabs
   %ul.nav.nav-tabs#resultsTabs
-    %li
+    %li{ class: params['activeTab'] == 'tableLink' ? 'active' : '' }
       %a#tableLink{ href: '#tableResults', 'data-toggle': 'tab'}
         = fa_icon('table')
-    %li.active
+    %li{ class: params['activeTab'].blank? || params['activeTab'] == 'barChartLink' ? 'active' : '' }
       %a#barChartLink{ href: '#barChartResults', 'data-toggle': 'tab'}
         = fa_icon('bar-chart-o')
-    %li
+    %li{ class: params['activeTab'] == 'timeSeriesLink' ? 'active' : '' }
       %a#timeSeriesLink{ href: '#timeSeriesResults', 'data-toggle': 'tab', title: t('time_series_chart_title')}
         = fa_icon('line-chart')
 
   / Tab panes
   .tab-content.tab-border.scrollable
-    #tableResults.tab-pane.table-responsive
+    #tableResults.tab-pane.table-responsive{ class: params['activeTab'] == 'tableLink' ? 'active' : '' }
       %table.table.table-bordered.table-striped.text-right
         %thead.text-left
           %tr
@@ -39,7 +39,7 @@
               - @codes.each do |code|
                 %td= numcase_display(num_cases[code.code])
 
-    #barChartResults.tab-pane.active
+    #barChartResults.tab-pane{ class: params['activeTab'].blank? || params['activeTab'] == 'barChartLink' ? 'active' : '' }
       :javascript
         $( window ).resize(function() {
           google.charts.setOnLoadCallback(drawBarChart);
@@ -50,6 +50,7 @@
           google.charts.setOnLoadCallback(drawBarChart);
         });
         google.charts.setOnLoadCallback(drawBarChart);
+
         function drawBarChart() {
           var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
 
@@ -67,7 +68,7 @@
         }
       #barchart_comparison_num_cases{ style: "height: 400px;" }
 
-    #timeSeriesResults.tab-pane
+    #timeSeriesResults.tab-pane{ class: params['activeTab'] == 'timeSeriesLink' ? 'active' : '' }
       - if @system.years.length == 1
         .alert.alert-info{ role: 'alert'}= t('only_one_year')
       - else
@@ -76,7 +77,8 @@
           $('#timeSeriesLink').on('shown.bs.tab', function (e) {
             google.charts.setOnLoadCallback(drawLineChart);
           });
-
+          if(drawLineChart != undefined)
+            google.charts.setOnLoadCallback(drawLineChart);
           function drawLineChart() {
             var data = new google.visualization.DataTable();
             var columns = #{time_series[0].to_json};

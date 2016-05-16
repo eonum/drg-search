@@ -81,11 +81,14 @@ $( function() {
         });
     }
 
+    /**
+     * Get the results tab section based on the selected hospitals and codes.
+     */
     var updateComparison = function(){
         var hospitals = $('#hospitals').val();
         var codes = $('#codes').val();
         var url = $('#compareUrl').val();
-        $.get(url, {codes: codes, hospitals: hospitals})
+        $.get(url, {codes: codes, hospitals: hospitals, activeTab: $("ul#resultsTabs li.active a")[0].id})
             .done(function (data) {
                 $('#comparison-resultsbox').html(data);
                 addRemoval();
