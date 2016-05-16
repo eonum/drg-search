@@ -89,6 +89,7 @@ $( function() {
                 $('#comparison-resultsbox').html(data);
                 addRemoval();
                 addSorting();
+                $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
             });
         setURL();
     }
@@ -144,6 +145,7 @@ $( function() {
             $(activeTab).addClass('highlightSearchResults');
             $(activeTab).removeClass('highlightSearchResults', 2000);
             $(activeTab).focus();
+            setURL();
             return;
         }
 
@@ -157,6 +159,7 @@ $( function() {
                 $('.hospitalselection').click(hospitalSelection);
                 $('.codeSelection').click(codeSelection);
                 disableAlreadySelected();
+                setURL();
             });
     }
 
@@ -166,4 +169,6 @@ $( function() {
 
     addRemoval();
     addSorting();
+    setURL();
+    $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
 });
