@@ -59,7 +59,8 @@ $( function() {
     }
 
     /**
-     * set the URL with the correct codes and hospital parameters.
+     * set the URL with the correct codes and hospital parameters
+     * and active tab and search term.
      * Hence we can enable a reload of the page.
      */
     var setURL = function(){
@@ -170,5 +171,10 @@ $( function() {
     addRemoval();
     addSorting();
     setURL();
+    // reset URL after active tab change
     $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
+
+    // trigger a hospital search if the search field for hospitals has an initial value on page load.
+    if($('#hospital_search').val() != '')
+        $('#hospital_search').trigger( "keyup" );
 });

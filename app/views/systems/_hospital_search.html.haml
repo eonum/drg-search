@@ -1,2 +1,2 @@
 = label 'hospital_search', t('hospital_search')
-= text_field_tag('hospital_search', '', { class: 'form-control', placeholder: t('hospital_search_placeholder'), 'data-search-url': system_search_all_path(@system)})
+= text_field_tag('hospital_search', params['hospitalSearch'], { class: 'form-control', placeholder: t('hospital_search_placeholder'), 'data-search-url': system_search_all_path(@system)})
