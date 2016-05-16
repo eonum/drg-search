@@ -1,0 +1,11 @@
+%h1= t('system_selection')
+
+.row
+  .col-sm-6.col-sm-offset-1
+    .list-group
+      - System.order(version: :desc).each do |system|
+        .list-group-item
+          %p
+            %strong= link_to system.application_year, system_path(system)
+            %br
+            = data_from(system)

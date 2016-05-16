@@ -65,9 +65,9 @@
             %nav.nav-service
               %ul
                 %li
-                  %a{:href => contact_path, :lang => locale, :title => "#{t('contact')}"} #{t('contact')}
+                  %a{:href => contact_path, :title => "#{t('contact')}"} #{t('contact')}
         .clearfix
-          %a.brand.hidden-xs{:href => "#{url_for( :locale => I18n.locale)}"}
+          %a.brand.hidden-xs{:href => home_path}
             %img{:onerror => "this.onerror=null; this.src='/img/logo-CH.png'", :src => "/img/logo-CH.svg"}/
             %h1
               = t('drg_search')
