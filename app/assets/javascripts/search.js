@@ -58,6 +58,11 @@ $( function() {
         $( ".sortableCodes" ).disableSelection();
     }
 
+    function getActiveTab() {
+        var activeTab = $("ul#resultsTabs li.active a")[0];
+        return activeTab == undefined ? '' : activeTab.id;
+    }
+
     /**
      * set the URL with the correct codes and hospital parameters
      * and active tab and search term.
@@ -67,12 +72,11 @@ $( function() {
         var path = purl().data.attr.path;
         var hospitals = $('#hospitals').val();
         var codes = $('#codes').val();
-        var activeTab = $("ul#resultsTabs li.active a")[0].id;
         var searchTermHospital = $('#hospital_search').val();
         var searchTermCodes = $('#codes_search').val();
 
         var params = '?codes=' + codes + '&hospitals=' + hospitals;
-        params += '&activeTab=' + activeTab + '&hospitalSearch=' + searchTermHospital;
+        params += '&activeTab=' + getActiveTab() + '&hospitalSearch=' + searchTermHospital;
 
         if("replaceState" in window.history)
             window.history.replaceState({}, 'DRG comparison', path + params);
@@ -88,7 +92,7 @@ $( function() {
         var hospitals = $('#hospitals').val();
         var codes = $('#codes').val();
         var url = $('#compareUrl').val();
-        $.get(url, {codes: codes, hospitals: hospitals, activeTab: $("ul#resultsTabs li.active a")[0].id})
+        $.get(url, {codes: codes, hospitals: hospitals, activeTab: getActiveTab()})
             .done(function (data) {
                 $('#comparison-resultsbox').html(data);
                 addRemoval();
