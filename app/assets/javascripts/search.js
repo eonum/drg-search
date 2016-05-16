@@ -66,10 +66,17 @@ $( function() {
         var path = purl().data.attr.path;
         var hospitals = $('#hospitals').val();
         var codes = $('#codes').val();
+        var activeTab = $("ul#resultsTabs li.active a")[0].id;
+        var searchTermHospital = $('#hospital_search').val();
+        var searchTermCodes = $('#codes_search').val();
+
+        var params = '?codes=' + codes + '&hospitals=' + hospitals;
+        params += '&activeTab=' + activeTab + '&hospitalSearch=' + searchTermHospital;
+
         if("replaceState" in window.history)
-            window.history.replaceState({}, 'DRG comparison', path + '?codes=' + codes + '&hospitals=' + hospitals);
+            window.history.replaceState({}, 'DRG comparison', path + params);
         $('.lang-selection').each(function() {
-            $(this).attr('href', $(this).attr('data') + '?codes=' + codes + '&hospitals=' + hospitals)
+            $(this).attr('href', $(this).attr('data') + params);
         });
     }
 

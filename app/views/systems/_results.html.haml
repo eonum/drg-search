@@ -9,9 +9,9 @@
 
 - else
   / Nav tabs
-  %ul.nav.nav-tabs
+  %ul.nav.nav-tabs#resultsTabs
     %li
-      %a{ href: '#tableResults', 'data-toggle': 'tab'}
+      %a#tableLink{ href: '#tableResults', 'data-toggle': 'tab'}
         = fa_icon('table')
     %li.active
       %a#barChartLink{ href: '#barChartResults', 'data-toggle': 'tab'}
@@ -43,7 +43,8 @@
       :javascript
         $( window ).resize(function() {
           google.charts.setOnLoadCallback(drawBarChart);
-          google.charts.setOnLoadCallback(drawLineChart);
+          if(drawLineChart != undefined)
+            google.charts.setOnLoadCallback(drawLineChart);
         });
         $('#barChartLink').on('shown.bs.tab', function (e) {
           google.charts.setOnLoadCallback(drawBarChart);
