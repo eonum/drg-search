@@ -9,10 +9,11 @@
 - else
   %li.dropdown
     %a.dropdown-toggle{ href:"#", 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' }
-      %span.icon.icon--right= code.code
+      = code.code_display
+    %span.icon.icon--greater
     %ul.dropdown-menu{ role: 'menu', 'aria-labelledby': 'admin-dropdown' }
       / Dropdown title, can ben place anywhere in the list
-      %li.dropdown-header{ role: 'presentation' }
+      %li{ role: 'presentation' }
         %ul{ role: 'menu' }
           - code.specialize.each do |scode|
             %li{ role: 'presentation' }
