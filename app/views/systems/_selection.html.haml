@@ -13,3 +13,9 @@
         = code.code_display + ' '
         %span.small{style: "color:#757575" }= code.text locale
         %span.pull-right.removeCode{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-code': code.code }= fa_icon('remove')
+        %nav.navbar.treecrumb.pull-left.nav-open{ role: 'navigation' }
+          %ul.nav.navbar-nav.nav-open
+            = render partial: 'code_hierarchy', locals: {code: code}
+
+
+

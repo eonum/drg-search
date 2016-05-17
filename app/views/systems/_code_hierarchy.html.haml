@@ -1,0 +1,19 @@
+/ recursion
+- unless code.generalize.nil?
+  = render partial: 'code_hierarchy', locals: { code: code.generalize }
+
+/ base case
+- if code.specialize.nil?
+  %li
+    %a= code.code_display
+- else
+  %li.dropdown
+    %a.dropdown-toggle{ href:"#", 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' }
+      %span.icon.icon--right= code.code
+    %ul.dropdown-menu{ role: 'menu', 'aria-labelledby': 'admin-dropdown' }
+      / Dropdown title, can ben place anywhere in the list
+      %li.dropdown-header{ role: 'presentation' }
+        %ul{ role: 'menu' }
+          - code.specialize.each do |scode|
+            %li{ role: 'presentation' }
+              %a{ href: '#', role: 'menuitem', tabindex: '-1', title: scode.text(locale) }= scode.code_display

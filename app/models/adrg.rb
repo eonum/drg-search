@@ -13,7 +13,7 @@ class Adrg < ActiveRecord::Base
     return self.partition
   end
 
-  def spezialize
+  def specialize
     return self.drgs.order(code: :asc)
   end
 end

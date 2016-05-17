@@ -11,11 +11,12 @@ class Mdc < ActiveRecord::Base
   end
 
   def generalize
-    return Mdc.where("version = '#{self.version}' and code <> 'ALL'").order(code: :asc) if code == 'ALL'
+    return Mdc.where("version = '#{self.version}' and code = 'ALL'").first unless code == 'ALL'
     return nil
   end
 
-  def spezialize
+  def specialize
+    return Mdc.where("version = '#{self.version}' and code <> 'ALL'").order(code: :asc) if code == 'ALL'
     return self.partitions
   end
 end

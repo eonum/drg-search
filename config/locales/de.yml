@@ -65,3 +65,7 @@ de:
    Jahr vorhanden. Ein zeitlicher Vergleich ist daher nicht möglich.
     Bitte wählen Sie dazu ein anderes Abrechnungsjahr."
   data_year: "Datenjahr"
+  partition: "Partition"
+  partition_A: "Andere"
+  partition_O: "Operativ"
+  partition_M: "Medizinisch"

@@ -9,14 +9,18 @@ class Partition < ActiveRecord::Base
   end
 
   def code_display
-    return 'MDC ' + code
+    return I18n.t('partition') + ' ' + I18n.t('partition_' + self.partition_letter)
+  end
+
+  def text locale
+    return ''
   end
 
   def generalize
     return self.mdc
   end
 
-  def spezialize
+  def specialize
     return self.adrgs.order(code: :asc)
   end
 end

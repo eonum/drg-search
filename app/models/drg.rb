@@ -13,7 +13,7 @@ class Drg < ActiveRecord::Base
     return self.adrg
   end
 
-  def spezialize
+  def specialize
     return nil
   end
 end
