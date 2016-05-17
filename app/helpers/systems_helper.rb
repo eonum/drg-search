@@ -12,7 +12,7 @@ module SystemsHelper
   # prepare data for the bar chart
   def chart_data(codes, hospitals, num_cases)
     data = []
-    data << [I18n.t('hospitals')] + codes.map{|code| code.code_display + (codes.size > 6 ? '' : ' ' + code.text(locale))}
+    identifiers = [I18n.t('hospitals')] + codes.map{|code| code.code_display + (codes.size > 6 ? '' : ' ' + code.text(locale))}
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
       hname = ''
@@ -23,7 +23,7 @@ module SystemsHelper
       end
       data << [hname] + codes.map {|code| numcase_number ncs[code.code] }
     end
-    data
+    [identifiers, data]
   end
 
   # prepare data for the time series line chart

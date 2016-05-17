@@ -40,6 +40,7 @@
                 %td= numcase_display(num_cases[code.code])
 
     #barChartResults.tab-pane{ class: params['activeTab'].blank? || params['activeTab'] == 'barChartLink' ? 'active' : '' }
+      - bar_chart_data = chart_data(@codes, @hospitals, @num_cases)
       :javascript
         $( window ).resize(function() {
           google.charts.setOnLoadCallback(drawBarChart);
@@ -52,7 +53,14 @@
         google.charts.setOnLoadCallback(drawBarChart);
 
         function drawBarChart() {
-          var data = google.visualization.arrayToDataTable(#{chart_data(@codes, @hospitals, @num_cases).to_json});
+          var data = new google.visualization.DataTable();
+            var columns = #{bar_chart_data[0].to_json};
+            data.addColumn('string', columns[0]);
+            for(var i = 1, size = columns.length; i < size ; i++){
+                data.addColumn('number', columns[i]);
+            }
+
+            data.addRows(#{bar_chart_data[1].to_json});
 
           var options = {
             title: "#{t('comparison_table')}",
