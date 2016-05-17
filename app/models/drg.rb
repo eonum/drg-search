@@ -8,4 +8,12 @@ class Drg < ActiveRecord::Base
   def code_display
     return code
   end
+
+  def generalize
+    return self.adrg
+  end
+
+  def spezialize
+    return nil
+  end
 end

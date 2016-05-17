@@ -8,4 +8,12 @@ class Adrg < ActiveRecord::Base
   def code_display
     return code
   end
+
+  def generalize
+    return self.partition
+  end
+
+  def spezialize
+    return self.drgs.order(code: :asc)
+  end
 end

@@ -9,4 +9,13 @@ class Mdc < ActiveRecord::Base
     return code if code == 'ALL'
     return 'MDC ' + code
   end
+
+  def generalize
+    return Mdc.where("version = '#{self.version}' and code <> 'ALL'").order(code: :asc) if code == 'ALL'
+    return nil
+  end
+
+  def spezialize
+    return self.partitions
+  end
 end

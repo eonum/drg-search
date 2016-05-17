@@ -11,4 +11,12 @@ class Partition < ActiveRecord::Base
   def code_display
     return 'MDC ' + code
   end
+
+  def generalize
+    return self.mdc
+  end
+
+  def spezialize
+    return self.adrgs.order(code: :asc)
+  end
 end
