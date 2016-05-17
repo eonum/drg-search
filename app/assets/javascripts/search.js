@@ -58,6 +58,16 @@ $( function() {
         $( ".sortableCodes" ).disableSelection();
     }
 
+    var addHierarchicalSelection = function() {
+        $('.hierarchicalCodeSelection').click(function(){
+            var newCode = $(this).data('newcode');
+            var oldCode = $(this).data('oldcode');
+            var codes = $('#codes').val($('#codes').val().replace(oldCode, newCode));
+            updateComparison();
+            return false;
+        });
+    }
+
     function getActiveTab() {
         var activeTab = $("ul#resultsTabs li.active a")[0];
         return activeTab == undefined ? '' : activeTab.id;
@@ -97,6 +107,7 @@ $( function() {
                 $('#comparison-resultsbox').html(data);
                 addRemoval();
                 addSorting();
+                addHierarchicalSelection();
                 $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
             });
         setURL();
@@ -177,6 +188,7 @@ $( function() {
 
     addRemoval();
     addSorting();
+    addHierarchicalSelection();
     setURL();
     // reset URL after active tab change
     $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
