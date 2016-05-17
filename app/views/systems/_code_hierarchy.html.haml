@@ -1,20 +1,24 @@
 / recursion
 - unless code.generalize.nil?
-  = render partial: 'code_hierarchy', locals: { code: code.generalize }
+  = render partial: 'code_hierarchy', locals: { code: code.generalize, base_code: code }
 
 / base case
 - if code.specialize.nil?
   %li
-    %a= code.code_display
-- else
-  %li.dropdown
-    %a.dropdown-toggle{ href:"#", 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' }
+    = code.code_display
+- elsif base_code != code
+  %li
+    %a.hierarchicalCodeSelection{ href:"#", title: code.text(locale), 'data-oldcode': base_code, 'data-newcode': code }
       = code.code_display
     %span.icon.icon--greater
-    %ul.dropdown-menu{ role: 'menu', 'aria-labelledby': 'admin-dropdown' }
+- else
+  %li.dropdown
+    %a.dropdown-toggle{ href:"#", 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false', title: code.text(locale) }
+      = code.code_display
+    %ul.dropdown-menu{ role: 'menu' }
       / Dropdown title, can ben place anywhere in the list
       %li{ role: 'presentation' }
         %ul{ role: 'menu' }
           - code.specialize.each do |scode|
             %li{ role: 'presentation' }
-              %a{ href: '#', role: 'menuitem', tabindex: '-1', title: scode.text(locale) }= scode.code_display
+              %a.hierarchicalCodeSelection{ href: '#', role: 'menuitem', tabindex: '-1', title: scode.text(locale), 'data-oldcode': base_code, 'data-newcode': scode }= scode.code_display
