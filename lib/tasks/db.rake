@@ -204,6 +204,7 @@ namespace :db do
 
   desc 'Empties all tables and executes all tasks to setup the database.'
   task :reseed, [:directory] => :environment do |t, args|
+    Rake::Task['db:truncate'].invoke()
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V1.0/'))
     Rake::Task['db:seed_drg_version'].reenable
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V2.0/'))
