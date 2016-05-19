@@ -71,8 +71,7 @@ class SearchController < ApplicationController
 
     def code_search model, query
       return [] if query.blank?
-      return model.where("version = '#{@system.version}' and (code ILIKE ? or text_#{@locale} ILIKE ?)", "%#{Regexp.escape(query)}%", "%#{Regexp.escape(query)}%")
-                 .order(code: :asc).limit(@limit)
+      return model.search query, where: {version: @system.version}, limit: @limit, highlight: {tag: '<mark>'}
     end
 
     def hospital_search query
