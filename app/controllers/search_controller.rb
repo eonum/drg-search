@@ -77,7 +77,6 @@ class SearchController < ApplicationController
 
     def hospital_search query
       return [] if query.blank?
-      Hospital.where("year = '#{@system.base_year}' and (name ILIKE ? or address ILIKE ?)", "%#{Regexp.escape(query)}%", "%#{Regexp.escape(query)}%")
-          .order(name: :asc).limit(@limit)
+      Hospital.search query, where: {year: @system.base_year}, limit: @limit
     end
 end
