@@ -76,6 +76,10 @@ namespace :db do
         adrg.save!
       end
     end
+
+    Mdc.reindex
+    Adrg.reindex
+    Drg.reindex
   end
 
   desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.
@@ -186,6 +190,8 @@ namespace :db do
         end
       end
     end
+
+    Hospital.reindex
   end
 
   desc 'Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence).'

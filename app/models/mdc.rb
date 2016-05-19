@@ -5,6 +5,8 @@ class Mdc < ActiveRecord::Base
 
   include MultiLanguageText
 
+  searchkick
+
   def code_display
     return code if code == 'ALL'
     return 'MDC ' + code

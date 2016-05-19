@@ -5,6 +5,8 @@ class Drg < ActiveRecord::Base
 
   include MultiLanguageText
 
+  searchkick
+
   def code_display
     return code
   end
