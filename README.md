@@ -121,7 +121,15 @@ This will copy the files from ./styleguide/build to the appropriate locations in
 
 These both steps can also be executed at once by entering: 
 
-``rake swiss_styleguide:update_and_import`` 
+``rake swiss_styleguide:update_and_import``
+
+### Install ElasticSearch and index the database
+
+General installation guide:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html
+
+Installation instructions using apt on Ubuntu:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
 
 ## Testing
 

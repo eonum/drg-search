@@ -48,4 +48,8 @@ gem 'i18n-js'
 gem 'ruby-progressbar'
 gem 'json'
 
-gem "font-awesome-rails"
+# font awesome icons
+gem 'font-awesome-rails'
+
+# search with elasticsearch
+gem 'searchkick'
