@@ -4,7 +4,7 @@
       .alert.alert-warning{ role: 'alert'}= t('no_search_results')
 
 - i = 0
-- @hospitals.each do |hospital|
+- @hospitals.with_details.each do |hospital, details|
   - i += 1
   - if i % 2 == 1
     <div class='row'>
@@ -12,10 +12,10 @@
     %article{ id: 'hospital_' + hospital.id.to_s }
       .pull-right
         %button.btn.hospitalselection{ type: "button", title: t('take_over_hospital'), 'data-hospital-id': hospital.id }= t('take_over')
-      %strong= hospital.name
+      %strong= raw highlight_text(hospital.name, details, :name)
       %address.small
-        = hospital.street
+        = raw highlight_text(hospital.street, details, :street)
         %br
-        = hospital.address
+        = raw highlight_text(hospital.address, details, :address)
   - if i % 2 == 0 || i == @hospitals.length
     </div>

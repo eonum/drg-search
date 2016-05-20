@@ -70,12 +70,10 @@ class SearchController < ApplicationController
     end
 
     def code_search model, query
-      return [] if query.blank?
-      return model.search query, where: {version: @system.version}, limit: @limit, highlight: {tag: '<mark>'}
+      return model.search query, where: {version: @system.version}, fields: [:code, ('text_' + locale.to_s).to_sym], limit: @limit, highlight: {tag: '<mark>'}
     end
 
     def hospital_search query
-      return [] if query.blank?
-      Hospital.search query, where: {year: @system.base_year}, limit: @limit
+      Hospital.search query, where: {year: @system.base_year}, fields: [:name, :address, :street, :address], limit: @limit, highlight: {tag: '<mark>'}
     end
 end

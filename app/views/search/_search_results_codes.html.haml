@@ -3,11 +3,11 @@
     .col-sm-12
       .alert.alert-warning{ role: 'alert'}= t('no_search_results')
 
-- codes.each do |code|
+- codes.with_details.each do |code, details|
   %article.row{ id: 'code_' + code.code }
     %strong.col-sm-1= code.code_display
     .col-sm-11
-      = ' ' + code.text(locale)
+      = raw  highlight_code(code.text(locale), details, locale)
       .pull-right
         %button.btn.codeSelection{ type: "button", title: t('take_over_code'), 'data-code': code.code }= t('take_over')
     %hr
