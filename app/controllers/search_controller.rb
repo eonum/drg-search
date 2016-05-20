@@ -70,10 +70,28 @@ class SearchController < ApplicationController
     end
 
     def code_search model, query
-      return model.search query, where: {version: @system.version}, fields: [:code, ('text_' + locale.to_s).to_sym], limit: @limit, highlight: {tag: '<mark>'}
+      codes = model.search query, where: {version: @system.version},
+                           fields: ['code^2', 'text_' + locale.to_s],
+                           limit: @limit, highlight: {tag: '<mark>'}
+      if codes.empty?
+        codes = model.search query, where: {version: @system.version},
+                             fields: ['code^2', 'text_' + locale.to_s],
+                             operator: 'or',
+                             limit: @limit, highlight: {tag: '<mark>'}
+      end
+      return codes
     end
 
     def hospital_search query
-      Hospital.search query, where: {year: @system.base_year}, fields: [:name, :address, :street, :address], limit: @limit, highlight: {tag: '<mark>'}
+      hospitals = Hospital.search query, where: {year: @system.base_year},
+                                  fields: ['name^2', :street, :address],
+                                  limit: @limit, highlight: {tag: '<mark>'}
+      if hospitals.empty?
+        hospitals = Hospital.search query, where: {year: @system.base_year},
+                                    fields: ['name^2', :street, :address],
+                                    operator: 'or',
+                                    limit: @limit, highlight: {tag: '<mark>'}
+      end
+      return hospitals
     end
 end
