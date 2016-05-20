@@ -13,7 +13,7 @@
       .pull-right
         %button.btn.hospitalselection{ type: "button", title: t('take_over_hospital'), 'data-hospital-id': hospital.id }= t('take_over')
       %strong= raw highlight_text(hospital.name, details, :name)
-      %address.small
+      .small
         = raw highlight_text(hospital.street, details, :street)
         %br
         = raw highlight_text(hospital.address, details, :address)
