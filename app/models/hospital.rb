@@ -3,7 +3,7 @@
 class Hospital < ActiveRecord::Base
   has_many :num_cases
 
-  searchkick
+  searchkick word_middle: [:name]
   # hospital_id is only unique within one year
   # id is unique over all hospital objects
 end

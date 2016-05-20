@@ -89,7 +89,7 @@ class SearchController < ApplicationController
       if hospitals.empty?
         hospitals = Hospital.search query, where: {year: @system.base_year},
                                     fields: ['name^2', :street, :address],
-                                    operator: 'or',
+                                    operator: 'or', match: :word_middle,
                                     limit: @limit, highlight: {tag: '<mark>'}
       end
       return hospitals
