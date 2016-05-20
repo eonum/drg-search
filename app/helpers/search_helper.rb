@@ -7,7 +7,7 @@ module SearchHelper
     return text.gsub(to_replace, highlighted_text)
   end
 
-  def highglight_code(text, detail, locale)
+  def highlight_code(text, detail, locale)
     return highlight_text(text, detail, ('text_' + locale.to_s).to_sym)
   end
 end
