@@ -183,7 +183,7 @@ $( function() {
     }
 
     $('#hospital_search').keyup(function(e) {search(e, "#hospitalSearchResults")});
-    $('#codes_search').keyup(function(e) {search(e, "#drgSearchResults")});
+    $('#codes_search').keyup(function(e) {search(e, "#codeSearchResults")});
 
 
     addRemoval();
