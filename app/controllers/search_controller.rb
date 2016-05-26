@@ -45,6 +45,10 @@ class SearchController < ApplicationController
     json = {}
     json[:drgs] = @drgs = code_search(Drg, @query_codes)
     json[:adrgs] = @adrgs = code_search(Adrg, @query_codes)
+    # remove all 'Z' DRGs already present as ADRG
+    adrg_codes = @adrgs.map {|adrg| adrg.code}
+    @exclude_codes = @drgs.map {|drg| drg.code}
+    @exclude_codes.select! {|code| code.ends_with?('Z') && adrg_codes.include?(code[0..2])}
     json[:mdcs] = @mdcs = code_search(Mdc, @query_codes)
     json[:hospitals] = @hospitals = hospital_search @query_hospital
 

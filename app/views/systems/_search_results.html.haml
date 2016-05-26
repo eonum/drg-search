@@ -8,22 +8,12 @@
     %li.active
       %a{ href: '#hospitalSearchResults', 'data-toggle': 'tab'}= t('hospitals')
     %li
-      %a{ href: '#mdcSearchResults', 'data-toggle': 'tab'}= t('mdcs')
-    %li
-      %a{ href: '#adrgSearchResults', 'data-toggle': 'tab'}= t('adrgs')
-    %li
-      %a{ href: '#drgSearchResults', 'data-toggle': 'tab'}= t('drgs')
+      %a{ href: '#codeSearchResults', 'data-toggle': 'tab'}= t('num_cases')
 
   / Tab panes
   .tab-content.tab-border
     #hospitalSearchResults.tab-pane.active
       = render 'search/search_results_hospitals'
 
-    #mdcSearchResults.tab-pane
-      = render partial: 'search/search_results_codes', locals: {codes: @mdcs}
-
-    #adrgSearchResults.tab-pane
-      = render partial: 'search/search_results_codes', locals: {codes: @adrgs}
-
-    #drgSearchResults.tab-pane
-      = render partial: 'search/search_results_codes', locals: {codes: @drgs}
+    #codeSearchResults.tab-pane
+      = render partial: 'search/search_results_codes'
