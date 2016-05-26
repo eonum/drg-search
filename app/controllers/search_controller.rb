@@ -76,12 +76,14 @@ class SearchController < ApplicationController
     def code_search model, query
       codes = model.search query, where: {version: @system.version},
                            fields: ['code^2', 'text_' + locale.to_s],
-                           limit: @limit, highlight: {tag: '<mark>'}
+                           limit: @limit, highlight: {tag: '<mark>',
+                           misspellings: {below: 1}}
       if codes.empty?
         codes = model.search query, where: {version: @system.version},
                              fields: ['code^2', 'text_' + locale.to_s],
                              operator: 'or',
-                             limit: @limit, highlight: {tag: '<mark>'}
+                             limit: @limit, highlight: {tag: '<mark>'},
+                             misspellings: {below: 1}
       end
       return codes
     end
@@ -89,12 +91,13 @@ class SearchController < ApplicationController
     def hospital_search query
       hospitals = Hospital.search query, where: {year: @system.base_year},
                                   fields: ['name^2', :street, :address],
-                                  limit: @limit, highlight: {tag: '<mark>'}
+                                  limit: @limit, highlight: {tag: '<mark>'},
+                                  misspellings: {below: 1}
       if hospitals.empty?
         hospitals = Hospital.search query, where: {year: @system.base_year},
                                     fields: ['name^2', :street, :address],
                                     operator: 'or', match: :word_middle,
-                                    limit: @limit, highlight: {tag: '<mark>'}
+                                    limit: @limit, highlight: {tag: '<mark>'}, misspellings: {below: 1}
       end
       return hospitals
     end
