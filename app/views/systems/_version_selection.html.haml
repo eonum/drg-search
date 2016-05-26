@@ -1,2 +1,3 @@
+= t('system_selection')
 %div.dropdown
   #version-select= select_tag('system', options_for_select(System.order(version: :desc).map { |s| [s.text(locale), system_path(s)]}, system_path(@system)), class: 'form-control')
