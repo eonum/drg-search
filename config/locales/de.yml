@@ -68,3 +68,4 @@ de:
   partition_A: "Andere"
   partition_O: "Operativ"
   partition_M: "Medizinisch"
+  search_hospitals_drgs: "Suche Spitäler und DRG Fallzahlen"
