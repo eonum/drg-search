@@ -29,7 +29,7 @@ de:
   edi_long: "Eidgenössisches Departement des Innern EDI"
   legal: "Rechtliches"
   drg_version: "DRG Version"
-  system_selection: "Auswahl SwissDRG Versionen"
+  system_selection: "Auswahl Anwendungsjahr / SwissDRG Version"
   hospital_search: "Spitalsuche"
   hospital_search_placeholder: "Name oder Adresse der Klinik"
   number_search: "Fallzahlsuche"
@@ -60,9 +60,9 @@ de:
   time_series_chart_title: "Zeitlicher Verlauf der Fallzahlen"
   year: "Jahr"
   no_value: "Keine Angaben"
-  only_one_year: "Für dieses Abrechnungsjahr sind nur Vergleichsdaten von einem
+  only_one_year: "Für dieses Anwendungsjahr sind nur Vergleichsdaten von einem
    Jahr vorhanden. Ein zeitlicher Vergleich ist daher nicht möglich.
-    Bitte wählen Sie dazu ein anderes Abrechnungsjahr."
+    Bitte wählen Sie dazu ein anderes Anwendungsjahr."
   data_year: "Datenjahr"
   partition: "Partition"
   partition_A: "Andere"
