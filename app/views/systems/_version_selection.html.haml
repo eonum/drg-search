@@ -1,3 +1,7 @@
 = t('system_selection')
 %div.dropdown
-  #version-select= select_tag('system', options_for_select(System.order(version: :desc).map { |s| [(s.application_year.to_s + ' / ' + s.text(locale)), system_path(s)]}, system_path(@system)), class: 'form-control')
+  #version-select
+    %select#system{ name: 'system'}
+      - System.order(version: :desc).each do |s|
+        - url =  system_path(s) + "?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}"
+        %option.version-selection{ selected: @system == s ? 'selected' : nil, value: url, 'data-url': system_path(s),}= s.application_year.to_s + ' / ' + s.text(locale)

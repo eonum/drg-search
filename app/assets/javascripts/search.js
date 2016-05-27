@@ -93,6 +93,9 @@ $( function() {
         $('.lang-selection').each(function() {
             $(this).attr('href', $(this).attr('data') + params);
         });
+        $('.version-selection').each(function() {
+            $(this).attr('value', $(this).data('url') + params);
+        });
     }
 
     /**
