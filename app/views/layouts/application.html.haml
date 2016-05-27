@@ -92,16 +92,12 @@
                         %li
                           = link_to t('drg_search'), root_path
                         %li
-                          = link_to t('about'), about_path
-                        %li
-                          = link_to t('help'), help_path
+                          = link_to t('documentation'), documentation_path
           %ul.nav.navbar-nav
             %li.dropdown.yamm-fw{ class: controller.controller_name == 'systems' ? 'current' : ''}
               = link_to t('drg_search'), root_path
             %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'about' ? 'current' : ''}
-              = link_to t('about'), about_path
-            %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'help' ? 'current' : ''}
-              = link_to t('help'), help_path
+              = link_to t('documentation'), documentation_path
       .row
         .col-xs-12
           #content.container-fluid

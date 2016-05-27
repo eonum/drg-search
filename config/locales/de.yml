@@ -46,7 +46,7 @@ de:
   search: "Suche"
   no_search_results: "Es konnten keine Suchergebnisse zum eingegebenen Begriff gefunden werden."
   help: "Hilfe"
-  about: "Info"
+  documentation: "Dokumentation"
   take_over_hospital: "Dieses Spital in die Analyse übernehmen"
   take_over_code: "Diese Fallzahl in die Analyse übernehmen"
   take_over: "Übernehmen"
