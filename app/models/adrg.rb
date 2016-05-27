@@ -11,6 +11,10 @@ class Adrg < ActiveRecord::Base
     return code
   end
 
+  def code_display_long
+    return I18n.t('adrg') + ' ' + code
+  end
+
   def generalize
     return self.partition
   end

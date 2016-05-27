@@ -39,6 +39,7 @@ de:
   num_cases: "Fallzahlen"
   mdcs: "MDCs Major Diagnostic Categories"
   adrgs: "Basis-DRGs"
+  adrg: "Basis-DRG"
   drgs: "DRGs - Fallpauschalen"
   comparison_table: "Fallzahlen nach Spital"
   contact: "Kontakt"

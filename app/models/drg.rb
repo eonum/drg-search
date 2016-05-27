@@ -11,6 +11,10 @@ class Drg < ActiveRecord::Base
     return code
   end
 
+  def code_display_long
+    return 'DRG ' + code
+  end
+
   def generalize
     return self.adrg
   end

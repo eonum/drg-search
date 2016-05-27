@@ -12,6 +12,10 @@ class Mdc < ActiveRecord::Base
     return 'MDC ' + code
   end
 
+  def code_display_long
+    return code_display
+  end
+
   def generalize
     return Mdc.where("version = '#{self.version}' and code = 'ALL'").first unless code == 'ALL'
     return nil

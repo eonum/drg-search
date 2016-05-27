@@ -29,7 +29,7 @@
             %th
             - @codes.each do |code|
               %th{ title: code.text(locale) }
-                = code.code_display
+                = code.code_display_long
         %tbody
           - @hospitals.each do |hospital|
             %tr
