@@ -74,6 +74,7 @@ class SearchController < ApplicationController
     end
 
     def code_search model, query
+      return [] if query.blank? || query.length < 3
       codes = model.search query, where: {version: @system.version},
                            fields: ['code^2', 'text_' + locale.to_s],
                            limit: @limit, highlight: {tag: '<mark>',
@@ -89,6 +90,7 @@ class SearchController < ApplicationController
     end
 
     def hospital_search query
+      return [] if query.blank? || query.length < 3
       hospitals = Hospital.search query, where: {year: @system.base_year},
                                   fields: ['name^2', :street, :address],
                                   limit: @limit, highlight: {tag: '<mark>'},
