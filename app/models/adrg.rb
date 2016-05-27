@@ -5,7 +5,7 @@ class Adrg < ActiveRecord::Base
 
   include MultiLanguageText
 
-  searchkick callbacks: false, language: 'german'
+  searchkick word_middle: [:text_de, :text_fr, :text_it], callbacks: false, language: 'german'
 
   def code_display
     return code

@@ -77,6 +77,7 @@ class SearchController < ApplicationController
       return [] if query.blank? || query.length < 3
       codes = model.search query, where: {version: @system.version},
                            fields: ['code^2', 'text_' + locale.to_s],
+                           match: :word_middle,
                            limit: @limit, highlight: {tag: '<mark>',
                            misspellings: {below: 1}}
       if codes.empty?
@@ -93,6 +94,7 @@ class SearchController < ApplicationController
       return [] if query.blank? || query.length < 3
       hospitals = Hospital.search query, where: {year: @system.base_year},
                                   fields: ['name^2', :street, :address],
+                                  match: :word_middle,
                                   limit: @limit, highlight: {tag: '<mark>'},
                                   misspellings: {below: 1}
       if hospitals.empty?
