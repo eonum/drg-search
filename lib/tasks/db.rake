@@ -82,10 +82,14 @@ namespace :db do
     Drg.reindex
   end
 
-  desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.
+  desc 'Seed all data in a certain directory from a certain year. This includes hospital data and number of cases data.
       All files must be encoded using UTF-8. All rows in one  numcase file must have identical version, year and level.'
-  task :seed_numcase_data, [:directory] => :environment do |t, args|
+  task :seed_numcase_data, [:directory, :year] => :environment do |t, args|
     puts "Seed folder #{args.directory}"
+
+    # create pseudo hospital ALL
+    Hospital.create!({year: args.year.to_i, hospital_id: 9999, name: 'Alle akutsomatischen Spitäler der Schweiz', street: '', address: '', canton: 'CH'})
+
     Dir.entries(args.directory).sort.each do |file|
       next unless file.downcase.end_with?('csv.utf8')
 
@@ -221,8 +225,8 @@ namespace :db do
     Rake::Task['db:seed_drg_version'].reenable
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V5.0/'))
 
-    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'))
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'), '2012')
     Rake::Task['db:seed_numcase_data'].reenable
-    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'))
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
   end
 end
