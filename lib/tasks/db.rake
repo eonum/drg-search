@@ -195,6 +195,12 @@ namespace :db do
       end
     end
 
+    # aggregate all num cases for pseudo hospital ALL
+
+    NumCase.where(year: args.year).group("version").group("level").group("code").sum(:n).each do |key, n|
+      NumCase.create!({hospital_id: 9999, year: args.year, version: key[0], level: key[1], code: key[2], n: n})
+    end
+
     Hospital.reindex
   end
 
