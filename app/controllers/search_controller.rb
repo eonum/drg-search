@@ -45,11 +45,19 @@ class SearchController < ApplicationController
     json = {}
     json[:drgs] = @drgs = code_search(Drg, @query_codes)
     json[:adrgs] = @adrgs = code_search(Adrg, @query_codes)
+    json[:mdcs] = @mdcs = code_search(Mdc, @query_codes)
+    if @drgs.empty? && @adrgs.empty? && @mdcs.empty?
+      json[:drgs] = @drgs = code_search_tolerant(Drg, @query_codes)
+      json[:adrgs] = @adrgs = code_search_tolerant(Adrg, @query_codes)
+      json[:mdcs] = @mdcs = code_search_tolerant(Mdc, @query_codes)
+    end
+
+
     # remove all 'Z' DRGs already present as ADRG
     adrg_codes = @adrgs.map {|adrg| adrg.code}
     @exclude_codes = @drgs.map {|drg| drg.code}
     @exclude_codes.select! {|code| code.ends_with?('Z') && adrg_codes.include?(code[0..2])}
-    json[:mdcs] = @mdcs = code_search(Mdc, @query_codes)
+
     json[:hospitals] = @hospitals = hospital_search @query_hospital
 
     respond_to do |format|
@@ -78,15 +86,18 @@ class SearchController < ApplicationController
       codes = model.search query, where: {version: @system.version},
                            fields: ['code^2', 'text_' + locale.to_s],
                            match: :word_middle,
-                           limit: @limit, highlight: {tag: '<mark>',
-                           misspellings: {below: 1}}
-      if codes.empty?
-        codes = model.search query, where: {version: @system.version},
+                           limit: @limit, highlight: {tag: '<mark>'},
+                           misspellings: false
+      return codes
+    end
+
+    def code_search_tolerant model, query
+      return [] if query.blank? || query.length < 3
+      codes = model.search query, where: {version: @system.version},
                              fields: ['code^2', 'text_' + locale.to_s],
                              operator: 'or',
                              limit: @limit, highlight: {tag: '<mark>'},
                              misspellings: {below: 1}
-      end
       return codes
     end
 
