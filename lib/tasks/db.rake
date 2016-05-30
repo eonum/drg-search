@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'csv'
 require 'json'
+require_relative 'code_index_helper'
 
 namespace :db do
   desc "Seed a DRG system. You have to provide a folder containing adrgs.csv, drgs.csv, mdcs.csv and system.json"
@@ -81,14 +82,16 @@ namespace :db do
     icds = {}
     CSV.foreach(File.join(args.directory, 'icds.csv'), col_sep: ';') do |row|
       next if row[0] == 'code' # skip header if any
-      icds[row[0]] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+      icds[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
     end
+
+    relevant_diagnoses_by_code = read_code_index(File.join(args.directory, 'Index/DgIndex.txt'))
 
     puts 'Loading and linking procedures index..'
     chops = {}
     CSV.foreach(File.join(args.directory, 'chops.csv'), col_sep: ';') do |row|
       next if row[0] == 'code' # skip header if any
-      chops[row[0]] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+      chops[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
     end
 
     Mdc.reindex
