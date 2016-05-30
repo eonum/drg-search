@@ -35,7 +35,11 @@ namespace :db do
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of MDC #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5]})
+      rcodes = relevant_codes_texts[row[0]]
+      mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5],
+                         relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
+                         relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_fr],
+                         relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_it]})
       Partition.create!({code: "#{row[5]} O", version: system.version, mdc_id: mdc.id})
       Partition.create!({code: "#{row[5]} M", version: system.version, mdc_id: mdc.id})
       Partition.create!({code: "#{row[5]} A", version: system.version, mdc_id: mdc.id})
@@ -46,7 +50,12 @@ namespace :db do
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of ADRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      Adrg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4]})
+
+      rcodes = relevant_codes_texts[row[0]]
+      Adrg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4],
+                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
+                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_fr],
+                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_it]})
     end
 
     puts 'Loading DRGs..'
@@ -56,7 +65,12 @@ namespace :db do
       puts "Warning: version of DRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
       partition_letter = row[5]
       partition_letter = 'O' if partition_letter == 'X'
-      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: partition_letter})
+
+      rcodes = relevant_codes_texts[row[0]]
+      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: partition_letter,
+                   relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
+                   relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_fr],
+                   relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_it]})
     end
 
     puts 'Link codes..'

@@ -1,5 +1,6 @@
 
 def add_code(drg_code, index, code)
+  drg_code = 'Pre' if drg_code == 'Prä'
   index[drg_code] = [] if index[drg_code].nil?
   index[drg_code] << code unless index[drg_code].include? code
 end
@@ -17,11 +18,19 @@ def read_code_index index_file_name
   while line = index_file.gets
     elements = line.split("\t")
     current_code = elements[0].gsub(/[^0-9A-Z]/, '') unless elements[0].blank?
-    (1..elements.length - 1).each do |i|
-      add_code(elements[i], index, current_code)
-      add_code(elements[i][0..2], index, current_code) if i > 1
+    # MDC
+    add_code(elements[1], index, current_code)
+    next if elements.length < 3
+
+    elements[2].split(', ').each do |drg|
+      # DRG
+      add_code(drg, index, current_code)
+      # ADRG
+      add_code(drg[0..2], index, current_code)
     end
   end
+
+  return index
 end
 
 # Combine ICD and CHOP indices and the description texts
