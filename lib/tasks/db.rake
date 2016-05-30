@@ -77,6 +77,20 @@ namespace :db do
       end
     end
 
+    puts 'Loading and linking diagnoses index..'
+    icds = {}
+    CSV.foreach(File.join(args.directory, 'icds.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      icds[row[0]] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+    end
+
+    puts 'Loading and linking procedures index..'
+    chops = {}
+    CSV.foreach(File.join(args.directory, 'chops.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      chops[row[0]] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+    end
+
     Mdc.reindex
     Adrg.reindex
     Drg.reindex
