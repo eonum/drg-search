@@ -94,6 +94,8 @@ namespace :db do
       chops[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
     end
 
+    relevant_procedures_by_code = read_code_index(File.join(args.directory, 'Index/DgIndex.txt'))
+
     Mdc.reindex
     Adrg.reindex
     Drg.reindex
