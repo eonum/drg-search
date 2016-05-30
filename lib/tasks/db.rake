@@ -38,8 +38,8 @@ namespace :db do
       rcodes = relevant_codes_texts[row[0]]
       mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5],
                          relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
-                         relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_fr],
-                         relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_it]})
+                         relevant_codes_fr: rcodes.nil? ? '' : rcodes[:text_fr],
+                         relevant_codes_it: rcodes.nil? ? '' : rcodes[:text_it]})
       Partition.create!({code: "#{row[5]} O", version: system.version, mdc_id: mdc.id})
       Partition.create!({code: "#{row[5]} M", version: system.version, mdc_id: mdc.id})
       Partition.create!({code: "#{row[5]} A", version: system.version, mdc_id: mdc.id})
@@ -54,8 +54,8 @@ namespace :db do
       rcodes = relevant_codes_texts[row[0]]
       Adrg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4],
                     relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
-                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_fr],
-                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_it]})
+                    relevant_codes_fr: rcodes.nil? ? '' : rcodes[:text_fr],
+                    relevant_codes_it: rcodes.nil? ? '' : rcodes[:text_it]})
     end
 
     puts 'Loading DRGs..'
@@ -69,8 +69,8 @@ namespace :db do
       rcodes = relevant_codes_texts[row[0]]
       Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: partition_letter,
                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
-                   relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_fr],
-                   relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_it]})
+                   relevant_codes_fr: rcodes.nil? ? '' : rcodes[:text_fr],
+                   relevant_codes_it: rcodes.nil? ? '' : rcodes[:text_it]})
     end
 
     puts 'Link codes..'
