@@ -1,5 +1,11 @@
 
+def add_code(drg_code, index, code)
+  index[drg_code] = [] if index[drg_code].nil?
+  index[drg_code] << code unless index[drg_code].include? code
+end
 
+# Read a map that maps from DRG|MDC|ADRG code to all its relevant
+# ICD or CHOP codes within the grouping process.
 def read_code_index index_file_name
   index = {}
   index_file = File.new(index_file_name, 'r')
@@ -10,11 +16,45 @@ def read_code_index index_file_name
 
   while line = index_file.gets
     elements = line.split("\t")
-    current_code = elements[0] unless elements[0].blank?
+    current_code = elements[0].gsub(/[^0-9A-Z]/, '') unless elements[0].blank?
     (1..elements.length - 1).each do |i|
-      drg_code = elements[i]
-      index[drg_code] = [] if index[drg_code].nil?
-      index[drg_code] << current_code
+      add_code(elements[i], index, current_code)
+      add_code(elements[i][0..2], index, current_code) if i > 1
     end
   end
+end
+
+# Combine ICD and CHOP indices and the description texts
+def combine_indices(icds, chops, relevant_diagnoses_by_code, relevant_procedures_by_code)
+  texts = {}
+
+  relevant_diagnoses_by_code.each do |code, relevant_codes|
+    text_de = ''
+    text_fr = ''
+    text_it = ''
+
+    relevant_codes.each do |relevant_code|
+      text_de += '\n' + icds[relevant_code][:text_de] unless icds[relevant_code].nil?
+      text_fr += '\n' + icds[relevant_code][:text_fr] unless icds[relevant_code].nil?
+      text_it += '\n' + icds[relevant_code][:text_it] unless icds[relevant_code].nil?
+    end
+
+    texts[code] = {text_de: text_de, text_fr: text_fr, text_it: text_it}
+  end
+
+  relevant_procedures_by_code.each do |code, relevant_codes|
+    text_de = texts[code].nil? ? '' : texts[code][:text_de]
+    text_fr = texts[code].nil? ? '' : texts[code][:text_fr]
+    text_it = texts[code].nil? ? '' : texts[code][:text_it]
+
+    relevant_codes.each do |relevant_code|
+      text_de += '\n' + icds[relevant_code][:text_de] unless icds[relevant_code].nil?
+      text_fr += '\n' + icds[relevant_code][:text_fr] unless icds[relevant_code].nil?
+      text_it += '\n' + icds[relevant_code][:text_it] unless icds[relevant_code].nil?
+    end
+
+    texts[code] = {text_de: text_de, text_fr: text_fr, text_it: text_it}
+  end
+
+  return texts
 end

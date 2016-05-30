@@ -12,6 +12,23 @@ namespace :db do
     system = System.new(system_hash)
     system.save!
 
+    puts 'Loading and linking diagnoses index..'
+    icds = {}
+    CSV.foreach(File.join(args.directory, 'icds.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      icds[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+    end
+    relevant_diagnoses_by_code = read_code_index(File.join(args.directory, 'Index/DgIndex.txt'))
+
+    puts 'Loading and linking procedures index..'
+    chops = {}
+    CSV.foreach(File.join(args.directory, 'chops.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      chops[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+    end
+    relevant_procedures_by_code = read_code_index(File.join(args.directory, 'Index/PrIndex.txt'))
+    relevant_codes_texts = combine_indices(icds, chops, relevant_diagnoses_by_code, relevant_procedures_by_code)
+
     puts 'Loading MDCs..'
     Mdc.create!({code: 'ALL', version: system.version, text_de: 'Alle Fälle', text_fr: 'Tous les cas', text_it: 'Tutti i casi', prefix: '0'})
     CSV.foreach(File.join(args.directory, 'mdcs.csv'), col_sep: ';') do |row|
@@ -77,24 +94,6 @@ namespace :db do
         adrg.save!
       end
     end
-
-    puts 'Loading and linking diagnoses index..'
-    icds = {}
-    CSV.foreach(File.join(args.directory, 'icds.csv'), col_sep: ';') do |row|
-      next if row[0] == 'code' # skip header if any
-      icds[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
-    end
-
-    relevant_diagnoses_by_code = read_code_index(File.join(args.directory, 'Index/DgIndex.txt'))
-
-    puts 'Loading and linking procedures index..'
-    chops = {}
-    CSV.foreach(File.join(args.directory, 'chops.csv'), col_sep: ';') do |row|
-      next if row[0] == 'code' # skip header if any
-      chops[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
-    end
-
-    relevant_procedures_by_code = read_code_index(File.join(args.directory, 'Index/DgIndex.txt'))
 
     Mdc.reindex
     Adrg.reindex
