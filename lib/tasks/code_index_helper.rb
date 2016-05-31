@@ -43,9 +43,9 @@ def combine_indices(icds, chops, relevant_diagnoses_by_code, relevant_procedures
     text_it = ''
 
     relevant_codes.each do |relevant_code|
-      text_de += "\n" + icds[relevant_code][:text_de] unless icds[relevant_code].nil?
-      text_fr += "\n" + icds[relevant_code][:text_fr] unless icds[relevant_code].nil?
-      text_it += "\n" + icds[relevant_code][:text_it] unless icds[relevant_code].nil?
+      text_de += icds[relevant_code][:text_de] + "\n" unless icds[relevant_code].nil?
+      text_fr += icds[relevant_code][:text_fr] + "\n" unless icds[relevant_code].nil?
+      text_it += icds[relevant_code][:text_it] + "\n" unless icds[relevant_code].nil?
     end
 
     texts[code] = {text_de: text_de, text_fr: text_fr, text_it: text_it}
@@ -57,9 +57,9 @@ def combine_indices(icds, chops, relevant_diagnoses_by_code, relevant_procedures
     text_it = texts[code].nil? ? '' : texts[code][:text_it]
 
     relevant_codes.each do |relevant_code|
-      text_de += "\n" + icds[relevant_code][:text_de] unless icds[relevant_code].nil?
-      text_fr += "\n" + icds[relevant_code][:text_fr] unless icds[relevant_code].nil?
-      text_it += "\n" + icds[relevant_code][:text_it] unless icds[relevant_code].nil?
+      text_de += chops[relevant_code][:text_de] + "\n" unless chops[relevant_code].nil?
+      text_fr += chops[relevant_code][:text_fr] + "\n" unless chops[relevant_code].nil?
+      text_it += chops[relevant_code][:text_it] + "\n" unless chops[relevant_code].nil?
     end
 
     texts[code] = {text_de: text_de, text_fr: text_fr, text_it: text_it}
