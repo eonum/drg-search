@@ -109,6 +109,7 @@ namespace :db do
       end
     end
 
+    puts 'Reindex search index..'
     Mdc.reindex
     Adrg.reindex
     Drg.reindex

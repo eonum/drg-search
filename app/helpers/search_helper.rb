@@ -10,6 +10,22 @@ module SearchHelper
   end
 
   def highlight_code(text, detail, locale)
-    return highlight_text(text, detail, ('text_' + locale.to_s).to_sym)
+    text_field = ('text_' + locale.to_s + '.word_middle').to_sym
+    return highlight_text(text, detail, text_field) unless detail.nil? || detail[:highlight].nil? || detail[:highlight][text_field].nil?
+
+    # let's try to highlight a relevant code
+    return text if detail.nil?
+    return text if detail[:highlight].nil?
+    highlighted_text = detail[:highlight][('relevant_codes_' + locale.to_s).to_sym]
+    return text if highlighted_text.nil?
+    relevant_codes = highlighted_text.split("\n")
+    first = ''
+    i = 0
+    while first.blank?
+      first = relevant_codes[i] if relevant_codes[i].include? '<mark>'
+      i += 1
+    end
+    first += '</mark>' unless first.include? '</mark>'
+    return text + '<div class="small">(' + I18n.t('relevant_code') + ': ' + first + ')</div>'
   end
 end
