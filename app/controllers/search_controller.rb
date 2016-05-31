@@ -84,8 +84,7 @@ class SearchController < ApplicationController
     def code_search model, query
       return [] if query.blank? || query.length < 3
       codes = model.search query, where: {version: @system.version},
-                           fields: ['code^2', 'text_' + locale.to_s],
-                           match: :word_middle,
+                           fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                            limit: @limit, highlight: {tag: '<mark>'},
                            misspellings: false
       return codes
@@ -94,7 +93,7 @@ class SearchController < ApplicationController
     def code_search_tolerant model, query
       return [] if query.blank? || query.length < 3
       codes = model.search query, where: {version: @system.version},
-                             fields: ['code^2', 'text_' + locale.to_s],
+                             fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                              operator: 'or',
                              limit: @limit, highlight: {tag: '<mark>'},
                              misspellings: {below: 1}
