@@ -21,10 +21,11 @@ module SearchHelper
     relevant_codes = highlighted_text.split("\n")
     first = ''
     i = 0
-    while first.blank?
+    while first.blank? && relevant_codes.length > i
       first = relevant_codes[i] if relevant_codes[i].include? '<mark>'
       i += 1
     end
+    return text if first.blank?
     first += '</mark>' unless first.include? '</mark>'
     return text + '<div class="small">(' + I18n.t('relevant_code') + ': ' + first + ')</div>'
   end
