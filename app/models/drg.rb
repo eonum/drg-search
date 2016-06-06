@@ -5,7 +5,7 @@ class Drg < ActiveRecord::Base
 
   include MultiLanguageText
 
-  searchkick callbacks: false, language: 'german', synonyms: [CSV.read("data/mesh_2016/synonyms.csv")]
+  searchkick callbacks: false, language: 'german'
 
   def code_display
     return code
