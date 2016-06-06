@@ -12,7 +12,7 @@ module SystemsHelper
   # prepare data for the bar chart
   def chart_data(codes, hospitals, num_cases)
     data = []
-    identifiers = [I18n.t('hospitals')] + codes.map{|code| code.code_display + (codes.size > 6 ? '' : ' ' + code.text(locale))}
+    identifiers = [I18n.t('hospitals')] + codes.map{|code| code.code_display_long }
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
       hname = ''

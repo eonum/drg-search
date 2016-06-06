@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    redirect_to system_path(System.order(version: :desc).first())
   end
 
   def redirect
@@ -9,9 +10,6 @@ class HomeController < ApplicationController
   def contact
   end
 
-  def about
-  end
-
-  def help
+  def documentation
   end
 end

@@ -12,6 +12,10 @@ class Partition < ActiveRecord::Base
     return self.mdc.code_display + ' ' + I18n.t('partition') + ' ' + I18n.t('partition_' + self.partition_letter)
   end
 
+  def code_display_long
+    return code_display
+  end
+
   def text locale
     return ''
   end

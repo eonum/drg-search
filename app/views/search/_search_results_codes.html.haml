@@ -1,13 +1,15 @@
-- if codes.empty?
+- if @mdcs.empty? && @adrgs.empty? && @drgs.empty?
   .row
     .col-sm-12
       .alert.alert-warning{ role: 'alert'}= t('no_search_results')
-
-- codes.with_details.each do |code, details|
-  %article.row{ id: 'code_' + code.code }
-    %strong.col-sm-1= raw highlight_text(code.code_display, details, :code)
-    .col-sm-11
-      = raw  highlight_code(code.text(locale), details, locale)
-      .pull-right
-        %button.btn.codeSelection{ type: "button", title: t('take_over_code'), 'data-code': code.code }= t('take_over')
-    %hr
+- else
+  - [@mdcs, @adrgs, @drgs].each do |codes|
+    - codes.with_details.each do |code, details|
+      - next if @exclude_codes.include? code.code
+      %article.row{ id: 'code_' + code.code }
+        %strong.col-sm-1= raw highlight_text(code.code_display, details, :code)
+        .col-sm-11
+          = raw  highlight_code(code.text(locale), details, locale)
+          .pull-right
+            %button.btn.codeSelection{ type: "button", title: t('take_over_code'), 'data-code': code.code }= t('take_over')
+        %hr

@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'csv'
 require 'json'
+require_relative 'code_index_helper'
 
 namespace :db do
   desc "Seed a DRG system. You have to provide a folder containing adrgs.csv, drgs.csv, mdcs.csv and system.json"
@@ -11,13 +12,34 @@ namespace :db do
     system = System.new(system_hash)
     system.save!
 
+    puts 'Loading and linking diagnoses index..'
+    icds = {}
+    CSV.foreach(File.join(args.directory, 'icds.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      icds[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+    end
+    relevant_diagnoses_by_code = read_code_index(File.join(args.directory, 'Index/DgIndex.txt'))
+
+    puts 'Loading and linking procedures index..'
+    chops = {}
+    CSV.foreach(File.join(args.directory, 'chops.csv'), col_sep: ';') do |row|
+      next if row[0] == 'code' # skip header if any
+      chops[row[0].gsub('.', '')] = { text_de: row[2], text_fr: row[3], text_it: row[4]}
+    end
+    relevant_procedures_by_code = read_code_index(File.join(args.directory, 'Index/PrIndex.txt'))
+    relevant_codes_texts = combine_indices(icds, chops, relevant_diagnoses_by_code, relevant_procedures_by_code)
+
     puts 'Loading MDCs..'
     Mdc.create!({code: 'ALL', version: system.version, text_de: 'Alle Fälle', text_fr: 'Tous les cas', text_it: 'Tutti i casi', prefix: '0'})
     CSV.foreach(File.join(args.directory, 'mdcs.csv'), col_sep: ';') do |row|
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of MDC #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5]})
+      rcodes = relevant_codes_texts[row[0]]
+      mdc = Mdc.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], prefix: row[5],
+                         relevant_codes_de: '',
+                         relevant_codes_fr: '',
+                         relevant_codes_it: ''})
       Partition.create!({code: "#{row[5]} O", version: system.version, mdc_id: mdc.id})
       Partition.create!({code: "#{row[5]} M", version: system.version, mdc_id: mdc.id})
       Partition.create!({code: "#{row[5]} A", version: system.version, mdc_id: mdc.id})
@@ -28,7 +50,12 @@ namespace :db do
       next if row[0] == 'code' # skip header if any
       version = row[1]
       puts "Warning: version of ADRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
-      Adrg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4]})
+
+      rcodes = relevant_codes_texts[row[0]]
+      Adrg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4],
+                    relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
+                    relevant_codes_fr: rcodes.nil? ? '' : rcodes[:text_fr],
+                    relevant_codes_it: rcodes.nil? ? '' : rcodes[:text_it]})
     end
 
     puts 'Loading DRGs..'
@@ -38,7 +65,12 @@ namespace :db do
       puts "Warning: version of DRG #{row[0]} is not identical with version of system: #{version} vs. #{system.version}" if system.version != version
       partition_letter = row[5]
       partition_letter = 'O' if partition_letter == 'X'
-      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: partition_letter})
+
+      rcodes = relevant_codes_texts[row[0]]
+      Drg.create!({code: row[0], version: row[1], text_de: row[2], text_fr: row[3], text_it: row[4], partition_letter: partition_letter,
+                   relevant_codes_de: rcodes.nil? ? '' : rcodes[:text_de],
+                   relevant_codes_fr: rcodes.nil? ? '' : rcodes[:text_fr],
+                   relevant_codes_it: rcodes.nil? ? '' : rcodes[:text_it]})
     end
 
     puts 'Link codes..'
@@ -77,15 +109,20 @@ namespace :db do
       end
     end
 
+    puts 'Reindex search index..'
     Mdc.reindex
     Adrg.reindex
     Drg.reindex
   end
 
-  desc 'Seed all data in a certain directory. This includes hospital data and number of cases data.
+  desc 'Seed all data in a certain directory from a certain year. This includes hospital data and number of cases data.
       All files must be encoded using UTF-8. All rows in one  numcase file must have identical version, year and level.'
-  task :seed_numcase_data, [:directory] => :environment do |t, args|
+  task :seed_numcase_data, [:directory, :year] => :environment do |t, args|
     puts "Seed folder #{args.directory}"
+
+    # create pseudo hospital ALL
+    Hospital.create!({year: args.year.to_i, hospital_id: 9999, name: 'Alle stationären Kliniken der Schweiz', street: '', address: '', canton: 'CH'})
+
     Dir.entries(args.directory).sort.each do |file|
       next unless file.downcase.end_with?('csv.utf8')
 
@@ -191,6 +228,12 @@ namespace :db do
       end
     end
 
+    # aggregate all num cases for pseudo hospital ALL
+
+    NumCase.where(year: args.year).group("version").group("level").group("code").sum(:n).each do |key, n|
+      NumCase.create!({hospital_id: 9999, year: args.year, version: key[0], level: key[1], code: key[2], n: n})
+    end
+
     Hospital.reindex
   end
 
@@ -221,8 +264,8 @@ namespace :db do
     Rake::Task['db:seed_drg_version'].reenable
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V5.0/'))
 
-    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'))
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'), '2012')
     Rake::Task['db:seed_numcase_data'].reenable
-    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'))
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
   end
 end

@@ -93,6 +93,9 @@ $( function() {
         $('.lang-selection').each(function() {
             $(this).attr('href', $(this).attr('data') + params);
         });
+        $('.version-selection').each(function() {
+            $(this).attr('value', $(this).data('url') + params);
+        });
     }
 
     /**
@@ -183,7 +186,7 @@ $( function() {
     }
 
     $('#hospital_search').keyup(function(e) {search(e, "#hospitalSearchResults")});
-    $('#codes_search').keyup(function(e) {search(e, "#drgSearchResults")});
+    $('#codes_search').keyup(function(e) {search(e, "#codeSearchResults")});
 
 
     addRemoval();
