@@ -8,8 +8,8 @@ class Adrg < ActiveRecord::Base
   include MultiLanguageText
 
   searchkick word_middle: [:text_de, :text_fr, :text_it],
-             callbacks: false, language: 'german', batch_size: 200
-             #synonyms: -> { CSV.read('data/mesh_2016/synonyms.csv', {col_sep: ';'}) }
+             callbacks: false, language: 'german', batch_size: 50,
+             synonyms: -> { CSV.read('data/mesh_2016/synonyms.csv', {col_sep: ';'}) }
 
   def code_display
     return code
