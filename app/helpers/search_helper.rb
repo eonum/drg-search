@@ -11,7 +11,7 @@ module SearchHelper
 
   def highlight_code(text, detail, locale)
     text_field = ('text_' + locale.to_s + '.word_middle').to_sym
-    return highlight_text(text, detail, text_field) unless detail.nil? || detail[:highlight].nil? || detail[:highlight][text_field].nil?
+    return highlight_text(text, detail, text_field) unless detail.nil? || detail[:highlight].nil? || detail[:highlight][text_field].nil? || !detail[:highlight][text_field].include?('<mark>')
 
     # let's try to highlight a relevant code
     return text if detail.nil?
