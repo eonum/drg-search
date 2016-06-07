@@ -42,16 +42,28 @@ class SearchController < ApplicationController
     @query_codes = params[:term_codes].blank? ? '' : params[:term_codes]
     @query_hospital = params[:term_hospitals].blank? ? '' : params[:term_hospitals]
 
-    json = {}
-    json[:drgs] = @drgs = code_search(Drg, @query_codes)
-    json[:adrgs] = @adrgs = code_search(Adrg, @query_codes)
-    json[:mdcs] = @mdcs = code_search(Mdc, @query_codes)
-    if @drgs.empty? && @adrgs.empty? && @mdcs.empty?
-      json[:drgs] = @drgs = code_search_tolerant(Drg, @query_codes)
-      json[:adrgs] = @adrgs = code_search_tolerant(Adrg, @query_codes)
-      json[:mdcs] = @mdcs = code_search_tolerant(Mdc, @query_codes)
+    if @query_codes.blank? || @query_codes.length < 3
+      @drgs = []
+      @adrgs = []
+      @mdcs = []
+    else
+      @drgs = code_search(Drg, @query_codes)
+      @adrgs = code_search(Adrg, @query_codes)
+      @mdcs = code_search(Mdc, @query_codes)
+      Searchkick.multi_search([@drgs, @adrgs, @mdcs])
+
+      if @drgs.empty? && @adrgs.empty? && @mdcs.empty?
+        @drgs = code_search_tolerant(Drg, @query_codes)
+        @adrgs = code_search_tolerant(Adrg, @query_codes)
+        @mdcs = code_search_tolerant(Mdc, @query_codes)
+        Searchkick.multi_search([@drgs, @adrgs, @mdcs])
+      end
     end
 
+    json = {}
+    json[:drgs] = @drgs
+    json[:adrgs] = @adrgs
+    json[:mdcs] = @mdcs
 
     # remove all 'Z' DRGs already present as ADRG
     adrg_codes = @adrgs.map {|adrg| adrg.code}
@@ -82,22 +94,18 @@ class SearchController < ApplicationController
     end
 
     def code_search model, query
-      return [] if query.blank? || query.length < 3
-      codes = model.search query, where: {version: @system.version},
+      return model.search query, where: {version: @system.version},
                            fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                            limit: @limit, highlight: {tag: '<mark>'},
-                           misspellings: false
-      return codes
+                           misspellings: false, execute: false
     end
 
     def code_search_tolerant model, query
-      return [] if query.blank? || query.length < 3
-      codes = model.search query, where: {version: @system.version},
+      return model.search query, where: {version: @system.version},
                              fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                              operator: 'or',
                              limit: @limit, highlight: {tag: '<mark>'},
-                             misspellings: {below: 1}
-      return codes
+                             misspellings: {below: 1}, execute: false
     end
 
     def hospital_search query
