@@ -138,9 +138,3 @@ sudo apt-get update && sudo apt-get install elasticsearch
 sudo /bin/systemctl enable elasticsearch.service
 sudo service elasticsearch status
 ```
-
-## Testing
-
-* Uses ``RSpec`` instead of ``Test``.
-* ``FactoryGirl`` to create test fixtures and ``DatabaseCleaner`` to reset the database 
-  after each test are provided by the Gemfile.
