@@ -112,13 +112,13 @@ class SearchController < ApplicationController
       return [] if query.blank? || query.length < 3
       hospitals = Hospital.search query, where: {year: @system.base_year},
                                   fields: ['name^2', :street, :address],
-                                  match: :word_middle,
+                                  match: :word_start,
                                   limit: @limit, highlight: {tag: '<mark>'},
-                                  misspellings: {below: 1}
-      if hospitals.empty?
+                                  misspellings: false
+      if query.length > 5 and hospitals.empty?
         hospitals = Hospital.search query, where: {year: @system.base_year},
                                     fields: ['name^2', :street, :address],
-                                    operator: 'or', match: :word_middle,
+                                    operator: 'or', match: :word_start,
                                     limit: @limit, highlight: {tag: '<mark>'}, misspellings: {below: 1}
       end
       return hospitals

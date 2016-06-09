@@ -103,7 +103,7 @@ The following rake tasks handle the import of data and DRG catalogues. Use `rake
 rake db:reseed[directory]                # Empties all tables and executes all tasks to setup the database
 rake db:seed_drg_version[directory]      # Seed a DRG system
 rake db:seed_numcase_data[directory]     # Seed all data in a certain directory
-rake db:truncate                         # Truncate all tables (empties all tables exept from schema_migrations and resets pk sequence)
+rake db:truncate                         # Truncate all tables (empties all tables except schema_migrations and resets pk sequence)
 ```
 
 ### Update and Import Swiss Styleguide (https://github.com/swiss/styleguide)
