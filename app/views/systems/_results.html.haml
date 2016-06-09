@@ -22,6 +22,7 @@
 
   / Tab panes
   .tab-content.tab-border.scrollable
+    %h3= t('comparison_table')
     #tableResults.tab-pane.table-responsive{ class: params['activeTab'] == 'tableLink' ? 'active' : '' }
       %table.table.table-bordered.table-striped.text-right
         %thead.text-left
@@ -60,7 +61,7 @@
         function drawBarChart() {
           var data = new google.visualization.DataTable();
             var columns = #{bar_chart_data[0].to_json};
-            data.addColumn('string', columns[0]);
+            data.addColumn({type: 'string', label: columns[0]});
             for(var i = 1, size = columns.length; i < size ; i++){
                 data.addColumn('number', columns[i]);
             }
@@ -71,7 +72,7 @@
             title: "#{t('comparison_table')}",
             hAxis: { title: "#{t('num_cases')}", titleTextStyle: {color: '#888888' }},
             vAxis: { title: "#{t('hospitals')}", titleTextStyle: {color: '#888888' }},
-            chartArea: { left: '20%', width: '76%' },
+            chartArea: { left: '30%', width: '66%' },
             legend: { position: 'top', maxLines: 4 },
             colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D']
           };
