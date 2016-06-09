@@ -19,3 +19,8 @@ div[class*=col-] {
   margin-right: 10px;
   cursor: pointer;
 }
+
+// Do also display code hierarchy breadcrumb on mobile view.
+#codeHierarchy {
+  display:block;
+}
