@@ -42,6 +42,12 @@ class SearchController < ApplicationController
     @query_codes = params[:term_codes].blank? ? '' : params[:term_codes]
     @query_hospital = params[:term_hospitals].blank? ? '' : params[:term_hospitals]
 
+    if locale.to_s == 'de'
+      @query_codes.gsub!('ue', 'u')
+      @query_codes.gsub!('ae', 'a')
+      @query_codes.gsub('oe', 'o')
+    end
+
     if @query_codes.blank? || @query_codes.length < 3
       @drgs = []
       @adrgs = []
@@ -52,7 +58,7 @@ class SearchController < ApplicationController
       @mdcs = code_search(Mdc, @query_codes)
       Searchkick.multi_search([@drgs, @adrgs, @mdcs])
 
-      if @drgs.empty? && @adrgs.empty? && @mdcs.empty?
+      if @drgs.empty? && @adrgs.empty? && @mdcs.empty? && @query_codes.length > 5
         @drgs = code_search_tolerant(Drg, @query_codes)
         @adrgs = code_search_tolerant(Adrg, @query_codes)
         @mdcs = code_search_tolerant(Mdc, @query_codes)
@@ -118,7 +124,7 @@ class SearchController < ApplicationController
       if query.length > 5 and hospitals.empty?
         hospitals = Hospital.search query, where: {year: @system.base_year},
                                     fields: ['name^2', :street, :address],
-                                    operator: 'or', match: :word_start,
+                                    operator: 'or', match: :word_start,     # maybe remove word_start here
                                     limit: @limit, highlight: {tag: '<mark>'}, misspellings: {below: 1}
       end
       return hospitals
