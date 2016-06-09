@@ -44,13 +44,18 @@
       :javascript
         $( window ).resize(function() {
           google.charts.setOnLoadCallback(drawBarChart);
-          if(drawLineChart != undefined)
+          if(typeof drawLineChart != 'undefined')
             google.charts.setOnLoadCallback(drawLineChart);
         });
         $('#barChartLink').on('shown.bs.tab', function (e) {
           google.charts.setOnLoadCallback(drawBarChart);
         });
+        // workaround for mobile devices. shown.bs.tab does not work properly on mobile devices.
+        $('#barChartLink').on('click', function (e) {
+          setTimeout(function() {google.charts.setOnLoadCallback(drawBarChart);}, 500);
+        });
         google.charts.setOnLoadCallback(drawBarChart);
+
 
         function drawBarChart() {
           var data = new google.visualization.DataTable();
@@ -85,6 +90,10 @@
         :javascript
           $('#timeSeriesLink').on('shown.bs.tab', function (e) {
             google.charts.setOnLoadCallback(drawLineChart);
+          });
+          // workaround for mobile devices. shown.bs.tab does not work properly on mobile devices.
+          $('#timeSeriesLink').on('click', function (e) {
+            setTimeout(function() {google.charts.setOnLoadCallback(drawLineChart);}, 500);
           });
           if(drawLineChart != undefined)
             google.charts.setOnLoadCallback(drawLineChart);
