@@ -268,4 +268,31 @@ namespace :db do
     Rake::Task['db:seed_numcase_data'].reenable
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
   end
+
+  desc 'Deletes unnecessary synonyms from synonyms file.'
+  task :reduce_synonyms, [:directory] => :environment do |t, args|
+    file_name = File.join(args.directory, 'mesh_2016/synonyms.csv')
+    csv_contents = CSV.read(file_name, col_sep: ';')
+    count = `wc -l "#{file_name}"`.to_i  +  1
+    puts count
+    pg = ProgressBar.create(total: count, title: "Deleting unnecessary synonyms...")
+    csv_contents.each do |row|
+      row.each do |item|
+        pg.increment
+        [Adrg, Drg, Mdc].each do |model|
+          puts "."
+          ['de', 'fr', 'it'].each do |locale|
+            result = model.search item,
+                         fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
+                         limit: @limit, highlight: {tag: '<mark>'},
+                         misspellings: false, execute: false
+            if result.length == 0
+              # TODO
+            end
+          end
+        end
+      end
+    end
+    pg.finish
+  end
 end
