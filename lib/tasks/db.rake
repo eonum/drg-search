@@ -274,23 +274,25 @@ namespace :db do
     file_name = File.join(args.directory, 'mesh_2016/synonyms.csv')
     csv_contents = CSV.read(file_name, col_sep: ';')
     count = `wc -l "#{file_name}"`.to_i  +  1
-    puts count
     pg = ProgressBar.create(total: count, title: "Deleting unnecessary synonyms...")
     csv_contents.each do |row|
-      row.each do |item|
+      row.delete_if do |item|
         pg.increment
         [Adrg, Drg, Mdc].each do |model|
-          puts "."
-          ['de', 'fr', 'it'].each do |locale|
+          ['de'].each do |locale| # at the moment ['de'] is enough because the synonyms list only contains german synonyms
             result = model.search item,
                          fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                          limit: @limit, highlight: {tag: '<mark>'},
                          misspellings: false, execute: false
-            if result.length == 0
-              # TODO
-            end
+            result.length == 0
           end
         end
+      end
+    end
+
+    CSV.open(File.join(args.directory, 'mesh_2016/synonyms_reduced.csv',), "w", col_sep: ';') do |csv|
+      csv_contents.each do |row|
+        csv << row
       end
     end
     pg.finish
