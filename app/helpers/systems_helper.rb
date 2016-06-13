@@ -15,7 +15,9 @@ module SystemsHelper
     identifiers = [I18n.t('hospitals')] + codes.map{|code| code.code_display_long }
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
-      data << [h.name] + codes.map {|code| numcase_number ncs[code.code] }
+      a = [h.name]
+      codes.each {|code|  a << numcase_number(ncs[code.code]); a << ncs[code.code].n.to_s }
+      data << a
     end
     [identifiers, data]
   end
