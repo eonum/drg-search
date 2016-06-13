@@ -269,20 +269,19 @@ namespace :db do
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
   end
 
-  desc 'Deletes unnecessary synonyms from synonyms file.'
+  desc 'Reads synonyms.csv and writes relevant synonyms to synonyms_reduced.csv.'
   task :reduce_synonyms, [:directory] => :environment do |t, args|
     Searchkick.timeout = 20
 
     file_name = File.join(args.directory, 'mesh_2016/synonyms.csv')
     csv_contents = CSV.read(file_name, col_sep: ';')
     count = csv_contents.length
-    pg = ProgressBar.create(total: count, title: "Deleting unnecessary synonyms...")
+    pg = ProgressBar.create(total: count, title: "Outputting relevant synonyms...")
 
     CSV.open(File.join(args.directory, 'mesh_2016/synonyms_reduced.csv',), "w", col_sep: ';') do |csv|
     csv_contents.each do |row|
         pg.increment
         found = false
-        puts "Analysing #{row}"
         row.each do |item|
           [Adrg, Drg, Mdc].each do |model|
             ['de'].each do |locale| # at the moment ['de'] is enough because the synonyms list only contains german synonyms
@@ -290,16 +289,13 @@ namespace :db do
                            fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                            limit: 1, highlight: {tag: '<mark>'},
                            misspellings: {edit_distance: 1}, execute: false
-              #puts "results length #{result.length} ... #{result}"
               found = (found or result.length > 0)
             end
           end
         end
         if found
-          puts "Added  #{row}"
           csv << row
         else
-          puts "Deleted #{row}"
         end
      end
     end
