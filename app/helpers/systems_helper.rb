@@ -52,7 +52,7 @@ module SystemsHelper
   # get the number from a NumCase
   # anonymize if lower than 5
   def numcase_number numcase
-    return Float::NAN if numcase.nil?
+    return 0 if numcase.nil?
     return 0 if numcase.n < 5
     return numcase.n
   end
@@ -60,7 +60,7 @@ module SystemsHelper
   # format the number. handle NaN and anonymized numbers
   def numcase_display numcase
     number = numcase_number numcase
-    return I18n.t('no_value') if number.to_f.nan?
+    return '< 5' if number.to_f.nan?
     return '< 5' if number < 5
     return number.to_s
   end
