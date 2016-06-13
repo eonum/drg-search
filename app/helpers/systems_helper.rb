@@ -16,7 +16,7 @@ module SystemsHelper
     hospitals.each do |h|
       ncs = num_cases[h.hospital_id]
       a = [h.name]
-      codes.each {|code|  a << numcase_number(ncs[code.code]); a << ncs[code.code].n.to_s }
+      codes.each {|code|  a << numcase_number(ncs[code.code]); a << numcase_display(ncs[code.code]) }
       data << a
     end
     [identifiers, data]
