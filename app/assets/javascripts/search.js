@@ -199,4 +199,10 @@ $( function() {
     // trigger a hospital search if the search field for hospitals has an initial value on page load.
     if($('#hospital_search').val() != '')
         $('#hospital_search').trigger( "keyup" );
+
+    $('#deleteAllButton').on('click', function(e) {
+        $('#hospitals').val('');
+        $('#codes').val('');
+        updateComparison();
+    })
 });

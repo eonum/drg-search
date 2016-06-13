@@ -20,6 +20,9 @@
       = text_field_tag 'hospitals', @hospitals.map(&:id).join(',')
       = text_field_tag 'codes', @codes.map(&:code).join(',')
   .row
+    .col-sm-3{ style: 'margin-top: 12px;'}
+      %button#deleteAllButton.btn{ type: 'button' }= t('delete_all')
+  .row
     .col-sm-12
       #comparison-resultsbox= render 'results'
 
