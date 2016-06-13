@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530134437) do
+ActiveRecord::Schema.define(version: 20160613085819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160530134437) do
     t.text   "relevant_codes_de"
     t.text   "relevant_codes_fr"
     t.text   "relevant_codes_it"
+    t.string "code_search"
   end
 
   create_table "num_cases", force: :cascade do |t|

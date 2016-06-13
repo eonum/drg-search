@@ -251,6 +251,16 @@ namespace :db do
     end
   end
 
+  desc 'Store the code_display property of all MDCs in the database. Hence we can search for MDCs'
+  task :save_code_display => :environment do
+    ActiveRecord::Base.connection_pool.with_connection do |conn|
+      Mdc.all.each do |mdc|
+        mdc.code_search = mdc.code_display + ' ' + mdc.code.gsub('0', '')
+        mdc.save!
+      end
+    end
+  end
+
   desc 'Empties all tables and executes all tasks to setup the database.'
   task :reseed, [:directory] => :environment do |t, args|
     Rake::Task['db:truncate'].invoke()
@@ -267,5 +277,6 @@ namespace :db do
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'), '2012')
     Rake::Task['db:seed_numcase_data'].reenable
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
+    Rake::Task['db:save_code_display'] .invoke()
   end
 end

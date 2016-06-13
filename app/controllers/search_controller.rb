@@ -53,15 +53,15 @@ class SearchController < ApplicationController
       @adrgs = []
       @mdcs = []
     else
-      @drgs = code_search(Drg, @query_codes)
-      @adrgs = code_search(Adrg, @query_codes)
-      @mdcs = code_search(Mdc, @query_codes)
+      @drgs = code_search(Drg, @query_codes, 'code')
+      @adrgs = code_search(Adrg, @query_codes, 'code')
+      @mdcs = code_search(Mdc, @query_codes, 'code_search')
       Searchkick.multi_search([@drgs, @adrgs, @mdcs])
 
       if @drgs.empty? && @adrgs.empty? && @mdcs.empty? && @query_codes.length > 5
-        @drgs = code_search_tolerant(Drg, @query_codes)
-        @adrgs = code_search_tolerant(Adrg, @query_codes)
-        @mdcs = code_search_tolerant(Mdc, @query_codes)
+        @drgs = code_search_tolerant(Drg, @query_codes, 'code')
+        @adrgs = code_search_tolerant(Adrg, @query_codes, 'code')
+        @mdcs = code_search_tolerant(Mdc, @query_codes, 'code_search')
         Searchkick.multi_search([@drgs, @adrgs, @mdcs])
       end
     end
@@ -99,16 +99,16 @@ class SearchController < ApplicationController
       return locale
     end
 
-    def code_search model, query
+    def code_search model, query, code_field
       return model.search query, where: {version: @system.version},
-                           fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
+                           fields: [code_field + '^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                            limit: @limit, highlight: {tag: '<mark>'},
                            misspellings: false, execute: false
     end
 
-    def code_search_tolerant model, query
+    def code_search_tolerant model, query, code_field
       return model.search query, where: {version: @system.version},
-                             fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
+                             fields: [code_field + '^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
                              operator: 'or',
                              limit: @limit, highlight: {tag: '<mark>'},
                              misspellings: {below: 1}, execute: false
