@@ -9,6 +9,8 @@
 
 .alreadySelected {
   color: #b2b2b2;
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 #search-results mark {

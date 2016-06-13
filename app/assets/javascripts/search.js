@@ -114,6 +114,12 @@ $( function() {
                 $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
             });
         setURL();
+
+        /* first reenable all. */
+        $('.searchResultEntry').removeClass('alreadySelected');
+        $('.searchResultEntry').find( ".btn" ).prop("disabled",false);
+        /* then disable already selected. */
+        disableAlreadySelected();
     }
 
     var assembleArray = function(item, list){
@@ -133,8 +139,7 @@ $( function() {
         var hospitals = $('#hospitals').val().split(',');
         $('#hospitals').val(assembleArray(hospital_id, hospitals));
         updateComparison();
-        $(this).hide();
-        $('#hospital_' + hospital_id).addClass('alreadySelected');
+        disableButton($('#hospital_' + hospital_id));
     }
 
     var codeSelection = function() {
@@ -142,21 +147,23 @@ $( function() {
         var codes = $('#codes').val().split(',');
         $('#codes').val(assembleArray(code, codes));
         updateComparison();
-        $(this).hide();
-        $('#code_' + code).addClass('alreadySelected');
+        disableButton($('#code_' + code));
     }
 
     var disableAlreadySelected = function(){
         var codes = $('#codes').val().split(',');
         var hospitals = $('#hospitals').val().split(',');
         for (var i = 0; i < codes.length; i++) {
-            $('#code_' + codes[i]).addClass('alreadySelected');
-            $('#code_' + codes[i]).find( ".btn" ).remove();
+            disableButton($('#code_' + codes[i]))
         }
         for (var i = 0; i < hospitals.length; i++) {
-            $('#hospital_' + hospitals[i]).addClass('alreadySelected');
-            $('#hospital_' + hospitals[i]).find( ".btn" ).remove();
+           disableButton($('#hospital_' + hospitals[i]));
         }
+    }
+
+    var disableButton = function(entry) {
+        entry.addClass('alreadySelected');
+        entry.find( ".btn" ).prop("disabled",true);
     }
 
     var search = function(e, activeTab) {

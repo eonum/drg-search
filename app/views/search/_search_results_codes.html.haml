@@ -6,7 +6,7 @@
   - [@mdcs, @adrgs, @drgs].each do |codes|
     - codes.with_details.each do |code, details|
       - next if @exclude_codes.include? code.code
-      %article.row{ id: 'code_' + code.code }
+      %article.row.searchResultEntry{ id: 'code_' + code.code }
         %strong.col-sm-1= raw highlight_text(code.code_display, details, :code)
         .col-sm-11
           = raw  highlight_code(code.text(locale), details, locale)
