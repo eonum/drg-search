@@ -277,28 +277,31 @@ namespace :db do
     csv_contents = CSV.read(file_name, col_sep: ';')
     count = csv_contents.length
     pg = ProgressBar.create(total: count, title: "Deleting unnecessary synonyms...")
-    csv_contents.delete_if do |row|
-      pg.increment
-      found = false
-      puts "Analysing #{row}"
-      row.each do |item|
-        [Adrg, Drg, Mdc].each do |model|
-          ['de'].each do |locale| # at the moment ['de'] is enough because the synonyms list only contains german synonyms
-            result = model.search item,
-                         fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
-                         limit: @limit, highlight: {tag: '<mark>'},
-                         misspellings: false, execute: false
-            found = found or result.length == 0
-          end
-        end
-      end
-      found
-    end
 
     CSV.open(File.join(args.directory, 'mesh_2016/synonyms_reduced.csv',), "w", col_sep: ';') do |csv|
-      csv_contents.each do |row|
-        csv << row
-      end
+    csv_contents.each do |row|
+        pg.increment
+        found = false
+        puts "Analysing #{row}"
+        row.each do |item|
+          [Adrg, Drg, Mdc].each do |model|
+            ['de'].each do |locale| # at the moment ['de'] is enough because the synonyms list only contains german synonyms
+              result = model.search item,
+                           fields: ['code^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
+                           limit: 1, highlight: {tag: '<mark>'},
+                           misspellings: {edit_distance: 1}, execute: false
+              #puts "results length #{result.length} ... #{result}"
+              found = (found or result.length > 0)
+            end
+          end
+        end
+        if found
+          puts "Added  #{row}"
+          csv << row
+        else
+          puts "Deleted #{row}"
+        end
+     end
     end
     pg.finish
   end
