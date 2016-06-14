@@ -28,6 +28,7 @@ de:
   edi: EDI
   edi_long: "Eidgenössisches Departement des Innern EDI"
   legal: "Rechtliches"
+  legal_link: "https://www.admin.ch/gov/de/start/rechtliches.html"
   drg_version: "DRG Version"
   system_selection: "Auswahl Anwendungsjahr / SwissDRG Version"
   hospital_search: "Spitalsuche"
