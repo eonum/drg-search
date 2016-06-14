@@ -60,6 +60,7 @@ module SystemsHelper
   # format the number. handle NaN and anonymized numbers
   def numcase_display numcase
     number = numcase_number numcase
+    return '0' if number == 0
     return '< 5' if number.to_f.nan?
     return '< 5' if number < 5
     return number.to_s
