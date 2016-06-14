@@ -9,7 +9,7 @@ class Partition < ActiveRecord::Base
   end
 
   def code_display
-    return self.mdc.code_display + ' ' + I18n.t('partition') + ' ' + I18n.t('partition_' + self.partition_letter)
+    return self.mdc.code_display + ' ' + I18n.t('partition_' + self.partition_letter)
   end
 
   def code_display_long
