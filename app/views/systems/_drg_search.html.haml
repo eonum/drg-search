@@ -1,2 +1,2 @@
-= label 'codes_search', t('number_search')
+%label{ for: 'codes_search' }= t('number_search')
 = text_field_tag('codes_search', '', { class: 'form-control', placeholder: t('number_search_placeholder'), 'data-search-url': system_search_all_path(@system) })
