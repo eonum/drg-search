@@ -117,21 +117,25 @@
             }
 
             data.addRows(#{time_series[1].to_json});
+            var numHospitals = #{time_series[2]};
+            var numCodes = #{time_series[3]};
+            var lineStyles = {};
+            var line = 0;
+            var colorPalette = ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D'];
+            var colors = [];
+
+            for(var i = 0; i < numHospitals; i++){
+              for(var j = 0; j < numCodes; j++){
+                lineStyles[line] = { lineDashStyle: [(i+1) * 2, i * 2], lineWidth: i + 1 }
+                colors.push(colorPalette[j % colorPalette.length]);
+                line++;
+              }
+            }
 
 
             var options = {
-              //colors: ['#DC0018', '#006699', '#66AFE9', '#FFFAB2', '#D8E8EF', '#757575', '#F7001D'],
-              series: {
-                0: { lineDashStyle: [1, 1] },
-                1: { lineDashStyle: [2, 2] },
-                2: { lineDashStyle: [4, 4] },
-                3: { lineDashStyle: [5, 1, 3] },
-                4: { lineDashStyle: [4, 1] },
-                5: { lineDashStyle: [10, 2] },
-                6: { lineDashStyle: [14, 2, 7, 2] },
-                7: { lineDashStyle: [14, 2, 2, 7] },
-                8: { lineDashStyle: [2, 2, 20, 2, 20, 2] }
-              },
+              colors: colors,
+              series: lineStyles,
               title: "#{t('time_series_chart_title')}",
               pointSize: 6,
               chartArea: {  height: "60%" },
