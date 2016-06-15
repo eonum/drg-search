@@ -46,7 +46,7 @@ module SystemsHelper
       end
       data << row
     end
-    [identifiers, data]
+    [identifiers, data, hospitals.length, @codes.length]
   end
 
   # get the number from a NumCase
