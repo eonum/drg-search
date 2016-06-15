@@ -195,6 +195,9 @@ $( function() {
     $('#hospital_search').keyup(function(e) {search(e, "#hospitalSearchResults")});
     $('#codes_search').keyup(function(e) {search(e, "#codeSearchResults")});
 
+    $('#hospital_search').focus(function(e) {search(e, "#hospitalSearchResults")});
+    $('#codes_search').focus(function(e) {search(e, "#codeSearchResults")});
+
 
     addRemoval();
     addSorting();
