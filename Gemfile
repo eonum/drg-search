@@ -53,3 +53,6 @@ gem 'font-awesome-rails'
 
 # search with elasticsearch
 gem 'searchkick'
+
+# ahoy analytics
+gem 'ahoy_matey'
