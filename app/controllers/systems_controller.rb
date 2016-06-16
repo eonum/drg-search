@@ -1,5 +1,6 @@
 class SystemsController < ApplicationController
   before_action :set_variables, :except => ['index']
+  after_filter :track_action
 
   def show
   end
@@ -12,6 +13,13 @@ class SystemsController < ApplicationController
     @system = System.order(version: :desc).first()
     redirect_to system_path(@system)
   end
+
+
+  protected
+    def track_action
+      ahoy.track "Processed #{controller_name}##{action_name}", request.filtered_parameters
+      ahoy.track_visit
+    end
 
   private
     def set_variables
