@@ -87,13 +87,17 @@ Restart the server
 
 Test with database creation
 
-``rake db:create``
-``rake db:migrate``
+```
+rake db:create
+rake db:migrate
+```
 
 and if you want to create a production database:
 
-``RAILS_ENV=production rake db:create``
-``RAILS_ENV=production rake db:migrate``
+```
+RAILS_ENV=production rake db:create
+RAILS_ENV=production rake db:migrate
+```
 
 
 Further information can be found here: https://help.ubuntu.com/community/PostgreSQL
