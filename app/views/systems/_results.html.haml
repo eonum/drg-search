@@ -11,10 +11,10 @@
   / Nav tabs
   %ul.nav.nav-tabs#resultsTabs
     %li{ class: params['activeTab'] == 'tableLink' ? 'active' : '' }
-      %a#tableLink{ href: '#tableResults', 'data-toggle': 'tab'}
+      %a#tableLink{ href: '#tableResults', 'data-toggle': 'tab', title: t('num_cases_tabular')}
         = fa_icon('table')
     %li{ class: params['activeTab'].blank? || params['activeTab'] == 'barChartLink' ? 'active' : '' }
-      %a#barChartLink{ href: '#barChartResults', 'data-toggle': 'tab'}
+      %a#barChartLink{ href: '#barChartResults', 'data-toggle': 'tab', title: t('num_cases_bar')}
         = fa_icon('bar-chart-o')
     %li{ class: params['activeTab'] == 'timeSeriesLink' ? 'active' : '' }
       %a#timeSeriesLink{ href: '#timeSeriesResults', 'data-toggle': 'tab', title: t('time_series_chart_title')}

@@ -75,3 +75,5 @@ de:
   back: "Zurück"
   delete_all: "Auswahl löschen"
   bern: Bern
+  num_cases_bar: "Visualisierung der Fallzahlen des aktuellsten Jahres"
+  num_cases_tabular: "Tabelarische Ansicht der Fallzahlen des aktuellsten Jahres"
