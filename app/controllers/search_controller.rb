@@ -2,7 +2,6 @@ class SearchController < ApplicationController
   include SearchHelper
 
   before_action :set_variables
-  after_filter :track_action
 
   # JSON / HTML API for hospital search
   # parameters:
@@ -84,11 +83,6 @@ class SearchController < ApplicationController
       format.html { render partial: 'systems/search_results' }
     end
   end
-
-  protected
-    def track_action
-      ahoy.track "#{controller_name}##{action_name}", request.filtered_parameters
-    end
 
   private
     def set_variables
