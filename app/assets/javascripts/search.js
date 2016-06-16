@@ -213,6 +213,9 @@ $( function() {
     $('#deleteAllButton').on('click', function(e) {
         $('#hospitals').val('');
         $('#codes').val('');
+        $('#hospital_search').val('');
+        $('#codes_search').val('');
+        search(e, '#hospitalSearchResults')
         updateComparison();
     })
 });
