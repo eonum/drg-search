@@ -4,8 +4,8 @@ class Hospital < ActiveRecord::Base
   has_many :num_cases
 
   searchkick word_middle: [:name, :address], language: 'german', callbacks: false,
-             synonyms: [['freiburg', 'fribourg'], ['centre hospitalier', 'spitalzentrum'], ['Biel', 'Bienne'], ['neuenburg', 'Neuchâtel', 'Neuchatel'],
-             ['Hôpital de l’île', 'Inselspital'], ['Genf', 'Geneve', 'Genève'], ['Bern', 'Berne', 'Berna'], ['Geburtshaus', 'Maison de naissance']]
+             synonyms: [['freiburg', 'fribourg'], ['centre hospitalier', 'spitalzentrum'], ['biel', 'bienne'], ['neuenburg', 'neuchâtel', 'neuchatel'],
+             ['hôpital de l\'ile', 'inselspital', 'ile'], ['genf', 'geneve', 'genève'], ['bern', 'berne', 'berna'], ['geburtshaus', 'maison de naissance']]
   # hospital_id is only unique within one year
   # id is unique over all hospital objects
 end
