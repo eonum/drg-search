@@ -88,8 +88,8 @@ $( function() {
         var params = '?codes=' + codes + '&hospitals=' + hospitals;
         params += '&activeTab=' + getActiveTab() + '&hospitalSearch=' + searchTermHospital;
 
-        if("replaceState" in window.history)
-            window.history.replaceState({}, 'DRG comparison', path + params);
+        if("pushState" in window.history)
+            window.history.pushState({state: params}, 'DRG comparison', path + params);
         $('.lang-selection').each(function() {
             $(this).attr('href', $(this).attr('data') + params);
         });
@@ -218,4 +218,10 @@ $( function() {
         search(e, '#hospitalSearchResults')
         updateComparison();
     })
+
+    $(window).bind("pageshow", function(event) {
+        if (event.originalEvent.persisted) {
+            window.location.reload() ;
+        }
+    });
 });
