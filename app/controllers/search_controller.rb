@@ -3,36 +3,6 @@ class SearchController < ApplicationController
 
   before_action :set_variables
 
-  # JSON / HTML API for hospital search
-  # parameters:
-  # term: search term
-  # limit: maximum number of items
-  def hospitals
-    @hospitals = hospital_search @query
-
-    respond_to do |format|
-      format.json { render json: @hospitals.map { |hospital| {:id => hospital.id.to_s, :code => hospital.hospital_id, :text => hospital.name}}}
-      format.html { render partial: 'search_results_hospitals' }
-    end
-  end
-
-  # JSON / HTML API for code search
-  # parameters:
-  # term: search term
-  # limit: maximum number of items
-  # level: one of 'drg', 'adrg', 'mdc'
-  def codes
-    model = {'drg' => Drg, 'mdc' => Mdc, 'adrg' => Adrg}[params[:level]]
-    model = Drg if model.nil?
-
-    @codes = code_search model, @query
-
-    respond_to do |format|
-      format.json { render json: @codes.map { |code| {:id => code.id.to_s, :code => code.code, :text => code.text(@locale)}}}
-      format.html { render partial: 'search_results_codes', locals: {codes: @codes} }
-    end
-  end
-
   # JSON / HTML API for codes and hospital search
   # parameters:
   # term_hospital: search term for hospitals
