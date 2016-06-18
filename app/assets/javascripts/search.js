@@ -154,7 +154,7 @@ $( function() {
         var codes = $('#codes').val().split(',');
         var hospitals = $('#hospitals').val().split(',');
         for (var i = 0; i < codes.length; i++) {
-            disableButton($('#code_' + codes[i]))
+            disableButton($('#code_' + codes[i]));
         }
         for (var i = 0; i < hospitals.length; i++) {
            disableButton($('#hospital_' + hospitals[i]));
@@ -163,7 +163,10 @@ $( function() {
 
     var disableButton = function(entry) {
         entry.addClass('alreadySelected');
-        entry.find( ".btn" ).prop("disabled",true);
+        entry.prop('title', I18n.t('already_in_selection'));
+        var button =  entry.find( ".btn" );
+        button.prop("disabled",true);
+        button.prop('title', I18n.t('already_in_selection'));
     }
 
     var search = function(e, activeTab) {

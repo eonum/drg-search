@@ -24,8 +24,8 @@ de:
   language_selection: "Sprachauswahl"
   foph: "BAG"
   foph_long: "Bundesamt für Gesundheit"
-  admin_ch: Bundesverwaltung
-  edi: EDI
+  admin_ch: "Bundesverwaltung"
+  edi: "EDI"
   edi_long: "Eidgenössisches Departement des Innern EDI"
   legal: "Rechtliches"
   legal_link: "https://www.admin.ch/gov/de/start/rechtliches.html"
@@ -77,3 +77,4 @@ de:
   bern: Bern
   num_cases_bar: "Visualisierung der Fallzahlen des aktuellsten Jahres"
   num_cases_tabular: "Tabelarische Ansicht der Fallzahlen des aktuellsten Jahres"
+  already_in_selection: "Dieses Element wurde bereits in die Auswahl übernommen."
