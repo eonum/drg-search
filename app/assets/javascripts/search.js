@@ -141,6 +141,9 @@ $( function() {
         $('#hospitals').val(assembleArray(hospital_id, hospitals));
         updateComparison();
         disableButton($('#hospital_' + hospital_id));
+        var hospital_name = String($(this).data('hospital-display'));
+        $('#takeoverItem').html(hospital_name);
+        $('#hintSuccess').prop('hidden', false);
     }
 
     var codeSelection = function() {
@@ -149,6 +152,9 @@ $( function() {
         $('#codes').val(assembleArray(code, codes));
         updateComparison();
         disableButton($('#code_' + code));
+        var codeDisplay = String($(this).data('code-display'));
+        $('#takeoverItem').html(codeDisplay);
+        $('#hintSuccess').prop('hidden', false);
     }
 
     var disableAlreadySelected = function(){

@@ -11,5 +11,5 @@
         .col-sm-11
           = raw  highlight_code(code.text(locale), details, locale)
           .pull-right
-            %button.btn.codeSelection{ type: "button", title: t('take_over_code'), 'data-code': code.code }= t('take_over')
+            %button.btn.codeSelection{ type: "button", title: t('take_over_code'), 'data-code': code.code, 'data-code-display': code.code_display_long }= t('take_over')
         %hr

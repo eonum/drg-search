@@ -11,7 +11,7 @@
     .col-sm-6
       %article.searchResultEntry{ id: 'hospital_' + hospital.id.to_s }
         .pull-right
-          %button.btn.hospitalselection{ type: "button", title: t('take_over_hospital'), 'data-hospital-id': hospital.id }= t('take_over')
+          %button.btn.hospitalselection{ type: "button", title: t('take_over_hospital'), 'data-hospital-id': hospital.id, 'data-hospital-display': hospital.name }= t('take_over')
         %strong= raw highlight_hospital(hospital.name, details, :name)
         .small
           = raw highlight_text(hospital.street, details, :street)
