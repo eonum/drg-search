@@ -34,7 +34,7 @@ de:
   hospital_search: "Spitalsuche"
   hospital_search_placeholder: "Name oder Adresse der Klinik"
   number_search: "Suche nach Diagnosengruppe"
-  number_search_placeholder: "Krankheitsbild, Diagnose oder Behandlung"
+  number_search_placeholder: "Krankheitsbild, Diagnose oder Behandlung, MDC- oder DRG- Name"
   search_results: "Suchresultate"
   hospitals: "Spitäler"
   diagnosis_group: "Diagnosengruppe"

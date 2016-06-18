@@ -118,6 +118,7 @@ $( function() {
         /* first reenable all. */
         $('.searchResultEntry').removeClass('alreadySelected');
         $('.searchResultEntry').find( ".btn" ).prop("disabled",false);
+        $('.searchResultEntry').find( ".btn" ).prop('title', I18n.t('take_over'));
         /* then disable already selected. */
         disableAlreadySelected();
     }
@@ -163,7 +164,6 @@ $( function() {
 
     var disableButton = function(entry) {
         entry.addClass('alreadySelected');
-        entry.prop('title', I18n.t('already_in_selection'));
         var button =  entry.find( ".btn" );
         button.prop("disabled",true);
         button.prop('title', I18n.t('already_in_selection'));
