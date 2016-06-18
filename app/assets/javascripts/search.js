@@ -20,6 +20,7 @@ $( function() {
             codes.splice(index, 1);
         }
         $(element).val(codes.join(','));
+        $('#hintSuccess').prop('hidden', true);
         updateComparison();
     }
 
