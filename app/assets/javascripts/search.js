@@ -144,6 +144,9 @@ $( function() {
         var hospital_name = String($(this).data('hospital-display'));
         $('#takeoverItem').html(hospital_name);
         $('#hintSuccess').prop('hidden', false);
+        $('html, body').animate({
+            scrollTop: $("#hintSuccess").offset().top
+        }, 700);
     }
 
     var codeSelection = function() {
@@ -155,6 +158,9 @@ $( function() {
         var codeDisplay = String($(this).data('code-display'));
         $('#takeoverItem').html(codeDisplay);
         $('#hintSuccess').prop('hidden', false);
+        $('html, body').animate({
+            scrollTop: $("#hintSuccess").offset().top
+        }, 700);
     }
 
     var disableAlreadySelected = function(){

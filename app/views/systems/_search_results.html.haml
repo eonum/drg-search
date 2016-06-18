@@ -1,9 +1,4 @@
 %h3= t('search_results')
-.row#hintSuccess{ style: 'margin-top: 10px', hidden: true}
-  .col-sm-12
-    .alert.alert-success{ role: 'alert'}
-      %span.sr-only
-      = raw t('successfull_take_over')
 
 - if @hospitals.nil? || @drgs.nil? || @mdcs.nil? || @adrgs.nil?
   = t('please_search')
@@ -22,3 +17,9 @@
 
     #codeSearchResults.tab-pane
       = render partial: 'search/search_results_codes'
+
+.row#hintSuccess{ style: 'margin-top: 10px', hidden: true}
+  .col-sm-12
+    .alert.alert-success{ role: 'alert'}
+      %span.sr-only
+      = raw t('successfull_take_over')
