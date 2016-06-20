@@ -1,7 +1,8 @@
 - if @hospitals.empty?
   .row
     .col-sm-12
-      .alert.alert-warning{ role: 'alert'}= t('no_search_results')
+      - if @query_hospital.length > 1
+        .alert.alert-warning{ role: 'alert'}= t('no_search_results')
 - else
   - i = 0
   - @hospitals.with_details.each do |hospital, details|

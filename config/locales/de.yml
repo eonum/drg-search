@@ -57,7 +57,7 @@ de:
   data_from: "Kennzahlen berechnet mit Daten aus dem Jahr"
   additional_data_plural: "und zusätzlichen Vergleichsdaten aus den Jahren"
   additional_data_singular: "und zusätzlichen Vergleichsdaten aus dem Jahr"
-  pick_at_least_one: "Wählen Sie mindestens ein Spital und eine Fallzahl zum Vergleich."
+  pick_at_least_one: "Wählen Sie mindestens ein Spital und eine Diagnosengruppe zum Vergleich."
   remove_from_comparison: "Aus dem Vergleich entfernen"
   selection: "Auswahl"
   time_series_chart_title: "Zeitlicher Verlauf der Fallzahlen"
