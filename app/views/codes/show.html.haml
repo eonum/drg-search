@@ -11,8 +11,9 @@
           %th= t('num_cases')
       %tbody
         - @num_cases.each do |nc|
+          - next if nc.hospital.nil?
           %tr
             %td
-              = nc.hospital.nil? ? 'error' : nc.hospital.name
+              = nc.hospital.name
             %td
               = numcase_display nc
