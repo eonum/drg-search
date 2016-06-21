@@ -11,6 +11,8 @@ if (!Array.prototype.indexOf) {
     }
 }
 
+var setURL = null;
+
 $( function() {
     var deleteItem = function(code, element){
         code = String(code);
@@ -82,7 +84,7 @@ $( function() {
      * and active tab and search term.
      * Hence we can enable a reload of the page.
      */
-    var setURL = function(){
+    setURL = function(){
         var path = purl().data.attr.path;
         if(path.indexOf('system') < 0)
             return;
@@ -231,7 +233,6 @@ $( function() {
     addRemoval();
     addSorting();
     addHierarchicalSelection();
-    setURL();
     // reset URL after active tab change
     $('#resultsTabs li a').on('shown.bs.tab', function (e) { setURL() });
 
