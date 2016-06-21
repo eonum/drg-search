@@ -9,7 +9,7 @@
   .col-sm-7.sortableCodes
     - @codes.each do |code|
       .selection.bordered{ 'data-code': code.code }
-        = link_to(code.code_display, system_codes_path(system_id: @system.id, code: code)) + ' '
+        = link_to(code.code_display, system_codes_path(system_id: @system.id, code: code, level: code.class)) + ' '
         %span.small{style: "color:#757575" }= code.text locale
         %span.pull-right.removeCode{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-code': code.code }= fa_icon('remove')
         %ol#codeHierarchy.breadcrumb{ role: 'navigation' }
