@@ -53,7 +53,7 @@ module SystemsHelper
   # anonymize if lower than 5
   def numcase_number numcase
     return 0 if numcase.nil?
-    return 0 if numcase.n < 5
+    #return 0 if numcase.n < 5
     return numcase.n
   end
 
