@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     resources :systems,  only: ['index', 'show'] do
       get :compare, on: :member
       get 'search/all'
-      resource :hospitals, only: [:show]
-      resource :codes, only: [:show]
+      resources :hospitals, only: [:show]
+      resources :codes, only: [:show]
     end
   end
 end

@@ -3,13 +3,13 @@
   .col-sm-5.sortableHospitals
     - @hospitals.each do |hospital|
       .selection.bordered-well{ 'data-hospital-id': hospital.id }
-        = link_to hospital.name, system_hospitals_path(system_id: @system.id, hospital: hospital, level: 'Drg')
+        = link_to hospital.name, system_hospital_path(@system, hospital, level: 'Drg')
         %span.pull-right.removeHospital{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }= fa_icon('remove')
 
   .col-sm-7.sortableCodes
     - @codes.each do |code|
       .selection.bordered{ 'data-code': code.code }
-        = link_to(code.code_display, system_codes_path(system_id: @system.id, code: code, level: code.class)) + ' '
+        = link_to(code.code_display, system_code_path(@system, code, level: code.class)) + ' '
         %span.small{style: "color:#757575" }= code.text locale
         %span.pull-right.removeCode{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-code': code.code }= fa_icon('remove')
         %ol#codeHierarchy.breadcrumb{ role: 'navigation' }

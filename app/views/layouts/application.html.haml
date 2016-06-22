@@ -56,11 +56,17 @@
             %nav.nav-lang
               %ul
                 %li
-                  %a.lang-selection{"aria-label" => "Deutsch ", :class => I18n.locale == :de ? 'active' : '', :data => "#{url_for( :locale => 'de')}", :href => "#{url_for( :locale => 'de')}?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}", :lang => "de", :title => "Deutsch"} DE
+                  = link_to('DE', params.merge({ locale: :de }),
+                  {"aria-label" => "Deutsch ", :class => I18n.locale == :de ? 'lang-selection active' : 'lang-selection',
+                  :lang => "de", :title => "Deutsch", :data => "#{url_for( :locale => 'de')}"})
                 %li
-                  %a.lang-selection{"aria-label" => "Français ", :class => I18n.locale == :fr ? 'active' : '', :data => "#{url_for( :locale => 'fr')}", :href => "#{url_for( :locale => 'fr')}?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}", :lang => "fr", :title => "Français"} FR
+                  = link_to('FR', params.merge({ locale: :fr }),
+                  {"aria-label" => "Français ", :class => I18n.locale == :fr ? 'lang-selection active' : 'lang-selection',
+                  :lang => "fr", :title => "Français", :data => "#{url_for( :locale => 'fr')}"})
                 %lih
-                  %a.lang-selection{"aria-label" => "Italiano", :class => I18n.locale == :it ? 'active' : '', :data => "#{url_for( :locale => 'it')}", :href => "#{url_for( :locale => 'it')}?codes=#{@codes_url_query}&hospitals=#{@hospitals_url_query}", :lang => "it", :title => "Italiano"} IT
+                  = link_to('IT', params.merge({ locale: :it }),
+                  {"aria-label" => "Italiano ", :class => I18n.locale == :it ? 'lang-selection active' : 'lang-selection',
+                  :lang => "it", :title => "Italiano", :data => "#{url_for( :locale => 'it')}"})
             %h2.sr-only= t('services_navigation')
             %nav.nav-service
               %ul
