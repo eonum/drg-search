@@ -273,7 +273,7 @@ namespace :db do
       end
     end
 
-    NumCase.all.each do |nc|
+    NumCase.find_each do |nc|
       pg.increment
       nc.code_object = codes[nc.level][nc.code + '--' + nc.version]
       nc.save!

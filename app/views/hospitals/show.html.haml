@@ -11,7 +11,7 @@
         - @num_cases.each do |nc|
           %tr
             %td
-              = nc.code_link.code_display
-              .small= nc.code_link.text locale
+              = nc.code_object.code_display
+              .small= nc.code_object.text locale
             %td
               = numcase_display nc
