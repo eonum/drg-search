@@ -273,14 +273,12 @@ namespace :db do
       end
     end
 
-    ActiveRecord::Base.connection_pool.with_connection do |conn|
-      NumCase.all.each do |nc|
-        pg.increment
-        nc.code_object = codes[nc.level][nc.code + '--' + nc.version]
-        nc.save!
-      end
-      pg.finish
+    NumCase.all.each do |nc|
+      pg.increment
+      nc.code_object = codes[nc.level][nc.code + '--' + nc.version]
+      nc.save!
     end
+    pg.finish
   end
 
   desc 'Empties all tables and executes all tasks to setup the database.'
