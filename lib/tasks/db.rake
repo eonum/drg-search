@@ -261,6 +261,19 @@ namespace :db do
     end
   end
 
+  desc 'Link codes to num_cases directly.'
+  task :link_codes_to_num_cases => :environment do
+    pg = ProgressBar.create(total: NumCase.count, title: "Linking codes to num_cases..")
+    ActiveRecord::Base.connection_pool.with_connection do |conn|
+      NumCase.all.each do |nc|
+        pg.increment
+        nc.code_object = nc.code_link
+        nc.save!
+      end
+      pg.finish
+    end
+  end
+
   desc 'Empties all tables and executes all tasks to setup the database.'
   task :reseed, [:directory] => :environment do |t, args|
     Rake::Task['db:truncate'].invoke()
@@ -278,5 +291,6 @@ namespace :db do
     Rake::Task['db:seed_numcase_data'].reenable
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
     Rake::Task['db:save_code_display'] .invoke()
+    Rake::Task['db:link_codes_to_num_cases'].invoke()
   end
 end
