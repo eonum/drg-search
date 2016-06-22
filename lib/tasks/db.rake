@@ -264,10 +264,19 @@ namespace :db do
   desc 'Link codes to num_cases directly.'
   task :link_codes_to_num_cases => :environment do
     pg = ProgressBar.create(total: NumCase.count, title: "Linking codes to num_cases..")
+    codes = {}
+    ['MDC', 'PARTITION', 'ADRG', 'DRG'].each do |level|
+      codes[level] = {}
+      code_class = {'MDC': Mdc, 'PARTITION': Partition, 'ADRG': Adrg, 'DRG': Drg}[level.to_sym]
+      code_class.all.each do |code|
+        codes[level][code.code + '--' + code.version] = code
+      end
+    end
+
     ActiveRecord::Base.connection_pool.with_connection do |conn|
       NumCase.all.each do |nc|
         pg.increment
-        nc.code_object = nc.code_link
+        nc.code_object = codes[nc.level][nc.code + '--' + nc.version]
         nc.save!
       end
       pg.finish
