@@ -1,0 +1,17 @@
+%h2= @hospital.name
+
+.row.table-responsive
+  .col-sm-12
+    %table.table.table-bordered.table-striped.text-right
+      %thead.text-left
+        %tr
+          %th= t('diagnosis_group')
+          %th= t('num_cases')
+      %tbody
+        - @num_cases.each do |nc|
+          %tr
+            %td
+              = nc.code_object.code_display
+              .small= nc.code_object.text locale
+            %td
+              = numcase_display nc

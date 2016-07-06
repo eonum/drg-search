@@ -1,3 +1,6 @@
+:javascript
+  $( function() { setURL(); });
+
 .container{ style: 'margin-top: 20px; padding-right: 3.0em;'}
   .row
     .col-sm-6
@@ -7,8 +10,6 @@
     .col-sm-6{ style: 'margin-top: 22px;'}
       = render 'version_selection'
   .row
-    -#.col-sm-2
-    -#  #version-selectionbox= render 'version_selection'
     .col-sm-6
       #hospital-searchbox= render 'hospital_search'
     .col-sm-6

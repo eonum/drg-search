@@ -1,0 +1,19 @@
+%h2
+  = @code.code_display_long
+  .small= @code.text locale
+
+.row.table-responsive
+  .col-sm-12
+    %table.table.table-bordered.table-striped.text-right
+      %thead.text-left
+        %tr
+          %th= t('hospitals')
+          %th= t('num_cases')
+      %tbody
+        - @num_cases.each do |nc|
+          - next if nc.hospital.nil?
+          %tr
+            %td
+              = nc.hospital.name
+            %td
+              = numcase_display nc
