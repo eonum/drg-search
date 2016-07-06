@@ -24,6 +24,9 @@ fr:
   language_selection: "Choix de la langue"
   foph: "OFSP"
   foph_long: "Office fédéral de la santé publique"
+  foph_department: "Unité de direction Assurance maladie et accidents<br/>
+                    Division Surveillance de l'assurance<br/>
+                    Section Gestion des données et statistique<br/>"
   admin_ch: "Administration fédérale"
   edi: "DFI"
   edi_long: "Département fédéral de l'Intérieur DFI"

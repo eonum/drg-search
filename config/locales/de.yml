@@ -24,6 +24,9 @@ de:
   language_selection: "Sprachauswahl"
   foph: "BAG"
   foph_long: "Bundesamt für Gesundheit"
+  foph_department: "Direktionsbereich Kranken- und Unfallversicherung<br/>
+                    Abteilung Versicherungsaufsicht<br/>
+                    Sektion Datenmanagement und Statistik<br/>"
   admin_ch: "Bundesverwaltung"
   edi: "EDI"
   edi_long: "Eidgenössisches Departement des Innern EDI"

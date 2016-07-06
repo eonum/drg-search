@@ -25,6 +25,9 @@ it:
   language_selection: "Selezione della lingua"
   foph: "UFSP"
   foph_long: "Ufficio federale della sanità pubblica"
+  foph_department: "Unità di direzione assicurazione malattia e infortunio<br/>
+                    Divisione vigilanza delle assicurazioni<br/>
+                    Sezione Gestione dei dati e statistica<br/>"
   admin_ch: "Amministrazione federale"
   edi: "DFI"
   edi_long: "Dipartimento federale dell'interno DFI"
