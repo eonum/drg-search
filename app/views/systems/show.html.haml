@@ -20,8 +20,9 @@
       = text_field_tag 'compareUrl', compare_system_path(@system)
       = text_field_tag 'hospitals', @hospitals.map(&:id).join(',')
       = text_field_tag 'codes', @codes.map(&:code).join(',')
+  %h3= t('selection')
   .row
-    .col-sm-3{ style: 'margin-top: 12px;'}
+    .col-sm-3{ style: 'margin-bottom: 12px;'}
       %button#deleteAllButton.btn{ type: 'button' }= t('delete_all')
   .row
     .col-sm-12
