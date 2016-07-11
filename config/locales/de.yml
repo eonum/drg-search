@@ -84,3 +84,4 @@ de:
   successfull_take_over: "<span id='takeoverItem'></span> wurde erfolgreich in die Auswahl übernommen"
   show_all_hospitals_from_service: "Zeige alle Spitäler, welche diese Leistung anbieten."
   show_all_services_from_hospital: "Zeige alle Leistungen an, welche dieses Spital anbietet."
+  level: "Ebene: "

@@ -1,5 +1,13 @@
 %h2= @hospital.name
 
+%div.dropdown{ style: 'margin-bottom: 10px;'}
+  #level-select
+    = t('level')
+    %select#level{ name: 'level'}
+      - ['Mdc', 'Adrg', 'Drg'].each do |level|
+        - url =  system_hospital_path(@system, @hospital, level: level)
+        %option.level-selection{ selected: @level == level.upcase ? 'selected' : nil, value: url }= level.upcase
+
 .row.table-responsive
   .col-sm-12
     %table.table.table-bordered.table-striped.text-right
@@ -11,7 +19,10 @@
         - @num_cases.each do |nc|
           %tr
             %td
-              = nc.code_object.code_display
-              .small= nc.code_object.text locale
+              - if nc.code_object.nil?
+                = nc.code
+              - else
+                = nc.code_object.code_display
+                .small= nc.code_object.text locale
             %td
               = numcase_display nc
