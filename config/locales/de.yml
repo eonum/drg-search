@@ -82,3 +82,5 @@ de:
   num_cases_tabular: "Tabelarische Ansicht der Fallzahlen des aktuellsten Jahres"
   already_in_selection: "Dieses Element wurde bereits in die Auswahl übernommen."
   successfull_take_over: "<span id='takeoverItem'></span> wurde erfolgreich in die Auswahl übernommen"
+  show_all_hospitals_from_service: "Zeige alle Spitäler, welche diese Leistung anbieten."
+  show_all_services_from_hospital: "Zeige alle Leistungen an, welche dieses Spital anbietet."
