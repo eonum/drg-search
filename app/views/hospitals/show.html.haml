@@ -6,7 +6,7 @@
     %select#level{ name: 'level'}
       - ['Mdc', 'Adrg', 'Drg'].each do |level|
         - url =  system_hospital_path(@system, @hospital, level: level)
-        %option.level-selection{ selected: @level == level.upcase ? 'selected' : nil, value: url }= level.upcase
+        %option.level-selection{ selected: @level == level.upcase ? 'selected' : nil, value: url }= level.upcase + ' ' + t(level.downcase)
 
 .row.table-responsive
   .col-sm-12

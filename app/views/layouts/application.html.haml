@@ -117,7 +117,8 @@
           %img.visible-xs{:alt => "back to home", :onerror => "this.onerror=null; this.src='#{image_path("logo-CH.png")}'", :src => "#{image_path("logo-CH.svg")}"}/
         %address
           %span.hidden-xs
-            ©2016 #{t('foph_long')}
+            ©2016 #{t('foph_long')} | created by
+            %a{ href: 'http://www.eonum.ch', target: 'blank'} eonum
           %nav.pull-right
             %ul
               %li
