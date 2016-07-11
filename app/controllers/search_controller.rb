@@ -71,7 +71,7 @@ class SearchController < ApplicationController
 
     def code_search model, query, code_field
       return model.search query, where: {version: @system.version},
-                           fields: [code_field + '^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
+                           fields: [code_field + '^5', 'text_' + locale.to_s + '^2', 'relevant_codes_' + locale.to_s],
                            limit: @limit, highlight: {tag: '<mark>'},
                            misspellings: false, execute: false
     end
