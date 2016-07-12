@@ -57,7 +57,7 @@ fr:
   take_over_hospital: "Ajouter cet hôpital"
   take_over_code: "Ajouter ce groupe diagnostique à l'analyse"
   take_over: "Ajouter"
-  application_year: "Tarif de facturation de l'année"
+  application_year: "Tarif de facturation de l'année "
   data_from: "Chiffres-clés calculés sur la base des données de l'année "
   additional_data_plural: "et comparés aux données des années "
   additional_data_singular: "et comparés aux données de l'année "
