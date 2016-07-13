@@ -80,30 +80,31 @@
               \- #{t('foph_long')}
       .header-separator
       .clearfix
-        %nav#main-navigation.nav-main.yamm.navbar
-          %section.nav-mobile
-            .table-row
-              .nav-mobile-header
-                .table-row
-                  %span.nav-mobile-logo
-                    %img{ src: '/img/swiss.svg', onerror: "this.onerror=null; this.src='/img/swiss.png'", alt: "Confederatio Helvetica"}
-                  %h1= t('drg_search')
-              .table-cell.dropdown
-                %a.nav-mobile-menu.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
-                  %span.icon.icon--menu.center-block
-                .drilldown.dropdown-menu{ role: "menu"}
-                  .drilldown-container
-                    %nav.nav-page-list
-                      %ul
-                        %li
-                          = link_to t('drg_search'), root_path
-                        %li
-                          = link_to t('documentation'), documentation_path
-          %ul.nav.navbar-nav
-            %li.dropdown.yamm-fw{ class: controller.controller_name == 'systems' ? 'current' : ''}
-              = link_to t('drg_search'), root_path
-            %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'documentation' ? 'current' : ''}
-              = link_to t('documentation'), documentation_path
+        - unless ['hospitals', 'codes'].include? controller.controller_name
+          %nav#main-navigation.nav-main.yamm.navbar
+            %section.nav-mobile
+              .table-row
+                .nav-mobile-header
+                  .table-row
+                    %span.nav-mobile-logo
+                      %img{ src: '/img/swiss.svg', onerror: "this.onerror=null; this.src='/img/swiss.png'", alt: "Confederatio Helvetica"}
+                    %h1= t('drg_search')
+                .table-cell.dropdown
+                  %a.nav-mobile-menu.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
+                    %span.icon.icon--menu.center-block
+                  .drilldown.dropdown-menu{ role: "menu"}
+                    .drilldown-container
+                      %nav.nav-page-list
+                        %ul
+                          %li
+                            = link_to t('drg_search'), root_path
+                          %li
+                            = link_to t('documentation'), documentation_path
+            %ul.nav.navbar-nav
+              %li.dropdown.yamm-fw{ class: controller.controller_name == 'systems' ? 'current' : ''}
+                = link_to t('drg_search'), root_path
+              %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'documentation' ? 'current' : ''}
+                = link_to t('documentation'), documentation_path
       .row
         .col-xs-12
           #content.container-fluid
