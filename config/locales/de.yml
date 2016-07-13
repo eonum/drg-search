@@ -80,7 +80,7 @@ de:
   back: "Zurück"
   delete_all: "Auswahl löschen"
   bern: Bern
-  num_cases_bar: "Visualisierung der Fallzahlen des aktuellsten Jahres"
+  num_cases_bar: "Balkendiagram der Fallzahlen des aktuellsten Jahres"
   num_cases_tabular: "Tabelarische Ansicht der Fallzahlen des aktuellsten Jahres"
   already_in_selection: "Dieses Element wurde bereits in die Auswahl übernommen."
   successfull_take_over: "<span id='takeoverItem'></span> wurde erfolgreich in die Auswahl übernommen"
