@@ -68,7 +68,7 @@
               role: "annotation" });
           }
 
-          var rows = #{bar_chart_data[1].to_json};
+          var rows = #{bar_chart_data[1].to_json.gsub('\u0026#39;', '\'')};
           data.addRows(rows);
 
           var maxHopLength = 0;
@@ -80,7 +80,7 @@
 
           var options = {
             title: "#{t('comparison_table')}",
-            hAxis: { title: "#{t('num_cases')}", titleTextStyle: {color: '#888888' }},
+            hAxis: { title: "#{t('num_cases')}", titleTextStyle: {color: '#888888' }},//, format:'000\'000'},
             vAxis: { title: "#{t('hospitals')}", titleTextStyle: {color: '#888888' }},
             chartArea: { left: leftSpace + '%' },
             legend: { position: 'top', maxLines: 4 },

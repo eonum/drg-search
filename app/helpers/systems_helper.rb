@@ -63,6 +63,6 @@ module SystemsHelper
     return '0' if number == 0
     return '< 5' if number.to_f.nan?
     return '< 5' if number < 5
-    return number.to_s
+    return number_with_delimiter(number, delimiter: '\'')
   end
 end
