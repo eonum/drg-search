@@ -1,7 +1,7 @@
 - if @mdcs.empty? && @adrgs.empty? && @drgs.empty?
   .row
     .col-sm-12
-      - if @query_codes.length > 1
+      - if @query_codes.length > 2
         .alert.alert-warning{ role: 'alert'}= t('no_search_results')
 - else
   - [@mdcs, @adrgs, @drgs].each do |codes|
