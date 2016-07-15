@@ -12,7 +12,7 @@ class SearchController < ApplicationController
     @query_codes = params[:term_codes].blank? ? '' : params[:term_codes]
     @query_hospital = params[:term_hospitals].blank? ? '' : params[:term_hospitals]
 
-    if locale.to_s == 'de'
+    if @locale.to_s == 'de'
       @query_codes.gsub!('ue', 'u')
       @query_codes.gsub!('ae', 'a')
       @query_codes.gsub('oe', 'o')
@@ -62,23 +62,23 @@ class SearchController < ApplicationController
       @locale =  check_locale(params[:locale])
     end
 
-    def check_locale locale
-      if(locale != 'fr' && locale != 'it')
-        locale = 'de'
+    def check_locale loc
+      if(loc != 'fr' && loc != 'it')
+        loc = 'de'
       end
-      return locale
+      return loc
     end
 
     def code_search model, query, code_field
       return model.search query, where: {version: @system.version},
-                           fields: [code_field + '^5', 'text_' + locale.to_s + '^2', 'relevant_codes_' + locale.to_s],
+                           fields: [code_field + '^5', 'text_' + @locale.to_s + '^2', 'relevant_codes_' + @locale.to_s],
                            limit: @limit, highlight: {tag: '<mark>'},
                            misspellings: false, execute: false
     end
 
     def code_search_tolerant model, query, code_field
       return model.search query, where: {version: @system.version},
-                             fields: [code_field + '^5', {'text_' + locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + locale.to_s],
+                             fields: [code_field + '^5', {'text_' + @locale.to_s + '^2' => :word_middle}, 'relevant_codes_' + @locale.to_s],
                              operator: 'or',
                              limit: @limit, highlight: {tag: '<mark>'},
                              misspellings: {below: 1}, execute: false
