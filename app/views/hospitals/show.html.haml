@@ -16,6 +16,16 @@
           %th= t('diagnosis_group')
           %th= t('num_cases')
       %tbody
+        - unless @level == 'MDC'
+          %tr
+            %td
+              - if @all_cases.code_object.nil?
+                = @all_cases.code
+              - else
+                = @all_cases.code_object.code_display
+                .small= @all_cases.code_object.text locale
+            %td
+              = numcase_display @all_cases
         - @num_cases.each do |nc|
           %tr
             %td

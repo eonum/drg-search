@@ -5,11 +5,6 @@ class CodesController < ApplicationController
   def show
     @system = System.find(params[:system_id])
 
-    if params[:level].nil?
-      # guess the level by the code length
-
-    end
-
     @code_class = {Mdc: Mdc, Partition: Partition, Adrg: Adrg, Drg: Drg}[params[:level].to_sym]
     @code = @code_class.find(params[:id])
 

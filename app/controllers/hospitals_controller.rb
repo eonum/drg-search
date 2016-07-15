@@ -8,5 +8,8 @@ class HospitalsController < ApplicationController
 
     @num_cases = NumCase.where(version: @system.version, year: @system.base_year, hospital_id: @hospital.hospital_id, level: @level)
                      .where('n > 0').includes(:code_object).order('n desc')
+
+    @all_cases = NumCase.where(version: @system.version, year: @system.base_year, hospital_id: @hospital.hospital_id, level: 'MDC', code: 'ALL')
+                     .includes(:code_object).first
   end
 end
