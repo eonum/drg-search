@@ -87,3 +87,26 @@ de:
   show_all_hospitals_from_service: "Zeige alle Spitäler, welche diese Leistung anbieten."
   show_all_services_from_hospital: "Zeige alle Leistungen an, welche dieses Spital anbietet."
   level: "Ebene: "
+
+  intro_title: "DRG Fallzahlsuche"
+  intro_lead: "Die DRG-Fallzahlsuche erlaubt die Anzahl Spitalaufenthalte für eine bestimmte
+                Diagnosengruppe (Basis-DRG, DRG, MDC) zu ermitteln und von einem Jahr zum nächsten zu vergleichen.
+                Dieser Vergleich vermittelt indirekt eine Vorstellung davon, wie gross die Erfahrung des Spitals
+                mit den gesuchten Eingriffen ist."
+  intro_subtitle1: "Spitalfinanzierung in der Schweiz ab dem 01.01.2012"
+  intro_subparam1: "Seit dem 1. Januar 2012 ist SwissDRG (Swiss Diagnosis Related Groups) das in der Schweiz geltende
+                    Tarifsystem für stationäre akutsomatische Spitalleistungen. Als Fallpauschalen-System regelt es
+                    gemäss der letzten Revision des Krankenversicherungsgesetzes (KVG) die Vergütung der stationären
+                    Spitalleistungen schweizweit einheitlich. Somit wird jeder Spitalaufenthalt anhand von bestimmten
+                    Kriterien (Hauptdiagnose, Nebendiagnosen, Behandlungen usw.) einer Fallgruppe zugeordnet und pauschal vergütet. 
+                    Die SwissDRG-Tarifstruktur wird jedes Jahr aufgrund der neuen Daten festgelegt und berücksichtigt
+                    die Aktualisierung der Schweizerischen Operationsklassifikation (CHOP) und der Internationalen
+                    Klassifikation der Krankheiten (International Classification of Diseases, ICD)."
+  intro_subtitle2: "Anwendung « DRG Fallzahlsuche »"
+  intro_subparam2: "Mit der Applikation «DRG-Fallzahlsuche» kann die Fallzahl einer Diagnosengruppe (Basis-DRG, DRG, MDC)
+                    eines bestimmten Spitals im Anwendungsjahr einer bestimmten Tarifstruktur angezeigt werden.
+                    Das Tool ermöglicht der breiten Öffentlichkeit, die Anzahl Spitalaufenthalte für eine bestimmte
+                    eine Diagnosengruppe zu ermitteln und von einem Jahr zum nächsten zu vergleichen.
+                    Dieser Vergleich vermittelt indirekt eine Vorstellung davon, wie häufig eine Eingriffsart
+                    in einem bestimmten Spital vorkommt und wie gross folglich die Erfahrung des Spitals mit
+                    diesen Eingriffen ist. Durch die DRG-Fallzahlsuche kann somit die Transparenz bei der freien Spitalwahl erhöht werden."

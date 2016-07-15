@@ -86,3 +86,26 @@ fr:
   show_all_hospitals_from_service: "Montrer tous les hôpitaux qui fournissent cette prestation."
   show_all_services_from_hospital: "Montrer toutes les prestations de cet hôpital."
   level: "Niveau: "
+
+  intro_title: "Recherche du nombre de cas par DRG"
+  intro_lead: "La « Recherche du nombre de cas par DRG » indique le nombre de séjours hospitalier pour un DRG donné
+              et permet de comparer ce nombre d’une année à l’autre, donnant, indirectement, une idée de l’expérience
+               d’un hôpital dans les interventions recherchées."
+  intro_subtitle1: "Financement des hôpitaux suisses depuis le 01.01.12"
+  intro_subparam1: "Dès le 01.01.12, SwissDRG (Swiss Diagnosis Related Groups) est le système tarifaire de rémunération
+                    des prestations hospitalières en soins somatiques aigus en vigueur en Suisse. Comme que système de
+                    forfaits par cas, il règle de manière uniforme et forfaitaire l’indemnisation des prestations hospitalières,
+                    conformément à la dernière révision de la loi sur l’assurance-maladie (LAMal). Chaque séjour hospitalier
+                    est ainsi classé dans un groupe de pathologie et indemnisé de manière forfaitaire sur la base de critères
+                    définis (diagnostic principal, diagnostics supplémentaires, traitements, etc.).
+                    La structure tarifaire SwissDRG est établie chaque année sur la base des nouvelles données et tient
+                    compte de l’actualisation de la classification suisse des interventions chirurgicales (CHOP) et de la
+                    classification internationale des maladies (CIM)."
+  intro_subtitle2: "L’application « Recherche du nombre de cas par DRG »"
+  intro_subparam2: "L’application « Recherche du nombre de cas par DRG » permet d’afficher le nombre de cas dans un
+                    groupe diagnostique (DRG de base, DRG, MDC) d’un hôpital donné, pour l’année d’application
+                    d’une structure tarifaire particulière. Cet outil permet au grand public de connaître le nombre
+                    de séjours hospitalier pour un DRG donné et de comparer ce nombre d’une année à l’autre. Cette
+                    comparaison donne, indirectement, une idée de la fréquence d’occurrence d’un type d’intervention
+                    dans un hôpital donné et, par-là, de l’expérience de l’hôpital dans ces interventions.
+                    La recherche du nombre de cas par DRG permet ainsi d’augmenter la transparence dans le libre choix de l’hôpital."

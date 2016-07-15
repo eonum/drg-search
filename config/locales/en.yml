@@ -24,3 +24,27 @@ en:
   contact: "Contakt"
   bern: Berne
   legal_link: "https://www.admin.ch/gov/en/start/terms-and-conditions.html"
+
+  intro_title: "Analysis of the number of cases per DRG"
+  intro_lead: "The “Analysis of the number of cases per DRG” indicates the number of hospital stays for a specific
+              DRG and allows this figure to be compared from one year to the next, thereby indirectly offering an insight
+              into the experience of a hospital with regard to the interventions analysed."
+  intro_subtitle1: "Funding of Swiss hospitals since 01.01.12"
+  intro_subparam1: "Since 1 January 2012, SwissDRG (Swiss Diagnosis Related Groups) has been the tariff system
+                    employed in Switzerland to pay for acute-care hospital services. Like the flat rate per case
+                    system, SwissDRG regulates the payment of hospital services in a consistent and all-inclusive
+                    approach in accordance with the latest revision of the Health Insurance Act. Each hospital stay
+                    is thus assigned to a particular pathology group and paid for on an all-inclusive basis
+                    according to defined criteria (primary diagnosis, supplementary diagnoses, treatments, etc.).
+                    The SwissDRG tariff structure is established each year on the basis of new data, taking into
+                    account the updated Swiss classification of surgical interventions (CHOP) and the International
+                    Classification of Diseases (ICD)."
+  intro_subtitle2: "The “Analysis of the number of cases per DRG” application"
+  intro_subparam2: "The “Analysis of the number of cases per DRG” application can display the number of cases in
+                    a diagnosis-related group (basic DRG, DRG, MDC) for a specific hospital, for the year in which a particular
+                    tariff structure applies. The general public can use this tool to find out the number of
+                    hospital stays for a specific DRG and compare this figure from one year to the next.
+                    Indirectly, this comparison provides some idea of the frequency of occurrence of a type
+                    of intervention in a specific hospital, and thus the experience possessed by the hospital
+                    in these interventions. As a result, the analysis of the number of cases per DRG can
+                    increase transparency in the free choice of hospitals."

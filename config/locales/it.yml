@@ -86,3 +86,29 @@ it:
   show_all_hospitals_from_service: "Visualizzare tutti gli ospedali che offrono questa prestazione."
   show_all_services_from_hospital: "Visualizzare tutte le prestazioni dell’ospedale."
   level: "Piano: "
+
+  intro_title: "Ricerca numero di casi per DRG"
+  intro_lead: "La «Ricerca del numero di casi per DRG» indica il numero di degenze ospedaliere per une gruppo
+              diagnostico (DRG di base, DRG, MDC) determinato e permette di comparare questo numero da un anno
+              all'altro. Il confronto permette, indirettamente, di farsi un’idea dell’esperienza dell’ospedale
+              nei tipi d’interventi cercati"
+  intro_subtitle1: "Finanziamento ospedaliero in Svizzera dal 1° gennaio 2012"
+  intro_subparam1: "Dal 1° gennaio 2012 è in vigore in Svizzera SwissDRG (Swiss Diagnosis Related Groups),
+                    il sistema tariffale di remunerazione delle prestazioni ospedaliere stazionarie di medicina
+                    somatica acuta. Trattandosi di un sistema di forfait per caso, esso disciplina in modo uniforme
+                    e forfettario la remunerazione delle prestazioni ospedaliere conformemente all’ultima revisione
+                    della legge sull’assicurazione malattie (LAMal). Ogni degenza ospedaliera è classificata in un
+                    gruppo di patologie e remunerata in modo forfettario sulla base di criteri definiti (diagnosi
+                    principale, diagnosi supplementari, trattamenti ecc.).
+                    La struttura tariffale SwissDRG è stabilita ogni anno sulla base di nuovi dati e tiene conto
+                    dell’aggiornamento della Classificazione Svizzera degli Interventi Chirurgici (CHOP) e della
+                    Classificazione internazionale delle malattie (CIM)."
+  intro_subtitle2: "L’applicazione “Ricerca del numero di casi per DRG”"
+  intro_subparam2: "L’applicazione «Ricerca del numero di casi per DRG» permette di visualizzare il numero di
+                    casi gruppo diagnostico di un determinato ospedale per l'anno di applicazione di una
+                    struttura tariffale particolare. Questo strumento permette a un vasto pubblico di conoscere
+                    il numero delle degenze ospedaliere per un determinato DRG e di comparare questo numero da
+                    un anno all'altro. Il confronto permette, indirettamente, di farsi un’idea della frequenza
+                    di occorrenza di un tipo d’intervento in un determinato ospedale e quindi dell’esperienza
+                    dell’ospedale in questo tipo d’intervento. La ricerca del numero di casi per DRG permette
+                    anche di aumentare la trasparenza nella libera scelta dell’ospedale."
