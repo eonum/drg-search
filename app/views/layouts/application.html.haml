@@ -101,12 +101,12 @@
                       %nav.nav-page-list
                         %ul
                           %li
-                            = link_to t('drg_search'), root_path
+                            = link_to t('drg_search'), system_path(System.order(version: :desc).first())
                           %li
                             = link_to t('documentation'), documentation_path
             %ul.nav.navbar-nav
               %li.dropdown.yamm-fw{ class: controller.controller_name == 'systems' ? 'current' : ''}
-                = link_to t('drg_search'), root_path
+                = link_to t('drg_search'), system_path(System.order(version: :desc).first())
               %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'documentation' ? 'current' : ''}
                 = link_to t('documentation'), documentation_path
       .row
