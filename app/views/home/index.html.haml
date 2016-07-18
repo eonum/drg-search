@@ -1,0 +1,13 @@
+.row
+  .col-lg-12
+    %h1= t('intro_title')
+    %p.lead= t('intro_lead')
+
+    %h2= t('intro_subtitle1')
+    %p= t('intro_subparam1')
+
+    %h2= t('intro_subtitle2')
+    %p= t('intro_subparam2')
+
+
+    = link_to t('drg_search'), system_path(System.order(version: :desc).first())
