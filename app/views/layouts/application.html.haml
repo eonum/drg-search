@@ -68,9 +68,14 @@
                   {"aria-label" => "Italiano ", :class => I18n.locale == :it ? 'lang-selection active' : 'lang-selection',
                   :lang => "it", :title => "Italiano", :data => "#{url_for( :locale => 'it')}"})
                 %lih
-                  = link_to('EN', params.merge({ locale: :en }),
-                  {"aria-label" => "English ", :class => I18n.locale == :en ? 'lang-selection active' : 'lang-selection',
-                  :lang => "en", :title => "English", :data => "#{url_for( :locale => 'en')}"})
+                  -if controller.controller_name == 'home'
+                    = link_to('EN', params.merge({ locale: :en }),
+                    {"aria-label" => "English ", :class => I18n.locale == :en ? 'lang-selection active' : 'lang-selection',
+                    :lang => "en", :title => "English", :data => "#{url_for( :locale => 'en')}"})
+                  - else
+                    = link_to('EN', params.merge({ locale: :en }),
+                    {"aria-label" => "English ", :class => 'lang-selection disabled',
+                    :lang => "en", :title => "English", :data => "#{url_for( :locale => 'en')}"})
             %h2.sr-only= t('services_navigation')
             %nav.nav-service
               %ul

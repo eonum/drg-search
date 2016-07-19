@@ -20,10 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  drg_search: "DRG Search"
-  contact: "Contakt"
+  contact: "Contact"
   bern: Berne
   legal_link: "https://www.admin.ch/gov/en/start/terms-and-conditions.html"
+  legal: "Legal framework"
 
   intro_title: "Analysis of the number of cases per DRG"
   intro_lead: "The “Analysis of the number of cases per DRG” indicates the number of hospital stays for a specific
