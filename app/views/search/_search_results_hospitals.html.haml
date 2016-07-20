@@ -15,7 +15,7 @@
           %button.btn.hospitalselection{ type: "button", title: t('take_over_hospital'), 'data-hospital-id': hospital.id, 'data-hospital-display': hospital.name }= t('take_over')
         %strong
           = link_to(raw(highlight_hospital(hospital.name, details, :name)), system_hospital_path(@system, hospital, level: 'Drg'),
-          {target: 'blank', title: t('show_all_services_from_hospital')})
+          {target: 'hop' + hospital.id.to_s, title: t('show_all_services_from_hospital')})
         .small
           = raw highlight_text(hospital.street, details, :street)
           %br

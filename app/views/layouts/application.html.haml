@@ -108,12 +108,12 @@
                           %li
                             = link_to t('drg_search'), system_path(System.order(version: :desc).first())
                           %li
-                            = link_to t('documentation'), documentation_path
+                            = link_to t('documentation'), '160615_DRG-Fallzahlsuche_user manual_FR.PDF', {target: 'blank'}
             %ul.nav.navbar-nav
               %li.dropdown.yamm-fw{ class: controller.controller_name == 'systems' ? 'current' : ''}
                 = link_to t('drg_search'), system_path(System.order(version: :desc).first())
               %li.dropdown.yamm-fw{ class: controller.controller_name == 'home' && controller.action_name == 'documentation' ? 'current' : ''}
-                = link_to t('documentation'), documentation_path
+                = link_to t('documentation'), '/160615_DRG-Fallzahlsuche_user manual_FR.PDF', {target: 'doc'}
       .row
         .col-xs-12
           #content.container-fluid

@@ -11,7 +11,7 @@ class Hospital < ActiveRecord::Base
              ['spital thurgau ag klinik st. katharinental', 'spital thurgau ag psychiatrische klinik münsterlingen', 'stgag'],
              ['spital thun simmental saanenland ag', 'sts', 'sts ag', 'spital thun­simmental­saanenland ag', 'thun'], ['sozialpädagogische psychiatrische modellstation für schwere adoleszentenstörungen', 'modellstation somosa'],
              ['gesundheitsversorgung zürcher oberland', 'gzo'], ['hôpital de porrentruy', 'hôpital du jura', 'jura'], ['spitalverbund appenzell ausserrhoden', 'spitalverbund ar', 'svar'],
-             ['riviera', 'clinique cic'], ['swiss medical network', 'gsmn neuchâtel sa', 'neuchâtel'], ['stimier', 'st-imier', 'jura']]
+             ['riviera', 'clinique cic'], ['swiss medical network', 'gsmn neuchâtel sa', 'neuchâtel', 'medical network', 'swiss '], ['stimier', 'st-imier', 'jura']]
   # hospital_id is only unique within one year
   # id is unique over all hospital objects
 end

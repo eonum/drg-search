@@ -4,7 +4,7 @@
       .selection.bordered-well{ 'data-hospital-id': hospital.id }
         = hospital.name
         %span.pull-right.removeHospital{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-hospital-id': hospital.id }= fa_icon('remove')
-        .small= link_to t('show_all_services_from_hospital'), system_hospital_path(@system, hospital, level: 'Drg'), {target: 'blank'}
+        .small= link_to t('show_all_services_from_hospital'), system_hospital_path(@system, hospital, level: 'Drg'), {target: 'hop' + hospital.id.to_s}
 
   .col-sm-7.sortableCodes
     - @codes.each do |code|
@@ -12,7 +12,7 @@
         = code.code_display + ' '
         %span.small{style: "color:#757575" }= code.text locale
         %span.pull-right.removeCode{ 'aria-hidden': 'true', style: 'color:#757575', title: t('remove_from_comparison'), 'data-code': code.code }= fa_icon('remove')
-        .small= link_to(t('show_all_hospitals_from_service'), system_code_path(@system, code, level: code.class), {target: 'blank'})
+        .small= link_to(t('show_all_hospitals_from_service'), system_code_path(@system, code, level: code.class), {target: 'code' + code.code.to_s})
         %ol#codeHierarchy.breadcrumb{ role: 'navigation' }
           = render partial: 'code_hierarchy', locals: {code: code, base_code: code}
 

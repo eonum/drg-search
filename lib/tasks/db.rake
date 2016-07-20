@@ -121,7 +121,7 @@ namespace :db do
     puts "Seed folder #{args.directory}"
 
     # create pseudo hospital ALL
-    Hospital.create!({year: args.year.to_i, hospital_id: 9999, name: 'Alle stationären Spitäler der Schweiz/ Tous les hôpitaux stationniares suisses / Tutti gli ospedali stazionari svizzeri', street: '', address: '', canton: 'CH'})
+    Hospital.create!({year: args.year.to_i, hospital_id: 9999, name: 'Alle stationären Spitäler der Schweiz/ Tous les hôpitaux stationnaires suisses / Tutti gli ospedali stazionari svizzeri', street: '', address: '', canton: 'CH'})
 
     Dir.entries(args.directory).sort.each do |file|
       next unless file.downcase.end_with?('csv.utf8')
