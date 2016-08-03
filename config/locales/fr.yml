@@ -86,6 +86,7 @@ fr:
   show_all_hospitals_from_service: "Montrer tous les hôpitaux qui fournissent cette prestation."
   show_all_services_from_hospital: "Montrer toutes les prestations de cet hôpital."
   level: "Niveau: "
+  all_cases: "Tous les cas"
 
   intro_title: "Recherche du nombre de cas par DRG"
   intro_lead: "La « Recherche du nombre de cas par DRG » indique le nombre de séjours hospitalier pour un DRG donné

@@ -14,6 +14,6 @@
           - next if nc.hospital.nil?
           %tr
             %td
-              = nc.hospital.name
+              = nc.hospital_id == 9999 ? t('all_cases') : nc.hospital.name
             %td
               = numcase_display nc

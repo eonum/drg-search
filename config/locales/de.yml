@@ -87,6 +87,7 @@ de:
   show_all_hospitals_from_service: "Zeige alle Spitäler, welche diese Leistung anbieten."
   show_all_services_from_hospital: "Zeige alle Leistungen an, welche dieses Spital anbietet."
   level: "Ebene: "
+  all_cases: "Alle Fälle"
 
   intro_title: "DRG Fallzahlsuche"
   intro_lead: "Die DRG-Fallzahlsuche erlaubt die Anzahl Spitalaufenthalte für eine bestimmte

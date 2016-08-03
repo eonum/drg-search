@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#redirect'
 
+  # redirect all English requests except the landing page to its German equivalents
   get '/en/systems/*path', to: redirect("/de/systems/%{path}")
 
   scope '/:locale', :locale => /de|fr|it|en/, :format => /json|html/ do
