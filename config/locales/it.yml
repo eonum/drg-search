@@ -86,7 +86,7 @@ it:
   show_all_hospitals_from_service: "Visualizzare tutti gli ospedali che offrono questa prestazione."
   show_all_services_from_hospital: "Visualizzare tutte le prestazioni dell’ospedale."
   level: "Piano: "
-  all_cases: "Tutti gli casi"
+  all_cases: "Tutti i casi"
 
   intro_title: "Ricerca numero di casi per DRG"
   intro_lead: "La «Ricerca del numero di casi per DRG» indica il numero di degenze ospedaliere per une gruppo
