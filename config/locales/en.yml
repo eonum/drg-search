@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  drg_search: "DRG Search"
+  drg_search: "Number of cases per DRG Search"
   language_selection: "Language selection"
   foph: "FOPH"
   foph_long: "Federal Office of Public Health"
@@ -33,8 +33,8 @@ en:
   legal_link: "https://www.admin.ch/gov/en/start/terms-and-conditions.html"
   legal: "Legal framework"
 
-  intro_title: "Analysis of the number of cases per DRG"
-  intro_lead: "The “Analysis of the number of cases per DRG” indicates the number of hospital stays for a specific
+  intro_title: "Number of cases per DRG Search"
+  intro_lead: "The analysis of the number of cases per DRG indicates the number of hospital stays for a specific
               DRG and allows this figure to be compared from one year to the next, thereby indirectly offering an insight
               into the experience of a hospital with regard to the interventions analysed."
   intro_subtitle1: "Funding of Swiss hospitals since 01.01.12"
@@ -47,8 +47,8 @@ en:
                     The SwissDRG tariff structure is established each year on the basis of new data, taking into
                     account the updated Swiss classification of surgical interventions (CHOP) and the International
                     Classification of Diseases (ICD)."
-  intro_subtitle2: "The “Analysis of the number of cases per DRG” application"
-  intro_subparam2: "The “Analysis of the number of cases per DRG” application can display the number of cases in
+  intro_subtitle2: "The “Number of cases per DRG Search” application"
+  intro_subparam2: "The “Number of cases per DRG Search” application can display the number of cases in
                     a diagnosis-related group (basic DRG, DRG, MDC) for a specific hospital, for the year in which a particular
                     tariff structure applies. The general public can use this tool to find out the number of
                     hospital stays for a specific DRG and compare this figure from one year to the next.
