@@ -77,7 +77,7 @@ it:
   relevant_code: "Diagnosi / trattamento rilevante (fra le altre cose)"
 
   back: "Indietro"
-  delete_all: "Auswahl löschen"
+  delete_all: "Eliminare selezione"
   bern: Berna
   num_cases_bar: "Diagramma a barre dei numero di casi dell’anno attuale"
   num_cases_tabular: "Numero di casi dell’anno attuale"
