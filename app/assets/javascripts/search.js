@@ -193,6 +193,15 @@ $( function() {
         button.prop('title', I18n.t('already_in_selection'));
     };
 
+    /** delay function for the searches on every keyup events. */
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+
     var search = function(e, activeTab) {
         var code = e.which;
         if(code==13) {
@@ -205,19 +214,22 @@ $( function() {
             return;
         }
 
-        var hospitalSearch = $("#hospital_search");
-        var searchTermHospital = hospitalSearch.val();
-        var searchTermCodes = $('#codes_search').val();
-        var searchUrl = hospitalSearch.data('search-url') + '.html';
-        $.get(searchUrl, {term_hospitals: searchTermHospital, term_codes: searchTermCodes, limit: 6})
-            .done(function (data) {
-                $('#search-results').html(data);
-                $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
-                $('.hospitalselection').click(hospitalSelection);
-                $('.codeSelection').click(codeSelection);
-                disableAlreadySelected();
-                setURL();
-            });
+        delay(function(){
+            var hospitalSearch = $("#hospital_search");
+            var searchTermHospital = hospitalSearch.val();
+            var searchTermCodes = $('#codes_search').val();
+            var searchUrl = hospitalSearch.data('search-url') + '.html';
+            $.get(searchUrl, {term_hospitals: searchTermHospital, term_codes: searchTermCodes, limit: 6})
+                .done(function (data) {
+                    $('#search-results').html(data);
+                    $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
+                    $('.hospitalselection').click(hospitalSelection);
+                    $('.codeSelection').click(codeSelection);
+                    disableAlreadySelected();
+                    setURL();
+                });
+        }, 500 );
+
     };
 
     var hospitalSearch = $("#hospital_search");
