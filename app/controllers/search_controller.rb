@@ -15,26 +15,30 @@ class SearchController < ApplicationController
     if @locale.to_s == 'de'
       @query_codes.gsub!('ue', 'u')
       @query_codes.gsub!('ae', 'a')
-      @query_codes.gsub('oe', 'o')
+      @query_codes.gsub!('oe', 'o')
     end
 
-    if @query_codes.blank? || @query_codes.length < 3
-      @drgs = []
-      @adrgs = []
-      @mdcs = []
-    else
-      @drgs = code_search(Drg, @query_codes, 'code')
-      @adrgs = code_search(Adrg, @query_codes, 'code')
-      @mdcs = code_search(Mdc, @query_codes, 'code_search')
-      Searchkick.multi_search([@drgs, @adrgs, @mdcs])
-
-      if @drgs.empty? && @adrgs.empty? && @mdcs.empty? && @query_codes.length > 5
-        @drgs = code_search_tolerant(Drg, @query_codes, 'code')
-        @adrgs = code_search_tolerant(Adrg, @query_codes, 'code')
-        @mdcs = code_search_tolerant(Mdc, @query_codes, 'code_search')
+    @drgs, @adrgs, @mdcs = Rails.cache.fetch("#{@query_codes}/code_search", expires_in: 12.hours) do
+      if @query_codes.blank? || @query_codes.length < 3
+        @drgs = []
+        @adrgs = []
+        @mdcs = []
+      else
+        @drgs = code_search(Drg, @query_codes, 'code')
+        @adrgs = code_search(Adrg, @query_codes, 'code')
+        @mdcs = code_search(Mdc, @query_codes, 'code_search')
         Searchkick.multi_search([@drgs, @adrgs, @mdcs])
+
+        if @drgs.empty? && @adrgs.empty? && @mdcs.empty? && @query_codes.length > 5
+          @drgs = code_search_tolerant(Drg, @query_codes, 'code')
+          @adrgs = code_search_tolerant(Adrg, @query_codes, 'code')
+          @mdcs = code_search_tolerant(Mdc, @query_codes, 'code_search')
+          Searchkick.multi_search([@drgs, @adrgs, @mdcs])
+        end
       end
+      [@drgs, @adrgs, @mdcs]
     end
+
 
     json = {}
     json[:drgs] = @drgs
