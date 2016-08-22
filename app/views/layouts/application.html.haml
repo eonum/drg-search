@@ -87,7 +87,6 @@
             %h1
               = t('drg_search')
               \- #{t('foph_long')}
-      .header-separator
       .clearfix
         - unless ['hospitals', 'codes'].include? controller.controller_name
           %nav#main-navigation.nav-main.yamm.navbar
@@ -98,9 +97,9 @@
                     %span.nav-mobile-logo
                       %img{ src: '/img/swiss.svg', onerror: "this.onerror=null; this.src='/img/swiss.png'", alt: "Confederatio Helvetica"}
                     %h1= t('drg_search')
-                .table-cell.dropdown
-                  %a.nav-mobile-menu.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown"}
-                    %span.icon.icon--menu.center-block
+                .table-cell.dropdown{ style: 'min-width: 43px;'}
+                  %a.nav-mobile-menu.dropdown-toggle{ :href => "#", 'data-toggle' => "dropdown", "aria-haspopup": "true", "aria-expanded": "false"}
+                    %span.icon.icon--menu
                   .drilldown.dropdown-menu{ role: "menu"}
                     .drilldown-container
                       %nav.nav-page-list
