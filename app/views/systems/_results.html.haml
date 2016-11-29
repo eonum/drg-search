@@ -24,6 +24,7 @@
   .tab-content.tab-border.scrollable
     %h3= t('comparison_table')
     #tableResults.tab-pane.table-responsive{ class: params['activeTab'] == 'tableLink' ? 'active' : '' }
+      %div= t('data_year') + ' ' + @system.base_year.to_s
       %table.table.table-bordered.table-striped.text-right
         %thead.text-left
           %tr
@@ -80,7 +81,7 @@
 
           var options = {
             title: "#{t('comparison_table')}",
-            hAxis: { title: "#{t('num_cases')}", titleTextStyle: {color: '#888888' }, format:"###,###.###"},
+            hAxis: { title: "#{t('num_cases')}: #{t('data_year')} #{@system.base_year.to_s}", titleTextStyle: {color: '#888888' }, format:"###,###.###"},
             vAxis: { title: "#{t('hospitals')}", titleTextStyle: {color: '#888888' }},
             chartArea: { left: leftSpace + '%' },
             legend: { position: 'top', maxLines: 4 },
