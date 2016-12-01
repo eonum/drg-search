@@ -1,5 +1,6 @@
-%h2= @hospital.name
-
+%h2
+  = @hospital.name
+  %span.small= t('data_year') + ' ' + @system.base_year.to_s
 %div.dropdown{ style: 'margin-bottom: 10px;'}
   #level-select
     = t('level')

@@ -1,5 +1,6 @@
 %h2
   = @code.code_display_long
+  %span.small= t('data_year') + ' ' + @system.base_year.to_s
   .small= @code.text locale
 
 .row.table-responsive
