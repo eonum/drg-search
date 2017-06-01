@@ -297,6 +297,10 @@ namespace :db do
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'), '2012')
     Rake::Task['db:seed_numcase_data'].reenable
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2013'), '2013')
+    Rake::Task['db:seed_numcase_data'].reenable
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2014'), '2014')
+    Rake::Task['db:seed_numcase_data'].reenable
+    Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2015'), '2015')
     Rake::Task['db:save_code_display'] .invoke()
     Rake::Task['db:link_codes_to_num_cases'].invoke()
   end
