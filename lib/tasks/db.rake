@@ -293,6 +293,8 @@ namespace :db do
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V4.0/'))
     Rake::Task['db:seed_drg_version'].reenable
     Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V5.0/'))
+    Rake::Task['db:seed_drg_version'].reenable
+    Rake::Task['db:seed_drg_version'].invoke(File.join(args.directory, 'catalogues/V6.0/'))
 
     Rake::Task['db:seed_numcase_data'].invoke(File.join(args.directory, '2012'), '2012')
     Rake::Task['db:seed_numcase_data'].reenable
