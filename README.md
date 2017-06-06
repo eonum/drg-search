@@ -145,7 +145,7 @@ sudo /bin/systemctl enable elasticsearch.service
 sudo service elasticsearch status
 ```
 
-### Add new data (year)
+### Seed new data (year)
 1. Add new numcase data directory to data repo
 2. Seed new catalogue
 ```
