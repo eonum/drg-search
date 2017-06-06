@@ -275,7 +275,7 @@ namespace :db do
 
     NumCase.find_each do |nc|
       pg.increment
-      nc.code_object = codes[nc.level][nc.code + '--' + nc.version]
+      nc.code_object = codes[nc.level][nc.code + '--' + nc.version] unless nc.level.nil? || nc.code.nil? || nc.version.nil?
       nc.save!
     end
     pg.finish
