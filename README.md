@@ -144,3 +144,11 @@ sudo apt-get update && sudo apt-get install elasticsearch
 sudo /bin/systemctl enable elasticsearch.service
 sudo service elasticsearch status
 ```
+
+### Add new data (year)
+1. Add new numcase data directory to data repo
+2. Update catalogues (add year to system.json in  and manually to database)
+3. Seed numcase data
+```
+rake db:seed_numcase_data['directory'] 
+```
