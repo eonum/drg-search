@@ -147,8 +147,13 @@ sudo service elasticsearch status
 
 ### Add new data (year)
 1. Add new numcase data directory to data repo
-2. Update catalogues (add year to system.json in  and manually to database)
-3. Seed numcase data
+2. Seed new catalogue
+```
+rake db:seed_drg_version['directory'] 
+```
+3. Update catalogues (add year to system.json in  and manually to database)
+4. Seed numcase data
 ```
 rake db:seed_numcase_data['directory'] 
 ```
+5. Update reseed task (db:reseed['directory']) to include new years
