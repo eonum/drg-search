@@ -141,8 +141,11 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositori
 wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
 sudo apt-get update && sudo apt-get install elasticsearch
-sudo /bin/systemctl enable elasticsearch.service
-sudo service elasticsearch status
+# if you want to automatically start elasticsearch on system startup
+sudo systemctl enable elasticsearch.service
+sudo systemctl start elasticsearch.service
+# check with
+sudo systemctl status elasticsearch.service
 ```
 
 ### Seed new data (year)
