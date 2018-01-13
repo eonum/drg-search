@@ -141,6 +141,22 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositori
 wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
 sudo apt-get update && sudo apt-get install elasticsearch
-sudo /bin/systemctl enable elasticsearch.service
-sudo service elasticsearch status
+# if you want to automatically start elasticsearch on system startup
+sudo systemctl enable elasticsearch.service
+sudo systemctl start elasticsearch.service
+# check with
+sudo systemctl status elasticsearch.service
 ```
+
+### Seed new data (year)
+1. Add new numcase data directory to data repo
+2. Seed new catalogue
+```
+rake db:seed_drg_version['directory'] 
+```
+3. Update catalogues (add year to system.json in  and manually to database)
+4. Seed numcase data
+```
+rake db:seed_numcase_data['directory'] 
+```
+5. Update reseed task (db:reseed['directory']) to include new years
