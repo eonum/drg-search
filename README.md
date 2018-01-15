@@ -154,7 +154,7 @@ sudo systemctl status elasticsearch.service
 ```
 rake db:seed_drg_version['directory'] 
 ```
-3. Update catalogues (add year to system.json in  and manually to database)
+3. Update catalogues (add year to system.json in the data repository in catalogues/VX.0/ and manually to the database if there is no complete reseed)
 4. Seed numcase data
 ```
 rake db:seed_numcase_data['directory'] 
