@@ -18,7 +18,7 @@ class SearchController < ApplicationController
       @query_codes.gsub!('oe', 'o')
     end
 
-    @drgs, @adrgs, @mdcs = Rails.cache.fetch("#{@query_codes}/code_search", expires_in: 12.hours) do
+    @drgs, @adrgs, @mdcs = nil #Rails.cache.fetch("#{@query_codes}/code_search", expires_in: 12.hours) do
       if @query_codes.blank? || @query_codes.length < 3
         @drgs = []
         @adrgs = []
@@ -37,7 +37,7 @@ class SearchController < ApplicationController
         end
       end
       [@drgs, @adrgs, @mdcs]
-    end
+   # end
 
 
     json = {}
