@@ -109,10 +109,10 @@ namespace :db do
       end
     end
 
-    puts 'Reindex search index..'
-    Mdc.reindex
-    Adrg.reindex
-    Drg.reindex
+    puts "Index search index for system #{system.version}.."
+    Mdc.where(:version => system.version).reindex
+    Adrg.where(:version => system.version).reindex
+    Drg.where(:version => system.version).reindex
   end
 
   desc 'Seed all data in a certain directory from a certain year. This includes hospital data and number of cases data.
