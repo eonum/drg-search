@@ -18,6 +18,7 @@ class SearchController < ApplicationController
       @query_codes.gsub!('oe', 'o')
     end
 
+    # Caching is currently disabled due to problems with dumping singletons
     @drgs, @adrgs, @mdcs = nil #Rails.cache.fetch("#{@query_codes}/code_search", expires_in: 12.hours) do
       if @query_codes.blank? || @query_codes.length < 3
         @drgs = []
@@ -36,7 +37,7 @@ class SearchController < ApplicationController
           Searchkick.multi_search([@drgs, @adrgs, @mdcs])
         end
       end
-      [@drgs, @adrgs, @mdcs]
+   #   [@drgs, @adrgs, @mdcs]
    # end
 
 

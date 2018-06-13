@@ -3,4 +3,4 @@
 	url = https://github.com/swiss/styleguide
 [submodule "data"]
 	path = data
-	url = eonum.ch:/home/tim/git/data-drgsearch.git
+	url = git@eonum.dynamic-dns.net:eonum/data-drgsearch.git
