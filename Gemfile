@@ -2,17 +2,19 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '~> 5.0', '5.0.7'
+
 # Use postgresql as the database for Active Record
-gem 'pg', '0.21.0'
+gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
+
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'jquery-ui-rails', '5.0.5'
+gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 
 # template language HAML
 gem 'haml-rails'
@@ -29,7 +31,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
