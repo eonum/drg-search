@@ -1,4 +1,4 @@
-class Mdc < ActiveRecord::Base
+class Mdc < ApplicationRecord
   has_many :partitions
   has_many :adrgs
   has_many :drgs

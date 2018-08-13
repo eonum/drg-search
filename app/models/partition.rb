@@ -1,4 +1,4 @@
-class Partition < ActiveRecord::Base
+class Partition < ApplicationRecord
   belongs_to :mdc
 
   has_many :adrgs

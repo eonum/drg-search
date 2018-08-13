@@ -1,4 +1,4 @@
-class System < ActiveRecord::Base
+class System < ApplicationRecord
   validates_uniqueness_of :version
 
   include MultiLanguageText

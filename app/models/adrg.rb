@@ -1,6 +1,6 @@
 require 'csv'
 
-class Adrg < ActiveRecord::Base
+class Adrg < ApplicationRecord
   belongs_to :mdc
   belongs_to :partition
   has_many :drgs
