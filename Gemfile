@@ -54,4 +54,4 @@ gem 'json'
 gem 'font-awesome-rails'
 
 # search with elasticsearch
-gem 'searchkick'
+gem 'searchkick', '2.4.0'
