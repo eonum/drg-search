@@ -19,8 +19,6 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 # template language HAML
 gem 'haml-rails'
 
-gem 'decent_exposure'
-
 # Loads environment variables from `.env` -> keep passwords out of database.yml
 gem 'dotenv-rails'
 
@@ -30,9 +28,6 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -40,7 +35,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
 end
 
 # Internationalization
@@ -48,7 +42,6 @@ gem 'i18n-js'
 
 # Used in rake tasks
 gem 'ruby-progressbar'
-gem 'json'
 
 # font awesome icons
 gem 'font-awesome-rails'
