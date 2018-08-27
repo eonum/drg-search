@@ -30,10 +30,10 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  username: <%= ENV['DRGSEARCH_DEVELOPMENT_USER'] %>
+  username: <%= Rails.application.credentials.postgres[:development][:drgsearch_development_user] %>
 
   # The password associated with the postgres role (username).
-  password: <%= ENV['DRGSEARCH_DEVELOPMENT_PASSWORD'] %>
+  password: <%= Rails.application.credentials.postgres[:development][:drgsearch_development_password] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -59,8 +59,8 @@ development:
 test:
   <<: *default
   database: drgsearch_test
-  username: <%= ENV['DRGSEARCH_TEST_USER'] %>
-  password: <%= ENV['DRGSEARCH_TEST_PASSWORD'] %>
+  username: <%= Rails.application.credentials.postgres[:test][:drgsearch_test_user] %>
+  password: <%= Rails.application.credentials.postgres[:test][:drgsearch_test_password] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: drgsearch_production
-  username: <%= ENV['DRGSEARCH_PRODUCTION_USER'] %>
-  password: <%= ENV['DRGSEARCH_PRODUCTION_PASSWORD'] %>
+  username: <%= Rails.application.credentials.postgres[:production][:drgsearch_production_user] %>
+  password: <%= Rails.application.credentials.postgres[:production][:drgsearch_production_password] %>
