@@ -43,16 +43,14 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
+    bootsnap (1.3.1)
+      msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     database_cleaner (1.7.0)
     diff-lcs (1.3)
-    dotenv (2.5.0)
-    dotenv-rails (2.5.0)
-      dotenv (= 2.5.0)
-      railties (>= 3.2, < 6.0)
     elasticsearch (6.1.0)
       elasticsearch-api (= 6.1.0)
       elasticsearch-transport (= 6.1.0)
@@ -112,6 +110,7 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.4)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nio4r (2.3.1)
@@ -215,9 +214,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootsnap (>= 1.1.0)
   byebug
   database_cleaner
-  dotenv-rails
   font-awesome-rails
   haml-rails
   i18n-js

@@ -6,8 +6,11 @@ gem 'rails', '~> 5.2.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '0.21.0'
+
 # Use SCSS for stylesheets
 gem 'sassc-rails'
+
+gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -18,9 +21,6 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 
 # template language HAML
 gem 'haml-rails'
-
-# Loads environment variables from `.env` -> keep passwords out of database.yml
-gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
