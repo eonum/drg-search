@@ -1,4 +1,4 @@
-class CreateAdrgs < ActiveRecord::Migration
+class CreateAdrgs < ActiveRecord::Migration[5.2]
   def change
     create_table :adrgs do |t|
       t.string :code

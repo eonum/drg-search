@@ -1,4 +1,4 @@
-class CreateDrgs < ActiveRecord::Migration
+class CreateDrgs < ActiveRecord::Migration[5.2]
   def change
     create_table :drgs do |t|
       t.string :code

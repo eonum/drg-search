@@ -1,4 +1,4 @@
-class AddRelevantCodes < ActiveRecord::Migration
+class AddRelevantCodes < ActiveRecord::Migration[5.2]
   def change
     add_column :mdcs, :relevant_codes, :text
     add_column :adrgs, :relevant_codes, :text
