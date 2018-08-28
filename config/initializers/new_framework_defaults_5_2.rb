@@ -36,3 +36,4 @@
 
 # Make `form_with` generate id attributes for any generated HTML tags.
 # Rails.application.config.action_view.form_with_generates_ids = true
+Rails.application.config.active_record.belongs_to_required_by_default = false
