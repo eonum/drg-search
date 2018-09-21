@@ -74,24 +74,24 @@
             %nav.nav-lang
               %ul
                 %li
-                  = link_to('DE', params.merge({ locale: :de }),
+                  = link_to('DE', params.permit(:locale).merge({ locale: :de }),
                   {"aria-label" => "Deutsch ", :class => I18n.locale == :de ? 'lang-selection active' : 'lang-selection',
                   :lang => "de", :title => "Deutsch", :data => "#{url_for( :locale => 'de')}"})
                 %li
-                  = link_to('FR', params.merge({ locale: :fr }),
+                  = link_to('FR', params.permit(:locale).merge({ locale: :fr }),
                   {"aria-label" => "Français ", :class => I18n.locale == :fr ? 'lang-selection active' : 'lang-selection',
                   :lang => "fr", :title => "Français", :data => "#{url_for( :locale => 'fr')}"})
                 %lih
-                  = link_to('IT', params.merge({ locale: :it }),
+                  = link_to('IT', params.permit(:locale).merge({ locale: :it }),
                   {"aria-label" => "Italiano ", :class => I18n.locale == :it ? 'lang-selection active' : 'lang-selection',
                   :lang => "it", :title => "Italiano", :data => "#{url_for( :locale => 'it')}"})
                 %lih
                   -if controller.controller_name == 'home'
-                    = link_to('EN', params.merge({ locale: :en }),
+                    = link_to('EN', params.permit(:locale).merge({ locale: :en }),
                     {"aria-label" => "English ", :class => I18n.locale == :en ? 'lang-selection active' : 'lang-selection',
                     :lang => "en", :title => "English", :data => "#{url_for( :locale => 'en')}"})
                   - else
-                    = link_to('EN', params.merge({ locale: :en }),
+                    = link_to('EN', params.permit(:locale).merge({ locale: :en }),
                     {"aria-label" => "English ", :class => 'lang-selection disabled',
                     :lang => "en", :title => "English", :data => "#{url_for( :locale => 'en')}"})
             %h2.sr-only= t('services_navigation')

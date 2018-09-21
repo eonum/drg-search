@@ -1,4 +1,4 @@
-class Drg < ActiveRecord::Base
+class Drg < ApplicationRecord
   belongs_to :mdc
   belongs_to :partition
   belongs_to :adrg

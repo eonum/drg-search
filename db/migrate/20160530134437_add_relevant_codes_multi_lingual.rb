@@ -1,4 +1,4 @@
-class AddRelevantCodesMultiLingual < ActiveRecord::Migration
+class AddRelevantCodesMultiLingual < ActiveRecord::Migration[5.2]
   def change
     remove_column :mdcs, :relevant_codes
     remove_column :adrgs, :relevant_codes

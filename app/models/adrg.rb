@@ -1,8 +1,8 @@
 require 'csv'
 
-class Adrg < ActiveRecord::Base
+class Adrg < ApplicationRecord
   belongs_to :mdc
-  belongs_to :partition
+  belongs_to :partition, optional: true
   has_many :drgs
 
   include MultiLanguageText

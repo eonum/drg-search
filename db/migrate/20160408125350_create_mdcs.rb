@@ -1,4 +1,4 @@
-class CreateMdcs < ActiveRecord::Migration
+class CreateMdcs < ActiveRecord::Migration[5.2]
   def change
     create_table :mdcs do |t|
       t.string :code

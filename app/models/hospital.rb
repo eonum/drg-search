@@ -1,6 +1,6 @@
 # A hospital is a representation of a hospital in one year.
 # Hence a unique hospital can have multiple hospital objects. One for each year.
-class Hospital < ActiveRecord::Base
+class Hospital < ApplicationRecord
   has_many :num_cases
 
   searchkick word_middle: [:name, :address], language: 'german', callbacks: false,

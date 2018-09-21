@@ -1,4 +1,4 @@
-class CreateNumCases < ActiveRecord::Migration
+class CreateNumCases < ActiveRecord::Migration[5.2]
   def change
     create_table :num_cases do |t|
       t.integer :n
