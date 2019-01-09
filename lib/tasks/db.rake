@@ -164,7 +164,7 @@ namespace :db do
         csv_contents.each do |row|
           pg.increment
           if is_hospital_table
-            Hospital.create!({year: row[0].to_i, hospital_id: row[1].to_i, name: row[2], street: row[3], address: row[4], canton: row[4]})
+            Hospital.create!({year: row[0].to_i, hospital_id: row[1].to_i, name: row[2], street: row[3], address: row[4], canton: row[5]})
           else
             if version != row[2] || year != row[1].to_i || level != row[3]
               puts "Warning row #{row} has not the same version, year or level as other rows in this file!"
